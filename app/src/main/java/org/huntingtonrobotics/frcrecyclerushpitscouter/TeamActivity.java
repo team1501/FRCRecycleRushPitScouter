@@ -13,7 +13,7 @@ public class TeamActivity extends ActionBarActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_team);
+        setContentView(R.layout.activity_fragment);
 
         //Add a CrimeFragment
         FragmentManager fm = getSupportFragmentManager();
