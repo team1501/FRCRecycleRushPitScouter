@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">FRC Recycle Rush Pit Scouter</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="team_number_hint">Enter a team number.</string>
+
 
 </resources>
