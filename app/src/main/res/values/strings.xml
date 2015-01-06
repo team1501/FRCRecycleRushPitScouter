@@ -3,6 +3,10 @@
 
     <string name="app_name">FRC Recycle Rush Pit Scouter</string>
     <string name="team_number_hint">Enter a team number.</string>
+    <string name="auto">AUTO</string>
+    <string name="teleop">TELEOP</string>
+    <string name="coopertition">COOPERTITION</string>
+    <string name="team_info">TEAM INFO</string>
 
 
 </resources>

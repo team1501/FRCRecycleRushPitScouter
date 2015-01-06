@@ -4,13 +4,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/team_info"
+        style="?android:listSeparatorTextViewStyle"/>
+
+    <!--TODO: add robot picture -->
 
     <EditText android:id="@+id/teamNum"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:inputType="number"
         android:ems="10"
         android:maxLength="4"
         android:hint="@string/team_number_hint"
         />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/auto"
+        style="?android:listSeparatorTextViewStyle"/>
+
+    <!--TODO: add auto views here -->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/coopertition"
+        style="?android:listSeparatorTextViewStyle"/>
+
+    <!--TODO: add coopertition views here -->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/teleop"
+        style="?android:listSeparatorTextViewStyle"/>
+
+    <!--TODO: add teleop views here -->
+
 </LinearLayout>

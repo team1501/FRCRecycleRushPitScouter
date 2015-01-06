@@ -31,6 +31,8 @@ public class TeamFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
         View v = inflater.inflate(R.layout.fragment_team, parent, false);
 
+        //PUT TEAM INFO VIEWS HERE
+
         //Team Number Text View
         mTeamNum = (EditText)v.findViewById(R.id.teamNum);
         mTeamNum.addTextChangedListener(new TextWatcher() {
@@ -43,7 +45,6 @@ public class TeamFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-
                     //use try catch in case nothing is in text view
                      try {
                          //saves text after converting CS to integer
@@ -53,7 +54,6 @@ public class TeamFragment extends Fragment {
                          mTeam.setTeamNum(0);
                      }
 
-
             }
 
             @Override
@@ -61,6 +61,13 @@ public class TeamFragment extends Fragment {
                 //also left blank
             }
         });
+
+        //PUT AUTO VIEWS HERE
+
+        //PUT COOPERTITION VIEWS HERE
+
+        //PUT TELEOP VIEWS HERE
+
         return v;
     }
     //---inflates the view
