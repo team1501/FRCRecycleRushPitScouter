@@ -32,17 +32,23 @@ public class Team {
         return mID;
     }
 
-    public void setID(UUID mID) {
-        this.mID = mID;
+    public void setID(UUID ID) {
+        mID = ID;
     }
     //---Getter and Setter for mID
 
 
-    //Setter for mTeamNum
-    public void setTeamNum(int mTeamNum) {
-        this.mTeamNum = mTeamNum;
+    //Getter and Setter for mTeamNum
+    public int getTeamNum() {
+        return mTeamNum;
     }
-    //---Setter for mTeamNum
+
+    public void setTeamNum(int teamNum) {
+        mTeamNum = teamNum;
+    }
+
+    //---Getter and Setter for mTeamNum
+
 
 
 }
