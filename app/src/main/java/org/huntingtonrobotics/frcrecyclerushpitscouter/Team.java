@@ -2,6 +2,7 @@ package org.huntingtonrobotics.frcrecyclerushpitscouter;
 
 import java.util.UUID;
 
+
 /**
  * Created by 2015H_000 on 1/5/2015.
  */
@@ -11,12 +12,20 @@ public class Team {
     private int mTeamNum;
 
 
+
+
     //Constructor for Team
     public Team(){
         //generate unique identifier
         mID = UUID.randomUUID();
     }
     //---Constructor for Team
+
+    @Override
+    public String toString() {
+        return "Team #" + mTeamNum;
+    }
+
 
     //Getter and Setter for mID
     public UUID getID() {

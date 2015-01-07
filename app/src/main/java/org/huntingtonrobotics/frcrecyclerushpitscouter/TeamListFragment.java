@@ -2,6 +2,7 @@ package org.huntingtonrobotics.frcrecyclerushpitscouter;
 
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
 
@@ -17,6 +18,8 @@ public class TeamListFragment extends ListFragment{
         getActivity().setTitle(R.string.teams_title);
         mTeams = TeamLab.get(getActivity()).getTeams();
 
+        ArrayAdapter<Team> adapter = new ArrayAdapter<Team>(getActivity(), android.R.layout.simple_list_item_1, mTeams);
+        setListAdapter(adapter);
     }
 
 
