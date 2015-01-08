@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <!-- FragmentManager requires that any view used as a fragment container must have an ID -->
+<resources>
+    <item type="id" name="viewPager" />
+</resources>

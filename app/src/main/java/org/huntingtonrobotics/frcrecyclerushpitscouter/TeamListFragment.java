@@ -38,8 +38,8 @@ public class TeamListFragment extends ListFragment {
         //log to tell which team was clicked
         Log.d(TAG, "Team #" + t.getTeamNum() + " was clicked.");
 
-        //Start TeamActivity
-        Intent i = new Intent(getActivity(), TeamActivity.class);
+        //Start TeamPagerActivity with this team
+        Intent i = new Intent(getActivity(), TeamPagerActivity.class);
         //get the team id and put it in an extra
         i.putExtra(TeamFragment.EXTRA_TEAM_ID, t.getID());
         startActivity(i);

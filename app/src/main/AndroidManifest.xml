@@ -14,7 +14,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".TeamActivity"
+            android:name=".TeamPagerActivity"
             android:label="@string/app_name" >
         </activity>
     </application>
