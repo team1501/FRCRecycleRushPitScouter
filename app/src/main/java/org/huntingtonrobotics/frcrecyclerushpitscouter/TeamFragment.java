@@ -1,10 +1,14 @@
 package org.huntingtonrobotics.frcrecyclerushpitscouter;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NavUtils;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -27,14 +31,26 @@ public class TeamFragment extends Fragment {
         //retrieve the extra and fetch the team
         UUID teamId = (UUID)getArguments().getSerializable(EXTRA_TEAM_ID);
         mTeam = TeamLab.get(getActivity()).getTeam(teamId);
+
+        setHasOptionsMenu(true);
     }
     //---fragment is created
 
 
     //inflates the view
+    @TargetApi(11)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
         View v = inflater.inflate(R.layout.fragment_team, parent, false);
+
+        //turn on Up button
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
+            //no parent no carret
+            if (NavUtils.getParentActivityName(getActivity())==null) {
+                getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
+            }
+        }
 
         //PUT TEAM INFO VIEWS HERE
 
@@ -97,4 +113,20 @@ public class TeamFragment extends Fragment {
         TeamLab.get(getActivity()).saveTeams();
     }
     //---saves teams to filesystem onPause()
+
+
+   //Respond to menu items being clicked
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case android.R.id.home:
+                if (NavUtils.getParentActivityName(getActivity())!=null){
+                    NavUtils.navigateUpFromSameTask(getActivity());
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    //---Respond to menu items being clicked
 }

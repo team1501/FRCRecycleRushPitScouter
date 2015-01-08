@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -23,6 +26,8 @@ public class TeamListFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);    //to tell fm to recieve a call for onCreateOptionsMenu()
+
         getActivity().setTitle(R.string.teams_title);
         mTeams = TeamLab.get(getActivity()).getTeams();
 
@@ -79,5 +84,33 @@ public class TeamListFragment extends ListFragment {
         ((TeamAdapter)getListAdapter()).notifyDataSetChanged();
     }
     //---Reload team list onResume
+
+    //inflate the options menu
+    @Override
+    public void onCreateOptionsMenu(Menu menu,MenuInflater inflater){
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.fragment_team_list, menu);
+    }
+    //---inflate the options menu
+
+    //respond to menu selection
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case R.id.menu_item_new_team:
+                Team team = new Team();
+                TeamLab.get(getActivity()).addTeam(team);
+                Intent i = new Intent(getActivity(), TeamPagerActivity.class);
+                i.putExtra(TeamFragment.EXTRA_TEAM_ID, team.getID());
+                startActivityForResult(i, 0);
+                return true;
+                //TODO set subtitle
+            case R.id.menu_item_send_teams:
+                //TODO open dialog
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
 }

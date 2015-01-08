@@ -44,6 +44,12 @@ public class TeamLab {
         return sTeamLab;
     }
 
+
+    public void addTeam(Team t){
+        mTeams.add(t);
+    }
+
+
     //getter for mTeams (returns an array of all the teams)
     public ArrayList<Team> getTeams(){
         return mTeams;
