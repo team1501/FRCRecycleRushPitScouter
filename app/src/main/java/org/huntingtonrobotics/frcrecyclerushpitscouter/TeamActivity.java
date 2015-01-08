@@ -1,18 +1,18 @@
 package org.huntingtonrobotics.frcrecyclerushpitscouter;
 
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+
+
+import java.util.UUID;
 
 
 public class TeamActivity extends SingleFragmentActivity {
 
     @Override
-    protected Fragment createFragment(){
-        return new TeamFragment();
-    }
+    protected Fragment createFragment() {
 
+        UUID teamId = (UUID) getIntent().getSerializableExtra(TeamFragment.EXTRA_TEAM_ID);
+
+        return TeamFragment.newInstance(teamId);
+    }
 }

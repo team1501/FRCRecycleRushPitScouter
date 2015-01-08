@@ -9,10 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import java.util.UUID;
+
 /**
  * Created by 2015H_000 on 1/6/2015.
  */
 public class TeamFragment extends Fragment {
+    public static final String EXTRA_TEAM_ID = "org.huntingtonrobotics.frcrecyclerush.team_id";
 
     private Team mTeam;
     private EditText mTeamNum;
@@ -21,7 +24,9 @@ public class TeamFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        mTeam = new Team();
+        //retrieve the extra and fetch the team
+        UUID teamId = (UUID)getArguments().getSerializable(EXTRA_TEAM_ID);
+        mTeam = TeamLab.get(getActivity()).getTeam(teamId);
     }
     //---fragment is created
 
@@ -72,6 +77,16 @@ public class TeamFragment extends Fragment {
     }
     //---inflates the view
 
+    //attach extra argument to team fragment
+    public static TeamFragment newInstance(UUID teamId){
+        Bundle args = new Bundle();
+        args.putSerializable(EXTRA_TEAM_ID, teamId);
 
+        TeamFragment fragment = new TeamFragment();
+        fragment.setArguments(args);
+
+        return fragment;
+    }
+    //---attach extra argument to team fragment
 
 }

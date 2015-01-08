@@ -40,6 +40,8 @@ public class TeamListFragment extends ListFragment {
 
         //Start TeamActivity
         Intent i = new Intent(getActivity(), TeamActivity.class);
+        //get the team id and put it in an extra
+        i.putExtra(TeamFragment.EXTRA_TEAM_ID, t.getID());
         startActivity(i);
     }
 
@@ -69,4 +71,13 @@ public class TeamListFragment extends ListFragment {
             return convertView;
         }
     }
+
+    //Reload team list onResume
+    @Override
+    public void onResume(){
+        super.onResume();
+        ((TeamAdapter)getListAdapter()).notifyDataSetChanged();
+    }
+    //---Reload team list onResume
+
 }
