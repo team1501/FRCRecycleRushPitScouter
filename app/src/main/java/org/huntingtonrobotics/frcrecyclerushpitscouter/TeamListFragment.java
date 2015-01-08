@@ -5,15 +5,21 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.support.v7.internal.widget.AdapterViewCompat;
 import android.util.Log;
+import android.view.ActionMode;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -39,14 +45,69 @@ public class TeamListFragment extends ListFragment {
         setRetainInstance(true);
     }
 
-
-
+    @TargetApi(11)
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
+    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         View v = super.onCreateView(inflater, parent, savedInstanceState);
 
-        ListView listView = (ListView)v.findViewById(android.R.id.list);
-        registerForContextMenu(listView);
+        ListView listView = (ListView) v.findViewById(android.R.id.list);
+
+        //set choice mode
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){
+            //use floating context menus on Froyo and Gingerbread
+            registerForContextMenu(listView);
+        }else{
+            //use contextual action bar on Honeycomb and above
+            listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+
+            //Multichoicelistener for deleting teams
+
+            listView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
+                @Override
+                public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
+                    //not used
+                }
+
+                //ActionMode.Callback methods
+                @Override
+                public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                    MenuInflater inflater = mode.getMenuInflater();
+                    inflater.inflate(R.menu.team_list_item_context, menu);
+                    return true;
+                }
+
+                @Override
+                public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+                    return false;
+                    //not used
+                }
+
+                @Override
+                public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+                    switch (item.getItemId()){
+                        case R.id.menu_item_delete_team:
+                            TeamAdapter adapter = (TeamAdapter)getListAdapter();
+                            TeamLab teamLab = TeamLab.get(getActivity());
+                            for (int i = adapter.getCount() - 1; i >= 0; i--){
+                                if (getListView().isItemChecked(i)){
+                                    teamLab.deleteTeam(adapter.getItem(i));
+                                }
+                            }
+                            mode.finish();
+                            adapter.notifyDataSetChanged();
+                            return true;
+                        default:
+                        return false;
+                    }
+
+                }
+
+                @Override
+                public void onDestroyActionMode(ActionMode mode) {
+                    //not used
+                }
+            });
+        }
 
         return v;
     }
@@ -56,7 +117,7 @@ public class TeamListFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         //use team adapter
-        Team t = ((TeamAdapter)getListAdapter()).getItem(position);
+        Team t = ((TeamAdapter) getListAdapter()).getItem(position);
         //log to tell which team was clicked
         Log.d(TAG, "Team #" + t.getTeamNum() + " was clicked.");
 
@@ -68,24 +129,24 @@ public class TeamListFragment extends ListFragment {
     }
 
     //hooks up dataset of crimes
-    private class TeamAdapter extends ArrayAdapter<Team>{
+    private class TeamAdapter extends ArrayAdapter<Team> {
 
-        public TeamAdapter(ArrayList<Team> teams){
+        public TeamAdapter(ArrayList<Team> teams) {
             super(getActivity(), 0, teams);
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent){
+        public View getView(int position, View convertView, ViewGroup parent) {
             //inflate a view if none is given
-            if(convertView == null){
+            if (convertView == null) {
                 convertView = getActivity().getLayoutInflater().inflate(R.layout.list_item_team, null);
             }
 
             //Configure the view for the team
             Team t = getItem(position);
             //for the list view
-            TextView titleTextView = (TextView)convertView.findViewById(R.id.team_list_item_titleTextView);
-            titleTextView.setText("Team #"+ t.getTeamNum());
+            TextView titleTextView = (TextView) convertView.findViewById(R.id.team_list_item_titleTextView);
+            titleTextView.setText("Team #" + t.getTeamNum());
 
 
             //TODO add views to list items here
@@ -96,15 +157,15 @@ public class TeamListFragment extends ListFragment {
 
     //Reload team list onResume
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
-        ((TeamAdapter)getListAdapter()).notifyDataSetChanged();
+        ((TeamAdapter) getListAdapter()).notifyDataSetChanged();
     }
     //---Reload team list onResume
 
     //inflate the options menu
     @Override
-    public void onCreateOptionsMenu(Menu menu,MenuInflater inflater){
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.fragment_team_list, menu);
     }
@@ -112,8 +173,8 @@ public class TeamListFragment extends ListFragment {
 
     //respond to menu selection
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
             case R.id.menu_item_new_team:
                 Team team = new Team();
                 TeamLab.get(getActivity()).addTeam(team);
@@ -121,7 +182,7 @@ public class TeamListFragment extends ListFragment {
                 i.putExtra(TeamFragment.EXTRA_TEAM_ID, team.getID());
                 startActivityForResult(i, 0);
                 return true;
-                //TODO set subtitle
+            //TODO set subtitle
             case R.id.menu_item_send_teams:
                 //TODO open dialog
                 return true;
@@ -130,4 +191,27 @@ public class TeamListFragment extends ListFragment {
         }
     }
 
+    //inflate the menu resource and use it to populate the context menu
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        getActivity().getMenuInflater().inflate(R.menu.team_list_item_context, menu);
+    }
+
+    //Listen for context menu item selection
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int position = info.position;
+        TeamAdapter adapter = (TeamAdapter) getListAdapter();
+        Team team = adapter.getItem(position);
+
+        switch (item.getItemId()) {
+            case R.id.menu_item_delete_team:
+                TeamLab.get(getActivity()).deleteTeam(team);
+                adapter.notifyDataSetChanged();
+                return true;
+        }
+        return super.onContextItemSelected(item);
+    }
 }
+

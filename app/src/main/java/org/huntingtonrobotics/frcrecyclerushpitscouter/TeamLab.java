@@ -58,6 +58,10 @@ public class TeamLab {
     }
     //---add team to teams
 
+    //remove team from teams
+    public void deleteTeam(Team t){
+        mTeams.remove(t);
+    }
 
     //save changes
     public boolean saveTeams(){
