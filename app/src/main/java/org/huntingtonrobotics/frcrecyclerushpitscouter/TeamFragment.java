@@ -89,4 +89,12 @@ public class TeamFragment extends Fragment {
     }
     //---attach extra argument to team fragment
 
+
+    //saves teams to filesystem onPause()
+    @Override
+    public void onPause(){
+        super.onPause();
+        TeamLab.get(getActivity()).saveTeams();
+    }
+    //---saves teams to filesystem onPause()
 }

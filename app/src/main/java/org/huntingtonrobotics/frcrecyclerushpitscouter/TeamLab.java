@@ -12,7 +12,11 @@ import java.util.UUID;
  * TeamLab stores team list to keep team data no matter what happens with act frags and their lifecycles
  */
 public class TeamLab {
+    private static final String TAG = "TeamLab";
+    private static final String FILENAME = "teams.json";
+
     private ArrayList<Team> mTeams;
+    private FRCRecycleRushPitScouterJSONSerializer mSerializer;
 
     private static TeamLab sTeamLab;    //'s'TeamLab is static
     private Context mAppContext;
@@ -20,14 +24,17 @@ public class TeamLab {
     private TeamLab(Context appContext){
         mAppContext = appContext;
         mTeams = new ArrayList<Team>();
+        mSerializer = new FRCRecycleRushPitScouterJSONSerializer(mAppContext, FILENAME);
 
+
+        /*Generates a list of 100 random teams
         //Generate a list of random teams for now
         for (int i = 0; i <100; i++){
             Team t = new Team();
             t.setTeamNum(i);
             mTeams.add(t);
         }
-
+        */
     }
 
     public static TeamLab get(Context c){
