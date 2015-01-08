@@ -1,9 +1,12 @@
 package org.huntingtonrobotics.frcrecyclerushpitscouter;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -33,7 +36,21 @@ public class TeamListFragment extends ListFragment {
 
         TeamAdapter adapter = new TeamAdapter(mTeams);
         setListAdapter(adapter);
+        setRetainInstance(true);
     }
+
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
+        View v = super.onCreateView(inflater, parent, savedInstanceState);
+
+        ListView listView = (ListView)v.findViewById(android.R.id.list);
+        registerForContextMenu(listView);
+
+        return v;
+    }
+
 
     //team from teamlist is clicked
     @Override
@@ -66,7 +83,7 @@ public class TeamListFragment extends ListFragment {
 
             //Configure the view for the team
             Team t = getItem(position);
-
+            //for the list view
             TextView titleTextView = (TextView)convertView.findViewById(R.id.team_list_item_titleTextView);
             titleTextView.setText("Team #"+ t.getTeamNum());
 

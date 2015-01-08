@@ -1,12 +1,14 @@
 package org.huntingtonrobotics.frcrecyclerushpitscouter;
 
 import android.annotation.TargetApi;
+import android.nfc.Tag;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NavUtils;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +21,7 @@ import java.util.UUID;
  * Created by 2015H_000 on 1/6/2015.
  */
 public class TeamFragment extends Fragment {
+    private static final String TAG = "TeamListFragment";
     public static final String EXTRA_TEAM_ID = "org.huntingtonrobotics.frcrecyclerush.team_id";
 
     private Team mTeam;
@@ -46,6 +49,7 @@ public class TeamFragment extends Fragment {
         //turn on Up button
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
+
             //no parent no carret
             if (NavUtils.getParentActivityName(getActivity())==null) {
                 getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -54,8 +58,9 @@ public class TeamFragment extends Fragment {
 
         //PUT TEAM INFO VIEWS HERE
 
-        //Team Number Text View
+        //Team Number Edit Text
         mTeamNum = (EditText)v.findViewById(R.id.teamNum);
+        mTeamNum.setText(""+mTeam.getTeamNum());
         mTeamNum.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -72,6 +77,7 @@ public class TeamFragment extends Fragment {
                          mTeam.setTeamNum(Integer.parseInt(s.toString()));
                      }catch (Exception e) {
                          //exception is thrown so setTeamNum to 0 so program can carry on
+                         Log.d(TAG, "ERROR: " + e);
                          mTeam.setTeamNum(0);
                      }
 

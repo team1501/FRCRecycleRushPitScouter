@@ -2,6 +2,7 @@ package org.huntingtonrobotics.frcrecyclerushpitscouter;
 
 
 import android.content.Context;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -26,6 +27,13 @@ public class TeamLab {
         mTeams = new ArrayList<Team>();
         mSerializer = new FRCRecycleRushPitScouterJSONSerializer(mAppContext, FILENAME);
 
+        //loads teams
+        try{
+            mTeams = mSerializer.loadTeams();
+        }catch (Exception e){
+            mTeams = new ArrayList<Team>();
+            Log.e(TAG, "ERROR loading teams: ", e);
+        }
 
         /*Generates a list of 100 random teams
         //Generate a list of random teams for now
@@ -44,10 +52,25 @@ public class TeamLab {
         return sTeamLab;
     }
 
-
+    //add team to teams
     public void addTeam(Team t){
         mTeams.add(t);
     }
+    //---add team to teams
+
+
+    //save changes
+    public boolean saveTeams(){
+        try{
+            mSerializer.saveTeams(mTeams);
+            Log.d(TAG, "teams saved to file");
+            return true;
+        } catch (Exception e){
+            Log.e(TAG, "ERROR saving teams: ", e);
+            return false;
+        }
+    }
+    //---save changes
 
 
     //getter for mTeams (returns an array of all the teams)

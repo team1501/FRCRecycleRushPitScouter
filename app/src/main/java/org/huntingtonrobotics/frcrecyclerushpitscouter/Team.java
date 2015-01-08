@@ -3,6 +3,7 @@ package org.huntingtonrobotics.frcrecyclerushpitscouter;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Date;
 import java.util.UUID;
 
 
@@ -14,7 +15,7 @@ public class Team {
     private static final String JSON_ID = "id";
     private static final String JSON_TEAM_NUM = "teamNum";
 
-    //inclde other things to save here
+    //include other things to save here
 
 
     private UUID mID;
@@ -29,6 +30,17 @@ public class Team {
         mID = UUID.randomUUID();
     }
     //---Constructor for Team
+
+    //constructor that accepts JSON object
+    public Team(JSONObject json) throws JSONException{
+        mID = UUID.fromString(json.getString(JSON_ID));
+        if (json.has(JSON_TEAM_NUM)){
+            mTeamNum = json.getInt(JSON_TEAM_NUM);
+        }
+
+    }
+    //---constructor that accepts JSON object
+
 
     //puts teams to JSON format to be put in JSON file
     public JSONObject toJSON() throws JSONException{

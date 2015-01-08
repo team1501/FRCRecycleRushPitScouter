@@ -1,5 +1,8 @@
 package org.huntingtonrobotics.frcrecyclerushpitscouter;
 
+import android.annotation.TargetApi;
+import android.app.ActionBar;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -61,9 +64,8 @@ public class TeamPagerActivity extends ActionBarActivity {
             //only interested in which page is currently selected
             public void onPageSelected(int pos){
                 Team Team = mTeams.get(pos);
-
-                try {
-                    setTitle("Team #" + Team.getTeamNum());
+                try{
+                    setTitle(""+Team.getTeamNum());
                 }catch (Exception e){
                     setTitle(e.toString());
                 }
@@ -80,5 +82,12 @@ public class TeamPagerActivity extends ActionBarActivity {
                 break;
             }
         }
+
+
+
+
+
     }
+
+
 }
