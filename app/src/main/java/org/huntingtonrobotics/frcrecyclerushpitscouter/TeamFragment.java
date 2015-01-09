@@ -1,6 +1,9 @@
 package org.huntingtonrobotics.frcrecyclerushpitscouter;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.hardware.Camera;
 import android.nfc.Tag;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import java.util.UUID;
 
@@ -26,6 +30,7 @@ public class TeamFragment extends Fragment {
 
     private Team mTeam;
     private EditText mTeamNum;
+    private ImageButton mPhotoButton;
 
     //fragment is created
     @Override
@@ -71,15 +76,15 @@ public class TeamFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                    //use try catch in case nothing is in text view
-                     try {
-                         //saves text after converting CS to integer
-                         mTeam.setTeamNum(Integer.parseInt(s.toString()));
-                     }catch (Exception e) {
-                         //exception is thrown so setTeamNum to 0 so program can carry on
-                         Log.d(TAG, "ERROR: " + e);
-                         mTeam.setTeamNum(0);
-                     }
+                //use try catch in case nothing is in text view
+                try {
+                    //saves text after converting CS to integer
+                    mTeam.setTeamNum(Integer.parseInt(s.toString()));
+                } catch (Exception e) {
+                    //exception is thrown so setTeamNum to 0 so program can carry on
+                    Log.d(TAG, "ERROR: " + e);
+                    mTeam.setTeamNum(0);
+                }
 
             }
 
@@ -89,11 +94,30 @@ public class TeamFragment extends Fragment {
             }
         });
 
+        //photo button
+        mPhotoButton = (ImageButton)v.findViewById(R.id.team_imageButton);
+        mPhotoButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent i = new Intent(getActivity(), RobotCameraActivity.class);
+                startActivity(i);
+            }
+        });
+
+        //if camera is not avilable, disable camera functionality
+        PackageManager pm = getActivity().getPackageManager();
+        boolean hasACamera = pm.hasSystemFeature(PackageManager.FEATURE_CAMERA) || pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT)
+                || (Build.VERSION.SDK_INT>= Build.VERSION_CODES.GINGERBREAD&& Camera.getNumberOfCameras() > 0);
+        if(!hasACamera){
+            mPhotoButton.setEnabled(false);
+        }
+
         //PUT AUTO VIEWS HERE
 
         //PUT COOPERTITION VIEWS HERE
 
         //PUT TELEOP VIEWS HERE
+
 
         return v;
     }
