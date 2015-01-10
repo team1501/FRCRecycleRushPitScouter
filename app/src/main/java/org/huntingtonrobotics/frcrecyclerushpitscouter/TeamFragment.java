@@ -1,13 +1,16 @@
 package org.huntingtonrobotics.frcrecyclerushpitscouter;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.BitmapDrawable;
 import android.hardware.Camera;
 import android.nfc.Tag;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NavUtils;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -18,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import java.util.UUID;
 
@@ -28,9 +32,15 @@ public class TeamFragment extends Fragment {
     private static final String TAG = "TeamListFragment";
     public static final String EXTRA_TEAM_ID = "org.huntingtonrobotics.frcrecyclerush.team_id";
 
+    private static final int REQUEST_PHOTO =1;
+    private static final String DIALOG_IMAGE = "image";
+
     private Team mTeam;
     private EditText mTeamNum;
     private ImageButton mPhotoButton;
+    private ImageView mPhotoView;
+
+
 
     //fragment is created
     @Override
@@ -100,7 +110,22 @@ public class TeamFragment extends Fragment {
             @Override
             public void onClick(View v){
                 Intent i = new Intent(getActivity(), RobotCameraActivity.class);
-                startActivity(i);
+                Log.d(TAG,"Photo button clicked");
+                startActivityForResult(i, REQUEST_PHOTO);
+            }
+        });
+
+        mPhotoView = (ImageView)v.findViewById(R.id.team_imageView);
+        mPhotoView.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Photo p = mTeam.getPhoto();
+                if(p==null){
+                    return;
+                }
+
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                String path = getActivity().getFileStreamPath(p.getFileName()).getAbsolutePath();
+                ImageFragment.newInstance(path).show(fm, DIALOG_IMAGE);
             }
         });
 
@@ -123,6 +148,36 @@ public class TeamFragment extends Fragment {
     }
     //---inflates the view
 
+
+    //shows the photo
+    private void showPhoto(){
+        //(Re)set the image buttons image based on your photo
+        Photo p = mTeam.getPhoto();
+        BitmapDrawable b = null;
+        if (p!=null){
+            String path = getActivity().getFileStreamPath(p.getFileName()).getAbsolutePath();
+            b = PictureUtils.getScaledDrawable(getActivity(), path);
+        }
+        mPhotoView.setImageDrawable(b);
+    }
+    //---shows the photo in photoview
+
+    //Load the image
+    @Override
+    public void onStart(){
+        super.onStart();
+        showPhoto();
+    }
+    //---Load the image
+
+    //unload the image
+    @Override
+    public void onStop(){
+        super.onStop();
+        PictureUtils.cleanImageView(mPhotoView);
+    }
+    //---unload the image
+
     //attach extra argument to team fragment
     public static TeamFragment newInstance(UUID teamId){
         Bundle args = new Bundle();
@@ -134,6 +189,27 @@ public class TeamFragment extends Fragment {
         return fragment;
     }
     //---attach extra argument to team fragment
+
+
+    //retrieve files from extras
+    @Override
+    public void onActivityResult(int requestCode,int resultCode, Intent data){
+        if (resultCode!= Activity.RESULT_OK) return;
+
+        if(requestCode == REQUEST_PHOTO){
+            //create a new Photo objet and attach it to the team
+            String filename = data.getStringExtra(RobotCameraFragment.EXTRA_PHOTO_FILENAME);
+            if(filename!=null){
+                Log.i(TAG,"filename: " + filename);
+
+                //handle a new photo
+                Photo p = new Photo(filename);
+                mTeam.setPhoto(p);
+                showPhoto();
+                Log.i(TAG, "Team: " + mTeam.getTeamNum() + "has a photo");
+            }
+        }
+    }
 
 
     //saves teams to filesystem onPause()

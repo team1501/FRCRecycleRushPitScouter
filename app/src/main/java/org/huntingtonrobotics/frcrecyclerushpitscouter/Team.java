@@ -14,12 +14,14 @@ public class Team {
 
     private static final String JSON_ID = "id";
     private static final String JSON_TEAM_NUM = "teamNum";
+    private static final String JSON_PHOTO = "photo";
 
     //include other things to save here
 
 
     private UUID mID;
     private int mTeamNum;
+    private Photo mPhoto;
 
 
 
@@ -36,6 +38,8 @@ public class Team {
         mID = UUID.fromString(json.getString(JSON_ID));
         if (json.has(JSON_TEAM_NUM)){
             mTeamNum = json.getInt(JSON_TEAM_NUM);
+        }else if (json.has(JSON_PHOTO)){
+            mPhoto = new Photo(json.getJSONObject(JSON_PHOTO));
         }
 
     }
@@ -47,6 +51,9 @@ public class Team {
         JSONObject json = new JSONObject();
         json.put(JSON_ID, mID.toString());
         json.put(JSON_TEAM_NUM, mTeamNum);
+        if (mPhoto!=null){
+            json.put(JSON_PHOTO, mPhoto.toJSON());
+        }
         return json;
     }
     //---puts teams to JSON format to be put in JSON file
@@ -82,5 +89,13 @@ public class Team {
     //---Getter and Setter for mTeamNum
 
 
+    //Getter and Setter for mPhoto
+    public Photo getPhoto() {
+        return mPhoto;
+    }
 
+    public void setPhoto(Photo p) {
+        this.mPhoto = p;
+    }
+    //---Getter and Setter for mPhoto
 }
