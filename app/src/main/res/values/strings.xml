@@ -11,15 +11,7 @@
     <string name="new_team">New Team</string>
     <string name="delete_team">Delete</string>
     <string name="send_teams">Send Teams</string>
-    <string name="take">Take!</string>
-    <string name="auto_programs">Number of Programs:</string>
-    <string name="auto_move">Can move to AZ:</string>
-    <string name="auto_totes">Number of totes able to move to AZ:</string>
-    <string name="auto_containers">Number of containers to AZ:</string>
-    <string name="auto_tote_height">Tote stack height in AZ:</string>
-    <string name="auto_move_tote_stack">Can move tote stack to AZ:</string>
-    <string name="auto_start_pos">Preferred starting position:</string>
-    <string name="between_0_and_3"># between 0-3</string>
+    <string name="take">Take dat picture!</string>
 
 
 </resources>
