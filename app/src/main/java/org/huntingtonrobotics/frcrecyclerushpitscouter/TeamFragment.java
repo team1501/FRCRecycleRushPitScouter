@@ -13,6 +13,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NavUtils;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 
 import java.util.UUID;
 
@@ -40,6 +42,14 @@ public class TeamFragment extends Fragment {
     private ImageButton mPhotoButton;
     private ImageView mPhotoView;
 
+    //auto
+    private EditText mAutoTotes;
+    private EditText mAutoContainers;
+
+    private RadioButton mAutoStartPos1;
+    private RadioButton mAutoStartPos2;
+    private RadioButton mAutoStartPos3;
+    private RadioButton mAutoStartPosA;
 
 
     //fragment is created
@@ -116,6 +126,7 @@ public class TeamFragment extends Fragment {
         });
 
         mPhotoView = (ImageView)v.findViewById(R.id.team_imageView);
+        showPhoto();
         mPhotoView.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Photo p = mTeam.getPhoto();
@@ -139,6 +150,15 @@ public class TeamFragment extends Fragment {
 
         //PUT AUTO VIEWS HERE
 
+        mAutoTotes = (EditText)v.findViewById(R.id.auto_totes);
+        mAutoTotes.setFilters(new InputFilter[]{new InputFilterMinMax(0, 3, getActivity().getApplicationContext())});
+
+        mAutoContainers = (EditText)v.findViewById(R.id.auto_containers);
+        mAutoContainers.setFilters(new InputFilter[]{ new InputFilterMinMax(0, 3,getActivity().getApplicationContext())});
+
+
+
+
         //PUT COOPERTITION VIEWS HERE
 
         //PUT TELEOP VIEWS HERE
@@ -154,7 +174,7 @@ public class TeamFragment extends Fragment {
         //(Re)set the image buttons image based on your photo
         Photo p = mTeam.getPhoto();
         BitmapDrawable b = null;
-        if (p!=null){
+        if (p != null){
             String path = getActivity().getFileStreamPath(p.getFileName()).getAbsolutePath();
             b = PictureUtils.getScaledDrawable(getActivity(), path);
         }
