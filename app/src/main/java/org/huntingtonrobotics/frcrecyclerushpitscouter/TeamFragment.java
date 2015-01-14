@@ -20,10 +20,14 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import java.util.UUID;
 
@@ -43,13 +47,15 @@ public class TeamFragment extends Fragment {
     private ImageView mPhotoView;
 
     //auto
+    private EditText mAutoProgs;
+    private CheckBox mAutoMove;
     private EditText mAutoTotes;
     private EditText mAutoContainers;
+    private EditText mAutoHeight;
+    private CheckBox mAutoMoveTote;
+    private RadioGroup mAutoPos;
 
-    private RadioButton mAutoStartPos1;
-    private RadioButton mAutoStartPos2;
-    private RadioButton mAutoStartPos3;
-    private RadioButton mAutoStartPosA;
+    //teleop
 
 
     //fragment is created
@@ -69,12 +75,11 @@ public class TeamFragment extends Fragment {
     @TargetApi(11)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
-        View v = inflater.inflate(R.layout.fragment_team, parent, false);
+        final View v = inflater.inflate(R.layout.fragment_team, parent, false);
 
         //turn on Up button
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
-
             //no parent no carret
             if (NavUtils.getParentActivityName(getActivity())==null) {
                 getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -125,15 +130,14 @@ public class TeamFragment extends Fragment {
             }
         });
 
+        //photo view
         mPhotoView = (ImageView)v.findViewById(R.id.team_imageView);
-        showPhoto();
         mPhotoView.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Photo p = mTeam.getPhoto();
                 if(p==null){
                     return;
                 }
-
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 String path = getActivity().getFileStreamPath(p.getFileName()).getAbsolutePath();
                 ImageFragment.newInstance(path).show(fm, DIALOG_IMAGE);
@@ -150,11 +154,208 @@ public class TeamFragment extends Fragment {
 
         //PUT AUTO VIEWS HERE
 
+        mAutoProgs = (EditText)v.findViewById(R.id.auto_programs);
+        mAutoProgs.setText(""+mTeam.getAutoProgs());
+        mAutoProgs.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //left blank
+            }
+
+            //user changes text of auto progs
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                //use try catch in case nothing is in text view
+                try {
+                    //saves text after converting CS to integer
+                    mTeam.setAutoProgs(Integer.parseInt(s.toString()));
+                } catch (Exception e) {
+                    //exception is thrown so setAutoProgs to 0 so program can carry on
+                    Log.d(TAG, "ERROR: " + e);
+                    mTeam.setAutoProgs(0);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                //also left blank
+            }
+        });
+
+
+        mAutoMove = (CheckBox)v.findViewById(R.id.auto_move);
+        mAutoMove.setChecked(mTeam.isAutoMove());
+        mAutoMove.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mTeam.setAutoMove(true);
+                } else if (!isChecked) {
+                    mTeam.setAutoMove(false);
+                } else {
+
+                }
+            }
+        });
+
+
         mAutoTotes = (EditText)v.findViewById(R.id.auto_totes);
+        //set filter to only allow numbers 0-3
         mAutoTotes.setFilters(new InputFilter[]{new InputFilterMinMax(0, 3, getActivity().getApplicationContext())});
+        mAutoTotes.setText(""+mTeam.getAutoTotes());
+        mAutoTotes.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //left blank
+            }
+
+            //user changes text of auto progs
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                //use try catch in case nothing is in text view
+                try {
+                    //saves text after converting CS to integer
+                     mTeam.setAutoTotes(Integer.parseInt(s.toString()));
+                } catch (Exception e) {
+                    //exception is thrown so setAutoTotes to 0 so program can carry on
+                    Log.d(TAG, "ERROR: " + e);
+                    mTeam.setAutoTotes(0);
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                //also left blank
+            }
+        });
+
 
         mAutoContainers = (EditText)v.findViewById(R.id.auto_containers);
+        //set filter to only allow numbers 0-3
         mAutoContainers.setFilters(new InputFilter[]{ new InputFilterMinMax(0, 3,getActivity().getApplicationContext())});
+        mAutoContainers.setText(""+mTeam.getAutoContainers());
+        mAutoContainers.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //left blank
+            }
+
+            //user changes text of auto progs
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                //use try catch in case nothing is in text view
+                try {
+                    //saves text after converting CS to integer
+                    mTeam.setAutoContainers(Integer.parseInt(s.toString()));
+                } catch (Exception e) {
+                    //exception is thrown so setAutoContainers to 0 so program can carry on
+                    Log.d(TAG, "ERROR: " + e);
+                    mTeam.setAutoContainers(0);
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                //also left blank
+            }
+        });
+
+        /*deleted from auto
+        mAutoHeight = (EditText)v.findViewById(R.id.auto_tote_height);
+        //set filter to only allow numbers 0-6
+        mAutoHeight.setFilters(new InputFilter[]{ new InputFilterMinMax(0, 6,getActivity().getApplicationContext())});
+        mAutoHeight.setText(""+mTeam.getAutoHeight());
+        mAutoHeight.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //left blank
+            }
+
+            //user changes text of auto height
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                //use try catch in case nothing is in text view
+                try {
+                    //saves text after converting CS to integer
+                    mTeam.setAutoHeight(Integer.parseInt(s.toString()));
+                } catch (Exception e) {
+                    //exception is thrown so setAutoHeight to 0 so program can carry on
+                    Log.d(TAG, "ERROR: " + e);
+                    mTeam.setAutoHeight(0);
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                //also left blank
+            }
+        });
+        */
+
+
+        mAutoMoveTote = (CheckBox)v.findViewById(R.id.auto_move_tote_stack);
+        mAutoMoveTote.setChecked(mTeam.isAutoMoveTote());
+        mAutoMoveTote.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                if(isChecked){
+                    mTeam.setAutoMoveTote(true);
+                }else if (!isChecked){
+                    mTeam.setAutoMoveTote(false);
+                }else{
+
+                }
+            }
+        });
+
+
+        mAutoPos = (RadioGroup)v.findViewById(R.id.startPosRadioGroup);
+        int ap = mTeam.getAutoPos();
+        switch (ap) {
+            case 1:
+                mAutoPos.check(R.id.autoStartPos1);
+                break;
+            case 2:
+                mAutoPos.check(R.id.autoStartPos2);
+                break;
+            case 3:
+                mAutoPos.check(R.id.autoStartPos3);
+                break;
+            case 0:
+                mAutoPos.check(R.id.autoStartPosA);
+                break;
+        }
+        mAutoPos.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // find which radio button is selected
+
+                switch (checkedId) {
+                    case R.id.autoStartPos1:
+                        mTeam.setAutoPos(1);
+                        break;
+                    case R.id.autoStartPos2:
+                        mTeam.setAutoPos(2);
+                        break;
+                    case R.id.autoStartPos3:
+                        mTeam.setAutoPos(3);
+                        break;
+                    case R.id.autoStartPosA:
+                        mTeam.setAutoPos(0);
+                        break;
+
+                }
+            }
+
+        });
 
 
 

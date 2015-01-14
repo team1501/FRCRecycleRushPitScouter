@@ -40,6 +40,7 @@ public class TeamListFragment extends ListFragment {
         getActivity().setTitle(R.string.teams_title);
         mTeams = TeamLab.get(getActivity()).getTeams();
 
+        bubbleSort(mTeams);
         TeamAdapter adapter = new TeamAdapter(mTeams);
         setListAdapter(adapter);
         setRetainInstance(true);
@@ -207,11 +208,42 @@ public class TeamListFragment extends ListFragment {
 
         switch (item.getItemId()) {
             case R.id.menu_item_delete_team:
-                TeamLab.get(getActivity()).deleteTeam(team);
-                adapter.notifyDataSetChanged();
+                /*
+                TeamAdapter teamAdapter = (TeamAdapter)getListAdapter();
+                TeamLab teamLab = TeamLab.getInstance(getActivity());
+                for (int i= teamAdapter.getCount()-1; i>=0; i--) {
+                    if (getListView().isItemChecked(i)) {
+                        teamLab.deleteTeam(teamAdapter.getItem(i));
+                    }
+                }
+                teamAdapter.notifyDataSetChanged();
                 return true;
+                */
         }
+
         return super.onContextItemSelected(item);
+    }
+
+    //bubble sort
+    public static void bubbleSort(ArrayList<Team> list)
+    {
+        Team team;
+        if (list.size()>1) // check if the number of teams is larger than 1
+        {
+            for (int x=0; x<list.size(); x++) // bubble sort outer loop
+            {
+
+                for (int i=0; i < list.size() - x - 1; i++){
+                    if (list.get(i).compareTo(list.get(i+1)) > 0)
+                    {
+                        team = list.get(i);
+                        list.set(i,list.get(i+1) );
+                        list.set(i+1, team);
+                    }
+                }
+            }
+        }
+
     }
 }
 

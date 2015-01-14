@@ -187,7 +187,7 @@
 
     </LinearLayout>
 
-    <!-- totes stack height to az-->
+    <!-- totes stack height to az
 
     <LinearLayout
         android:orientation="horizontal"
@@ -214,7 +214,7 @@
             />
 
     </LinearLayout>
-
+    -->
     <!-- move tote stack-->
 
     <LinearLayout
