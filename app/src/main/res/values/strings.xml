@@ -29,6 +29,11 @@
     <string name="mech_container">Container</string>
     <string name="mech_flipper">Flipper</string>
     <string name="mech_step_remover">Stp Rmvr</string>
-
-
+    <string name="blue">BLUETOOTH</string>
+    <string name="blue_on">Turn On</string>
+    <string name="blue_off">Turn Off</string>
+    <string name="blue_visible">Get Visible</string>
+    <string name="blue_list">List Devices</string>
+    <string name="sms">SMS</string>
+    <string name="send_title">Send Teams</string>
 </resources>

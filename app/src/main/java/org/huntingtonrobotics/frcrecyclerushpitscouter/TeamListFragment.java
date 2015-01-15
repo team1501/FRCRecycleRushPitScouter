@@ -192,6 +192,8 @@ public class TeamListFragment extends ListFragment {
             //TODO set subtitle
             case R.id.menu_item_send_teams:
                 //TODO open dialog
+                Intent i2 = new Intent(getActivity(), SendActivity.class);
+                startActivity(i2);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
