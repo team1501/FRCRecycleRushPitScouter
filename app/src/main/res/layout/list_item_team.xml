@@ -10,5 +10,6 @@
         android:textStyle="bold"
         android:paddingLeft="4dp"
         android:paddingRight="4dp"
-        android:text="Team Title"/>
+        android:text="Team Title"
+        android:textSize="25dp"/>
 </RelativeLayout>

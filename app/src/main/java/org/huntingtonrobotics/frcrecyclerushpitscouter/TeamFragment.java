@@ -46,12 +46,21 @@ public class TeamFragment extends Fragment {
     private ImageButton mPhotoButton;
     private ImageView mPhotoView;
 
+    //mech
+    private CheckBox mMechLitterInserter;
+    private CheckBox mMechLitterPusher;
+
+    private CheckBox mMechToteFeeder;
+
+    private CheckBox mMechContainerFlipper;
+    private CheckBox mMechContainerStepRemover;
+
     //auto
     private EditText mAutoProgs;
     private CheckBox mAutoMove;
     private EditText mAutoTotes;
     private EditText mAutoContainers;
-    private EditText mAutoHeight;
+    //private EditText mAutoHeight;     //Deleted from auto
     private CheckBox mAutoMoveTote;
     private RadioGroup mAutoPos;
 
@@ -151,6 +160,87 @@ public class TeamFragment extends Fragment {
         if(!hasACamera){
             mPhotoButton.setEnabled(false);
         }
+        
+        //MECH VIEW
+
+        mMechLitterInserter = (CheckBox)v.findViewById(R.id.mechLitterInserter);
+        mMechLitterInserter.setChecked(mTeam.isMechLitterInserter());
+        mMechLitterInserter.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mTeam.setMechLitterInserter(true);
+                } else if (!isChecked) {
+                    mTeam.setMechLitterInserter(false);
+                } else {
+
+                }
+            }
+        });
+        
+        
+        mMechLitterPusher = (CheckBox)v.findViewById(R.id.mechLitterPusher);
+        mMechLitterPusher.setChecked(mTeam.isMechLitterPusher());
+        mMechLitterPusher.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mTeam.setMechLitterPusher(true);
+                } else if (!isChecked) {
+                    mTeam.setMechLitterPusher(false);
+                } else {
+
+                }
+            }
+        });
+
+
+        mMechToteFeeder = (CheckBox)v.findViewById(R.id.mechToteFeeder);
+        mMechToteFeeder.setChecked(mTeam.isMechToteFeeder());
+        mMechToteFeeder.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mTeam.setMechToteFeeder(true);
+                } else if (!isChecked) {
+                    mTeam.setMechToteFeeder(false);
+                } else {
+
+                }
+            }
+        });
+
+
+        mMechContainerFlipper = (CheckBox)v.findViewById(R.id.mechContainerFlipper);
+        mMechContainerFlipper.setChecked(mTeam.isMechContainerFlipper());
+        mMechContainerFlipper.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mTeam.setMechContainerFlipper(true);
+                } else if (!isChecked) {
+                    mTeam.setMechContainerFlipper(false);
+                } else {
+
+                }
+            }
+        });
+
+
+        mMechContainerStepRemover = (CheckBox)v.findViewById(R.id.mechContainerStepRemover);
+        mMechContainerStepRemover.setChecked(mTeam.isMechContainerStepRemover());
+        mMechContainerStepRemover.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mTeam.setMechContainerStepRemover(true);
+                } else if (!isChecked) {
+                    mTeam.setMechContainerStepRemover(false);
+                } else {
+
+                }
+            }
+        });
 
         //PUT AUTO VIEWS HERE
 

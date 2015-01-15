@@ -66,6 +66,117 @@
     </LinearLayout>
 
 
+
+
+    <!--Mechanisms-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/mech"
+        android:background="@color/red"
+        style="?android:listSeparatorTextViewStyle"/>
+
+
+    <!--Mechanisms-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!--litter-->
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="@dimen/activity_top_margin">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/mech_litter"
+                />
+
+            <CheckBox android:id="@+id/mechLitterInserter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/mech_inserter"
+                />
+
+            <CheckBox android:id="@+id/mechLitterPusher"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/mech_pusher"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!--Tote-->
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="@dimen/activity_top_margin">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/mech_tote"
+            />
+
+        <CheckBox android:id="@+id/mechToteFeeder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/mech_feeder"
+            />
+    </LinearLayout>
+
+
+    <!--Tote-->
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="@dimen/activity_top_margin">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/mech_container"
+            />
+
+        <CheckBox android:id="@+id/mechContainerFlipper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/mech_flipper"
+            />
+
+        <CheckBox android:id="@+id/mechContainerStepRemover"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/mech_step_remover"
+             />
+    </LinearLayout>
+
+
+        <!--Auto-->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -73,8 +184,6 @@
         android:background="@color/lime"
         style="?android:listSeparatorTextViewStyle"/>
 
-
-    <!--Auto-->
     <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

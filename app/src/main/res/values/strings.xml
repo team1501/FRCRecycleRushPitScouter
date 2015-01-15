@@ -7,7 +7,7 @@
     <string name="teleop">TELEOP</string>
     <string name="coopertition">COOPERTITION</string>
     <string name="team_info">TEAM INFO</string>
-    <string name="teams_title">Teams</string>
+    <string name="teams_title">Teams List</string>
     <string name="new_team">New Team</string>
     <string name="delete_team">Delete</string>
     <string name="send_teams">Send Teams</string>
@@ -20,6 +20,15 @@
     <string name="auto_move_tote_stack">Can move tote stack to AZ:</string>
     <string name="auto_start_pos">Preferred starting position:</string>
     <string name="between_0_and_3"># between 0-3</string>
+    <string name="mech">MECHANISMS</string>
+    <string name="mech_litter">Litter(Noodle):</string>
+    <string name="mech_inserter">Inserter</string>
+    <string name="mech_pusher">Pusher</string>
+    <string name="mech_tote">Tote</string>
+    <string name="mech_feeder">Feeder</string>
+    <string name="mech_container">Container</string>
+    <string name="mech_flipper">Flipper</string>
+    <string name="mech_step_remover">Stp Rmvr</string>
 
 
 </resources>
