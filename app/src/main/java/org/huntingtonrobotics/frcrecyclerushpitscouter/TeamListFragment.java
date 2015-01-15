@@ -2,6 +2,7 @@ package org.huntingtonrobotics.frcrecyclerushpitscouter;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -18,16 +19,20 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * Created by 2015H_000 on 1/6/2015.
  */
 public class TeamListFragment extends ListFragment {
+    Team mTeam;
+    ImageView imageView;
     private ArrayList<Team> mTeams;
     private static final String TAG = "TeamListFragment";
 
@@ -146,8 +151,10 @@ public class TeamListFragment extends ListFragment {
             Team t = getItem(position);
             //for the list view
             TextView titleTextView = (TextView) convertView.findViewById(R.id.team_list_item_titleTextView);
-            titleTextView.setText("Team #" + t.getTeamNum());
+            titleTextView.setText("" + t.getTeamNum());
 
+            imageView = (ImageView)convertView.findViewById(R.id.team_list_item_imageView);
+            showPhoto(t);
 
             //TODO add views to list items here
 
@@ -244,5 +251,38 @@ public class TeamListFragment extends ListFragment {
         }
 
     }
+
+    //load picture
+    //shows the photo
+    private void showPhoto(Team team){
+        //(Re)set the image buttons image based on your photo
+
+        Photo p = team.getPhoto();
+        BitmapDrawable b = null;
+        if (p != null){
+            String path = getActivity().getFileStreamPath(p.getFileName()).getAbsolutePath();
+            b = PictureUtils.getScaledDrawable(getActivity(), path);
+        }
+        imageView.setImageDrawable(b);
+    }
+    //---shows the photo in photoview
+
+    //Load the image
+    @Override
+    public void onStart(){
+        super.onStart();
+
+    }
+    //---Load the image
+
+    //unload the image
+    @Override
+    public void onStop(){
+        super.onStop();
+        PictureUtils.cleanImageView(imageView);
+    }
+    //---unload the image
 }
+
+
 
