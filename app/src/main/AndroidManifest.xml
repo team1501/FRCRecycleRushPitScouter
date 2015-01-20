@@ -32,7 +32,13 @@
             android:label="@string/app_name" >
             <meta-data android:name="android.support.PARENT_ACTIVITY"
                 android:value=".TeamListActivity"/>
+            <receiver android:name="MyBTReceiver">
+                <intent-filter>
+                    <action android:name="android.bluetooth.BluetoothDevice.ACTION_ACL_CONNECTED" />
+                </intent-filter>
+            </receiver>
         </activity>
+
     </application>
 
 </manifest>
