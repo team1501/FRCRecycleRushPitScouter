@@ -414,8 +414,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
-        android:orientation="vertical">
+        android:orientation="vertical"/>
 
         <!--Headers-->
 
@@ -695,7 +694,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:checkedButton="@+id/teleDirectionL" >
+               >
 
 
                 <RadioButton android:id="@+id/teleDirectionL"
@@ -750,7 +749,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:checkedButton="@+id/teleHumanStation1" >
+                 >
 
 
                 <RadioButton android:id="@+id/teleHumanStation1"
@@ -805,7 +804,7 @@
 
 
                 android:orientation="horizontal"
-                android:checkedButton="@+id/telePlat1" >
+              >
 
 
                 <RadioButton android:id="@+id/telePlat1"
@@ -874,6 +873,11 @@
             android:text="@string/tele_pick_up_litter"
 
             />
+=======
+        android:text="@string/teleop"
+        android:background="@color/yellow"
+        style="?android:listSeparatorTextViewStyle"/>
+>>>>>>> parent of 0300133... Teleop now saves!  fragment_team.xml is complete!
 =======
         android:text="@string/teleop"
         android:background="@color/yellow"
