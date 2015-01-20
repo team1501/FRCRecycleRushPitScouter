@@ -6,9 +6,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="16dp"
-    android:orientation="vertical"
-    android:weightSum="1">
+    android:orientation="vertical">
 
     <!--Team Info-->
 
@@ -68,6 +66,8 @@
     </LinearLayout>
 
 
+
+
     <!--Mechanisms-->
     <TextView
         android:layout_width="match_parent"
@@ -77,6 +77,7 @@
         style="?android:listSeparatorTextViewStyle"/>
 
 
+    <!--Mechanisms-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -402,27 +403,18 @@
     </LinearLayout>
     </LinearLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/coopertition"
+        style="?android:listSeparatorTextViewStyle"/>
+
+    <!--TODO: add coopertition views here -->
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/teleop"
-        android:background="@color/yellow"
-        style="?android:listSeparatorTextViewStyle"/>
-
-
-
-
-
-
-
-
-
-    <!--Teleop-->
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:orientation="vertical">
 
         <!--Headers-->
@@ -882,33 +874,15 @@
             android:text="@string/tele_pick_up_litter"
 
             />
+=======
+        android:text="@string/teleop"
+        android:background="@color/yellow"
+        style="?android:listSeparatorTextViewStyle"/>
+>>>>>>> parent of 0300133... Teleop now saves!  fragment_team.xml is complete!
 
-        <CheckBox android:id="@+id/telePickUpLitter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-    </LinearLayout>
+    <!--TODO: add teleop views here -->
 
-    <!--move litter-->
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="@dimen/activity_top_margin">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/tele_move_litter"
-            />
 
-        <CheckBox android:id="@+id/teleMoveLitter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-    </LinearLayout>
 </LinearLayout>
 </ScrollView>
