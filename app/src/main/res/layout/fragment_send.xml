@@ -44,11 +44,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/blue_list" />
 
-            <Button android:id="@+id/blueSendTeams"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/blue_send_teams" />
-
             <ListView android:id="@+id/blueListView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -57,71 +52,7 @@
 
         </LinearLayout>
 
-
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                >
-
-                <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:textSize="18sp"
-                    />
-
-                <TextView
-                    android:id="@+id/title_paired_devices"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#666"
-                    android:paddingLeft="5dp"
-                    android:text="@string/title_paired_devices"
-                    android:textColor="#fff"
-                    android:visibility="gone"
-                    />
-
-                <ListView
-                    android:id="@+id/paired_devices"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:stackFromBottom="true"
-                    />
-
-                <TextView
-                    android:id="@+id/title_new_devices"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#666"
-                    android:paddingLeft="5dp"
-                    android:text="@string/title_other_devices"
-                    android:textColor="#fff"
-                    android:visibility="gone"
-                    />
-
-                <ListView
-                    android:id="@+id/new_devices"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:stackFromBottom="true"
-                    />
-
-                <Button
-                    android:id="@+id/button_scan"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/button_scan"
-                    />
-            </LinearLayout>
-
-
-
-
-            <LinearLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >

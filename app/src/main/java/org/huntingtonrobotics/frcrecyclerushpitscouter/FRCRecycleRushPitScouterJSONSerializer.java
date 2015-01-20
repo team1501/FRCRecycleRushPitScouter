@@ -17,7 +17,6 @@ package org.huntingtonrobotics.frcrecyclerushpitscouter;
  */
 
 import android.content.Context;
-import android.widget.ArrayAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,7 +40,6 @@ public class FRCRecycleRushPitScouterJSONSerializer {
 
     private Context mContext;
     private String mFileName;
-    ArrayList<Team> mTeams = new ArrayList<Team>();
 
     public FRCRecycleRushPitScouterJSONSerializer(Context c, String f) {
         mContext = c;
@@ -50,7 +48,7 @@ public class FRCRecycleRushPitScouterJSONSerializer {
 
     //load teams from file system
     public ArrayList<Team> loadTeams() throws IOException, JSONException {
-
+        ArrayList<Team> teams = new ArrayList<Team>();
         BufferedReader reader = null;
         try {
             //open and read the file into a stringBuilder
@@ -66,7 +64,7 @@ public class FRCRecycleRushPitScouterJSONSerializer {
             JSONArray array = (JSONArray) new JSONTokener(jsonString.toString()).nextValue();
             //build the array of teams from JSONObjects
             for (int i = 0; i < array.length(); i++) {
-                mTeams.add(new Team(array.getJSONObject(i)));
+                teams.add(new Team(array.getJSONObject(i)));
             }
         } catch (FileNotFoundException e) {
             //ignore
@@ -75,14 +73,16 @@ public class FRCRecycleRushPitScouterJSONSerializer {
             if (reader != null)
                 reader.close();
         }
-        return mTeams;
+        return teams;
     }
 
 
-    public void saveTeams(ArrayList<Team> t) throws JSONException, IOException{
+
+
+    public void saveTeams(ArrayList<Team> teams) throws JSONException, IOException{
         //Build an array in JSON
         JSONArray array = new JSONArray();
-        for (Team c : mTeams) {
+        for (Team c : teams) {
             array.put(c.toJSON());
         }
         //write file to disk
@@ -95,17 +95,7 @@ public class FRCRecycleRushPitScouterJSONSerializer {
             if (writer!= null)
                 writer.close();
         }
-        mTeams = t;
-    }
 
-    public String getJSONString() throws JSONException, IOException{
-        //Build an array in JSON
-        JSONArray array = new JSONArray();
-        loadTeams();
-        for (Team c : mTeams) {
-            array.put(c.toJSON());
-        }
-        return array.toString();
     }
 
 }
