@@ -20,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -65,6 +66,20 @@ public class TeamFragment extends Fragment {
     private RadioGroup mAutoPos;
 
     //teleop
+    private EditText mTeleTotes;
+    private EditText mTeleContainer;
+    private EditText mTelePlaceLitter;
+    private EditText mTelePlaceTotes;
+    private EditText mTeleCarryTotes;
+    private EditText mTeleCoopSet;
+    private EditText mTeleCoopStack;
+
+    private RadioGroup mTeleStackingDirection;
+    private RadioGroup mTelePlatform;
+    private RadioGroup mTeleHumanStation;
+
+    private CheckBox mTelePickUpLitter;
+    private CheckBox mTeleMoveLitter;
 
 
     //fragment is created
@@ -74,7 +89,7 @@ public class TeamFragment extends Fragment {
         //retrieve the extra and fetch the team
         UUID teamId = (UUID)getArguments().getSerializable(EXTRA_TEAM_ID);
         mTeam = TeamLab.get(getActivity()).getTeam(teamId);
-
+        this.getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         setHasOptionsMenu(true);
     }
     //---fragment is created
@@ -160,7 +175,7 @@ public class TeamFragment extends Fragment {
         if(!hasACamera){
             mPhotoButton.setEnabled(false);
         }
-        
+
         //MECH VIEW
 
         mMechLitterInserter = (CheckBox)v.findViewById(R.id.mechLitterInserter);
@@ -177,8 +192,8 @@ public class TeamFragment extends Fragment {
                 }
             }
         });
-        
-        
+
+
         mMechLitterPusher = (CheckBox)v.findViewById(R.id.mechLitterPusher);
         mMechLitterPusher.setChecked(mTeam.isMechLitterPusher());
         mMechLitterPusher.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -307,7 +322,7 @@ public class TeamFragment extends Fragment {
                 //use try catch in case nothing is in text view
                 try {
                     //saves text after converting CS to integer
-                     mTeam.setAutoTotes(Integer.parseInt(s.toString()));
+                    mTeam.setAutoTotes(Integer.parseInt(s.toString()));
                 } catch (Exception e) {
                     //exception is thrown so setAutoTotes to 0 so program can carry on
                     Log.d(TAG, "ERROR: " + e);
@@ -448,12 +463,372 @@ public class TeamFragment extends Fragment {
         });
 
 
+        //Tele
+        mTeleTotes = (EditText)v.findViewById(R.id.teleStackTotes);
+        //set filter to only allow numbers 0-6
+        mTeleTotes.setFilters(new InputFilter[]{ new InputFilterMinMax(0, 6,getActivity().getApplicationContext())});
+        mTeleTotes.setText(""+mTeam.getTeleTotes());
+        mTeleTotes.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //left blank
+            }
+
+            //user changes text of auto progs
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                //use try catch in case nothing is in text view
+                try {
+                    //saves text after converting CS to integer
+                    mTeam.setTeleTotes(Integer.parseInt(s.toString()));
+                } catch (Exception e) {
+                    //exception is thrown so setAutoContainers to 0 so program can carry on
+                    Log.d(TAG, "ERROR: " + e);
+                    mTeam.setTeleTotes(0);
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                //also left blank
+            }
+        });
 
 
-        //PUT COOPERTITION VIEWS HERE
+        mTeleContainer = (EditText)v.findViewById(R.id.teleStackContainer);
+        //set filter to only allow numbers 0-6
+        mTeleContainer.setFilters(new InputFilter[]{ new InputFilterMinMax(0, 6,getActivity().getApplicationContext())});
+        mTeleContainer.setText(""+mTeam.getTeleContainer());
+        mTeleContainer.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //left blank
+            }
 
-        //PUT TELEOP VIEWS HERE
+            //user changes text of auto progs
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
 
+                //use try catch in case nothing is in text view
+                try {
+                    //saves text after converting CS to integer
+                    mTeam.setTeleContainer(Integer.parseInt(s.toString()));
+                } catch (Exception e) {
+                    //exception is thrown so setAutoContainers to 0 so program can carry on
+                    Log.d(TAG, "ERROR: " + e);
+                    mTeam.setTeleContainer(0);
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                //also left blank
+            }
+        });
+
+
+        mTelePlaceLitter = (EditText)v.findViewById(R.id.telePlaceLitter);
+        //set filter to only allow numbers 0-6
+        mTelePlaceLitter.setFilters(new InputFilter[]{ new InputFilterMinMax(0, 6,getActivity().getApplicationContext())});
+        mTelePlaceLitter.setText(""+mTeam.getTelePlaceLitter());
+        mTelePlaceLitter.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //left blank
+            }
+
+            //user changes text of auto progs
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                //use try catch in case nothing is in text view
+                try {
+                    //saves text after converting CS to integer
+                    mTeam.setTelePlaceLitter(Integer.parseInt(s.toString()));
+                } catch (Exception e) {
+                    //exception is thrown so setAutoContainers to 0 so program can carry on
+                    Log.d(TAG, "ERROR: " + e);
+                    mTeam.setTelePlaceLitter(0);
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                //also left blank
+            }
+        });
+
+
+        mTelePlaceTotes = (EditText)v.findViewById(R.id.teleStackToteStack);
+        //set filter to only allow numbers 0-6
+        mTelePlaceTotes.setFilters(new InputFilter[]{ new InputFilterMinMax(0, 6,getActivity().getApplicationContext())});
+        mTelePlaceTotes.setText(""+mTeam.getTelePlaceTotes());
+        mTelePlaceTotes.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //left blank
+            }
+
+            //user changes text of auto progs
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                //use try catch in case nothing is in text view
+                try {
+                    //saves text after converting CS to integer
+                    mTeam.setTelePlaceTotes(Integer.parseInt(s.toString()));
+                } catch (Exception e) {
+                    //exception is thrown so setAutoContainers to 0 so program can carry on
+                    Log.d(TAG, "ERROR: " + e);
+                    mTeam.setTelePlaceTotes(0);
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                //also left blank
+            }
+        });
+
+
+        mTeleCarryTotes = (EditText)v.findViewById(R.id.teleCarryTotes);
+        //set filter to only allow numbers 0-6
+        mTeleCarryTotes.setFilters(new InputFilter[]{ new InputFilterMinMax(0, 6,getActivity().getApplicationContext())});
+        mTeleCarryTotes.setText(""+mTeam.getTeleCarryTotes());
+        mTeleCarryTotes.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //left blank
+            }
+
+            //user changes text of auto progs
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                //use try catch in case nothing is in text view
+                try {
+                    //saves text after converting CS to integer
+                    mTeam.setTeleCarryTotes(Integer.parseInt(s.toString()));
+                } catch (Exception e) {
+                    //exception is thrown so setAutoContainers to 0 so program can carry on
+                    Log.d(TAG, "ERROR: " + e);
+                    mTeam.setTeleCarryTotes(0);
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                //also left blank
+            }
+        });
+
+
+        mTeleCoopSet = (EditText)v.findViewById(R.id.teleCoopSet);
+        //set filter to only allow numbers 0-6
+        mTeleCoopSet.setFilters(new InputFilter[]{ new InputFilterMinMax(0, 6,getActivity().getApplicationContext())});
+        mTeleCoopSet.setText(""+mTeam.getTeleCoopSet());
+        mTeleCoopSet.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //left blank
+            }
+
+            //user changes text of auto progs
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                //use try catch in case nothing is in text view
+                try {
+                    //saves text after converting CS to integer
+                    mTeam.setTeleCoopSet(Integer.parseInt(s.toString()));
+                } catch (Exception e) {
+                    //exception is thrown so setAutoContainers to 0 so program can carry on
+                    Log.d(TAG, "ERROR: " + e);
+                    mTeam.setTeleCoopSet(0);
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                //also left blank
+            }
+        });
+
+        mTeleCoopStack = (EditText)v.findViewById(R.id.teleCoopStack);
+        //set filter to only allow numbers 0-6
+        mTeleCoopStack.setFilters(new InputFilter[]{ new InputFilterMinMax(0, 6,getActivity().getApplicationContext())});
+        mTeleCoopStack.setText(""+mTeam.getTeleCoopStack());
+        mTeleCoopStack.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //left blank
+            }
+
+            //user changes text of auto progs
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                //use try catch in case nothing is in text view
+                try {
+                    //saves text after converting CS to integer
+                    mTeam.setTeleCoopStack(Integer.parseInt(s.toString()));
+                } catch (Exception e) {
+                    //exception is thrown so setAutoContainers to 0 so program can carry on
+                    Log.d(TAG, "ERROR: " + e);
+                    mTeam.setTeleCoopStack(0);
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                //also left blank
+            }
+        });
+
+
+        mTeleStackingDirection = (RadioGroup)v.findViewById(R.id.stackingDirectionRadioGroup);
+        switch (mTeam.getTeleStackingDirection()) {
+            case 1:
+                mTeleStackingDirection.check(R.id.teleDirectionL);
+                break;
+            case 2:
+                mTeleStackingDirection.check(R.id.teleDirectionS);
+                break;
+            case 0:
+                mAutoPos.check(R.id.teleDNS);
+                break;
+        }
+        mTeleStackingDirection.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // find which radio button is selected
+
+                switch (checkedId) {
+                    case R.id.teleDirectionL:
+                        mTeam.setTeleStackingDirection(1);
+                        break;
+                    case R.id.teleDirectionS:
+                        mTeam.setTeleStackingDirection(2);
+                        break;
+                    case R.id.teleDNS:
+                        mTeam.setTeleStackingDirection(0);
+                        break;
+
+                }
+            }
+
+        });
+
+
+        mTelePlatform = (RadioGroup)v.findViewById(R.id.platformRadioGroup);
+        switch (mTeam.getTelePlatform()) {
+            case 1:
+                mTelePlatform.check(R.id.telePlat1);
+                break;
+            case 2:
+                mTelePlatform.check(R.id.telePlat2);
+                break;
+            case 0:
+                mAutoPos.check(R.id.telePlatA);
+                break;
+        }
+        mTelePlatform.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // find which radio button is selected
+
+                switch (checkedId) {
+                    case R.id.telePlat1:
+                        mTeam.setTelePlatform(1);
+                        break;
+                    case R.id.telePlat2:
+                        mTeam.setTelePlatform(2);
+                        break;
+                    case R.id.telePlatA:
+                        mTeam.setTelePlatform(0);
+                        break;
+
+                }
+            }
+
+        });
+
+
+        mTeleHumanStation = (RadioGroup)v.findViewById(R.id.humanStationRadioGroup);
+        switch (mTeam.getTeleHumanStation()) {
+            case 1:
+                mTeleHumanStation.check(R.id.teleHumanStation1);
+                break;
+            case 2:
+                mTeleHumanStation.check(R.id.teleHumanStation2);
+                break;
+            case 0:
+                mAutoPos.check(R.id.teleHumanStationA);
+                break;
+        }
+        mTeleHumanStation.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // find which radio button is selected
+
+                switch (checkedId) {
+                    case R.id.teleHumanStation1:
+                        mTeam.setTeleHumanStation(1);
+                        break;
+                    case R.id.teleHumanStation2:
+                        mTeam.setTeleHumanStation(2);
+                        break;
+                    case R.id.teleHumanStationA:
+                        mTeam.setTeleHumanStation(0);
+                        break;
+
+                }
+            }
+
+        });
+
+
+        mTelePickUpLitter = (CheckBox)v.findViewById(R.id.telePickUpLitter);
+        mTelePickUpLitter.setChecked(mTeam.isTelePickUpLitter());
+        mTelePickUpLitter.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                if(isChecked){
+                    mTeam.setTelePickUpLitter(true);
+                }else if (!isChecked){
+                    mTeam.setTelePickUpLitter(false);
+                }else{
+
+                }
+            }
+        });
+
+
+        mTeleMoveLitter = (CheckBox)v.findViewById(R.id.teleMoveLitter);
+        mTeleMoveLitter.setChecked(mTeam.isTeleMoveLitter());
+        mTeleMoveLitter.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                if(isChecked){
+                    mTeam.setTeleMoveLitter(true);
+                }else if (!isChecked){
+                    mTeam.setTeleMoveLitter(false);
+                }else{
+
+                }
+            }
+        });
 
         return v;
     }
@@ -532,7 +907,7 @@ public class TeamFragment extends Fragment {
     //---saves teams to filesystem onPause()
 
 
-   //Respond to menu items being clicked
+    //Respond to menu items being clicked
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
@@ -547,3 +922,4 @@ public class TeamFragment extends Fragment {
     }
     //---Respond to menu items being clicked
 }
+

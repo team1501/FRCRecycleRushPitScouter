@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.huntingtonrobotics.frcrecyclerushpitscouter" >
+    xmlns:tools="http://schemas.android.com/tools"
+    package="org.huntingtonrobotics.frcrecyclerushpitscouter">
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-feature android:name="android.hardware.Camera"/>
     <uses-permission android:name="android.permission.BLUETOOTH"/>
@@ -33,6 +34,19 @@
             <meta-data android:name="android.support.PARENT_ACTIVITY"
                 android:value=".TeamListActivity"/>
         </activity>
+        <activity
+            android:name=".bluetoothchat.MainActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name">
+
+        </activity>
+
+        <activity
+
+            android:name=".bluetoothchat.DeviceListActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/select_device"
+            android:theme="@android:style/Theme.Light"/>
     </application>
 
 </manifest>

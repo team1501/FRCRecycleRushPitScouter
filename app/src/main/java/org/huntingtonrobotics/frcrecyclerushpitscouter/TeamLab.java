@@ -35,14 +35,16 @@ public class TeamLab {
             Log.e(TAG, "ERROR loading teams: ", e);
         }
 
-        /*Generates a list of 100 random teams
+        //Generates a list of 100 random teams
         //Generate a list of random teams for now
+        /*
         for (int i = 0; i <100; i++){
             Team t = new Team();
             t.setTeamNum(i);
             mTeams.add(t);
         }
         */
+
     }
 
     public static TeamLab get(Context c){

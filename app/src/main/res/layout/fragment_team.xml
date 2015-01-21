@@ -3,88 +3,146 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-    <!--Team Info-->
-
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp">
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:orientation="vertical"
-        android:layout_marginRight="4dp"
-        android:layout_marginTop="@dimen/activity_top_margin">
+        android:weightSum="1">
 
+        <!--Team Info-->
 
-        <ImageView android:id="@+id/team_imageView"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:scaleType="centerInside"
-            android:background="@android:color/darker_gray"
-            android:cropToPadding="true"/>
-
-
-        <ImageButton android:id="@+id/team_imageButton"
-            android:layout_width="match_parent"
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_menu_camera"/>
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp">
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginRight="4dp"
+                android:layout_marginTop="@dimen/activity_top_margin">
 
 
-    <LinearLayout
+                <ImageView android:id="@+id/team_imageView"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:scaleType="centerInside"
+                    android:background="@android:color/darker_gray"
+                    android:cropToPadding="true"/>
 
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_top_margin"
-        android:layout_weight="1">
 
+                <ImageButton android:id="@+id/team_imageButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@android:drawable/ic_menu_camera"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_top_margin"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/team_info"
+                    android:background="@color/aqua"
+                    style="?android:listSeparatorTextViewStyle"/>
+
+                <EditText android:id="@+id/teamNum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:maxLength="4"
+                    android:hint="@string/team_number_hint"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <!--Mechanisms-->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/team_info"
-            android:background="@color/aqua"
+            android:text="@string/mech"
+            android:background="@color/red"
             style="?android:listSeparatorTextViewStyle"/>
 
-        <EditText android:id="@+id/teamNum"
+
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
-            android:maxLength="4"
-            android:hint="@string/team_number_hint"/>
-    </LinearLayout>
-    </LinearLayout>
+            android:orientation="vertical">
+
+            <!--litter-->
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="@dimen/activity_top_margin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/mech_litter"
+                    />
+
+                <CheckBox android:id="@+id/mechLitterInserter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/mech_inserter"
+                    />
+
+                <CheckBox android:id="@+id/mechLitterPusher"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/mech_pusher"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!--Tote-->
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="@dimen/activity_top_margin">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="@string/mech_tote"
+                />
+
+            <CheckBox android:id="@+id/mechToteFeeder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/mech_feeder"
+                />
+        </LinearLayout>
 
 
-
-
-    <!--Mechanisms-->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/mech"
-        android:background="@color/red"
-        style="?android:listSeparatorTextViewStyle"/>
-
-
-    <!--Mechanisms-->
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <!--litter-->
+        <!--Tote-->
 
         <LinearLayout
             android:orientation="horizontal"
@@ -98,352 +156,526 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/mech_litter"
+                android:text="@string/mech_container"
                 />
 
-            <CheckBox android:id="@+id/mechLitterInserter"
+            <CheckBox android:id="@+id/mechContainerFlipper"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/mech_inserter"
+                android:text="@string/mech_flipper"
                 />
 
-            <CheckBox android:id="@+id/mechLitterPusher"
+            <CheckBox android:id="@+id/mechContainerStepRemover"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/mech_pusher"
+                android:text="@string/mech_step_remover"
                 />
         </LinearLayout>
-    </LinearLayout>
-
-    <!--Tote-->
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="@dimen/activity_top_margin">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="@string/mech_tote"
-            />
-
-        <CheckBox android:id="@+id/mechToteFeeder"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/mech_feeder"
-            />
-    </LinearLayout>
-
-
-    <!--Tote-->
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="@dimen/activity_top_margin">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/mech_container"
-            />
-
-        <CheckBox android:id="@+id/mechContainerFlipper"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/mech_flipper"
-            />
-
-        <CheckBox android:id="@+id/mechContainerStepRemover"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/mech_step_remover"
-             />
-    </LinearLayout>
 
 
         <!--Auto-->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/auto"
-        android:background="@color/lime"
-        style="?android:listSeparatorTextViewStyle"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/auto"
+            android:background="@color/lime"
+            style="?android:listSeparatorTextViewStyle"/>
 
-    <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <!--num of programs-->
+            <!--num of programs-->
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="@dimen/activity_top_margin">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="@dimen/activity_top_margin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/auto_programs"
+                    />
+
+                <EditText android:id="@+id/auto_programs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    />
+            </LinearLayout>
+
+            <!-- move-->
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="@dimen/activity_top_margin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/auto_move"
+                    />
+
+                <CheckBox android:id="@+id/auto_move"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+
+
+
+            <!-- totes to az-->
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="@dimen/activity_top_margin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/auto_totes"
+                    />
+
+                <EditText android:id="@+id/auto_totes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:hint="@string/between_0_and_3"
+                    />
+
+            </LinearLayout>
+
+            <!-- Containers to az-->
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="@dimen/activity_top_margin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/auto_containers"
+                    />
+
+                <EditText android:id="@+id/auto_containers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:hint="@string/between_0_and_3"
+                    />
+
+            </LinearLayout>
+
+            <!-- totes stack height to az
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="@dimen/activity_top_margin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/auto_tote_height"
+                    />
+
+                <EditText android:id="@+id/auto_tote_height"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:hint="@string/between_0_and_3"
+                    />
+
+            </LinearLayout>
+            -->
+            <!-- move tote stack-->
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="@dimen/activity_top_margin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/auto_move_tote_stack"
+                    />
+
+                <CheckBox android:id="@+id/auto_move_tote_stack"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+
+
+            <!-- prefered starting position-->
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="@dimen/activity_top_margin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/auto_start_pos"
+                    />
+
+                <RadioGroup android:id="@+id/startPosRadioGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/text"
+                    android:orientation="horizontal"
+                    android:background="#abf234"
+                    android:checkedButton="@+id/autoStartPos1" >
+
+
+                    <RadioButton android:id="@+id/autoStartPos1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:checked="true"
+                        android:text="1"/>
+
+                    <RadioButton android:id="@+id/autoStartPos2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="2"/>
+
+                    <RadioButton android:id="@+id/autoStartPos3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="3"/>
+
+                    <RadioButton android:id="@+id/autoStartPosA"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="A"/>
+
+                </RadioGroup>
+            </LinearLayout>
+        </LinearLayout>
+
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/auto_programs"
-           />
-
-        <EditText android:id="@+id/auto_programs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:inputType="number"
-            android:maxLength="2"
-            />
-    </LinearLayout>
-
-    <!-- move-->
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="@dimen/activity_top_margin">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/auto_move"
-            />
-
-        <CheckBox android:id="@+id/auto_move"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-    </LinearLayout>
+            android:text="@string/teleop"
+            android:background="@color/yellow"
+            style="?android:listSeparatorTextViewStyle"/>
 
 
 
-    <!-- totes to az-->
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="@dimen/activity_top_margin">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/auto_totes"
-            />
-
-        <EditText android:id="@+id/auto_totes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:inputType="number"
-            android:maxLength="1"
-            android:hint="@string/between_0_and_3"
-           />
-
-    </LinearLayout>
-
-    <!-- Containers to az-->
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="@dimen/activity_top_margin">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/auto_containers"
-           />
-
-        <EditText android:id="@+id/auto_containers"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:inputType="number"
-            android:maxLength="1"
-            android:hint="@string/between_0_and_3"
-            />
-
-    </LinearLayout>
-
-    <!-- totes stack height to az
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="@dimen/activity_top_margin">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/auto_tote_height"
-            />
-
-        <EditText android:id="@+id/auto_tote_height"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:inputType="number"
-            android:maxLength="1"
-            android:hint="@string/between_0_and_3"
-            />
-
-    </LinearLayout>
-    -->
-    <!-- move tote stack-->
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="@dimen/activity_top_margin">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/auto_move_tote_stack"
-            />
-
-        <CheckBox android:id="@+id/auto_move_tote_stack"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-    </LinearLayout>
 
 
-    <!-- prefered starting position-->
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="@dimen/activity_top_margin">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/auto_start_pos"
-            />
-
-        <RadioGroup android:id="@+id/startPosRadioGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/text"
-            android:orientation="horizontal"
-            android:background="#abf234"
-            android:checkedButton="@+id/autoStartPos1" >
 
 
-        <RadioButton android:id="@+id/autoStartPos1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:checked="true"
-            android:text="1"/>
 
-        <RadioButton android:id="@+id/autoStartPos2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="2"/>
 
-        <RadioButton android:id="@+id/autoStartPos3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="3"/>
-
-        <RadioButton android:id="@+id/autoStartPosA"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="A"/>
-
-        </RadioGroup>
-    </LinearLayout>
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/coopertition"
-        style="?android:listSeparatorTextViewStyle"/>
-
-    <!--TODO: add coopertition views here -->
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"/>
-
-        <!--Headers-->
+        <!--Teleop-->
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="@dimen/activity_top_margin">
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/tele_actions"
-                android:gravity="center_horizontal"
-                android:textStyle="bold" />
+            <!--Headers-->
 
-            <TextView
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/tele_max_height"
-                android:gravity="center_horizontal"
-                android:textStyle="bold" />
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="@dimen/activity_top_margin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/tele_actions"
+                    android:gravity="center_horizontal"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/tele_max_height"
+                    android:gravity="center_horizontal"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- stack totes-->
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="@dimen/activity_top_margin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/tele_stack_totes"
+                    />
+
+                <EditText android:id="@+id/teleStackTotes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:hint="@string/between_0_and_6"
+                    />
+
+            </LinearLayout>
+
+
+
+            <!-- Stack Containers-->
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="@dimen/activity_top_margin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/tele_stack_container"
+                    />
+
+                <EditText android:id="@+id/teleStackContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:hint="@string/between_0_and_6"
+                    />
+
+            </LinearLayout>
+
+            <!-- place litter-->
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="@dimen/activity_top_margin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/tele_place_litter"
+                    />
+
+                <EditText android:id="@+id/telePlaceLitter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:hint="@string/between_0_and_6"
+                    />
+
+            </LinearLayout>
+
+            <!-- place tote stack-->
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="@dimen/activity_top_margin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/tele_place_totes_on_stack"
+                    />
+
+                <EditText android:id="@+id/teleStackToteStack"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:hint="@string/between_0_and_6"
+                    />
+
+            </LinearLayout>
+
+            <!-- carry totes-->
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="@dimen/activity_top_margin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/tele_carry_totes"
+                    />
+
+                <EditText android:id="@+id/teleCarryTotes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:hint="@string/between_0_and_6"
+                    />
+
+            </LinearLayout>
+
+            <!--Coop set-->
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="@dimen/activity_top_margin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/tele_coop_set"
+                    />
+
+                <EditText android:id="@+id/teleCoopSet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:hint="@string/between_0_and_6"
+                    />
+
+            </LinearLayout>
+
+            <!--Coop stack-->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="@dimen/activity_top_margin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/tele_coop_stack"
+                    />
+
+                <EditText android:id="@+id/teleCoopStack"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:hint="@string/between_0_and_6"
+                    />
+
+            </LinearLayout>
+
+            <!--blank-->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="@dimen/activity_top_margin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text=""
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text=""
+                    />
+
+            </LinearLayout>
         </LinearLayout>
 
-        <!-- stack totes-->
+        <!--Stacking Direction-->
 
         <LinearLayout
             android:orientation="horizontal"
@@ -451,29 +683,54 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:layout_marginTop="@dimen/activity_top_margin">
+            android:layout_marginTop="@dimen/activity_top_margin"
+            android:layout_weight="1">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/tele_stack_totes"
+                android:text="@string/tele_stack_direction"
                 />
 
-            <EditText android:id="@+id/teleStackTotes"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:inputType="number"
-                android:maxLength="1"
-                android:hint="@string/between_0_and_6"
-                />
+                android:layout_weight="1">
 
+                <RadioGroup android:id="@+id/stackingDirectionRadioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:checkedButton="@+id/teleDirectionL" >
+
+
+                    <RadioButton android:id="@+id/teleDirectionL"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="true"
+                        android:text="@string/tele_plat_long"/>
+
+                    <RadioButton android:id="@+id/teleDirectionS"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/tele_plat_short"/>
+
+                    <RadioButton android:id="@+id/teleDNS"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/tele_does_not_stack"/>
+
+                </RadioGroup>
+            </LinearLayout>
         </LinearLayout>
 
+        <!-- prefered human station-->
 
-
-        <!-- Stack Containers-->
 
         <LinearLayout
             android:orientation="horizontal"
@@ -481,27 +738,53 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:layout_marginTop="@dimen/activity_top_margin">
+            android:layout_marginTop="@dimen/activity_top_margin"
+            android:layout_weight="1">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/tele_stack_container"
+                android:text="@string/tele_human_station"
                 />
 
-            <EditText android:id="@+id/teleStackContainer"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:inputType="number"
-                android:maxLength="1"
-                android:hint="@string/between_0_and_6"
-                />
+                android:layout_weight="1">
 
+                <RadioGroup android:id="@+id/humanStationRadioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:checkedButton="@+id/teleHumanStation1" >
+
+
+                    <RadioButton android:id="@+id/teleHumanStation1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="true"
+                        android:text="1"/>
+
+                    <RadioButton android:id="@+id/teleHumanStation2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="2"/>
+
+                    <RadioButton android:id="@+id/teleHumanStationA"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="A"/>
+
+                </RadioGroup>
+            </LinearLayout>
         </LinearLayout>
 
-        <!-- place litter-->
+        <!-- prefered starting position-->
 
         <LinearLayout
             android:orientation="horizontal"
@@ -515,129 +798,47 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/tele_place_litter"
+                android:text="@string/tele_platform"
                 />
 
-            <EditText android:id="@+id/telePlaceLitter"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:inputType="number"
-                android:maxLength="1"
-                android:hint="@string/between_0_and_6"
-                />
+                android:layout_weight="1">
 
-        </LinearLayout>
+                <RadioGroup android:id="@+id/platformRadioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
 
-        <!-- place tote stack-->
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="@dimen/activity_top_margin">
+                    android:orientation="horizontal"
+                    android:checkedButton="@+id/telePlat1" >
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/tele_place_totes_on_stack"
-                />
 
-            <EditText android:id="@+id/teleStackToteStack"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:inputType="number"
-                android:maxLength="1"
-                android:hint="@string/between_0_and_6"
-                />
+                    <RadioButton android:id="@+id/telePlat1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="true"
+                        android:text="1"/>
 
-        </LinearLayout>
+                    <RadioButton android:id="@+id/telePlat2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="2"/>
 
-        <!-- carry totes-->
+                    <RadioButton android:id="@+id/telePlatA"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="A"/>
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="@dimen/activity_top_margin">
+                </RadioGroup>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/tele_carry_totes"
-                />
 
-            <EditText android:id="@+id/teleCarryTotes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:inputType="number"
-                android:maxLength="1"
-                android:hint="@string/between_0_and_6"
-                />
-
-        </LinearLayout>
-
-        <!--Coop set-->
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="@dimen/activity_top_margin">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/tele_coop_set"
-                />
-
-            <EditText android:id="@+id/teleCoopSet"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:inputType="number"
-                android:maxLength="1"
-                android:hint="@string/between_0_and_6"
-                />
-
-        </LinearLayout>
-
-        <!--Coop stack-->
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="@dimen/activity_top_margin">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/tele_coop_stack"
-                />
-
-            <EditText android:id="@+id/teleCoopStack"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:inputType="number"
-                android:maxLength="1"
-                android:hint="@string/between_0_and_6"
-                />
-
+            </LinearLayout>
         </LinearLayout>
 
         <!--blank-->
@@ -664,229 +865,50 @@
                 />
 
         </LinearLayout>
-    </LinearLayout>
 
-    <!--Stacking Direction-->
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="@dimen/activity_top_margin"
-        android:layout_weight="1">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/tele_stack_direction"
-            />
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <RadioGroup android:id="@+id/stackingDirectionRadioGroup"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-               >
-
-
-                <RadioButton android:id="@+id/teleDirectionL"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:checked="true"
-                    android:text="@string/tele_plat_long"/>
-
-                <RadioButton android:id="@+id/teleDirectionS"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/tele_plat_short"/>
-
-                <RadioButton android:id="@+id/teleDNS"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/tele_does_not_stack"/>
-
-            </RadioGroup>
-        </LinearLayout>
-    </LinearLayout>
-
-    <!-- prefered human station-->
-
-
+        <!--pick up litter-->
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:layout_marginTop="@dimen/activity_top_margin"
-            android:layout_weight="1">
+            android:layout_marginTop="@dimen/activity_top_margin">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/tele_human_station"
+                android:text="@string/tele_pick_up_litter"
+
                 />
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-            <RadioGroup android:id="@+id/humanStationRadioGroup"
+            <CheckBox android:id="@+id/telePickUpLitter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                 >
+                android:layout_weight="1"/>
+        </LinearLayout>
 
-
-                <RadioButton android:id="@+id/teleHumanStation1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:checked="true"
-                    android:text="1"/>
-
-                <RadioButton android:id="@+id/teleHumanStation2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="2"/>
-
-                <RadioButton android:id="@+id/teleHumanStationA"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="A"/>
-
-            </RadioGroup>
-    </LinearLayout>
-    </LinearLayout>
-
-    <!-- prefered starting position-->
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="@dimen/activity_top_margin">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/tele_platform"
-            />
-
+        <!--move litter-->
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="@dimen/activity_top_margin">
 
-            <RadioGroup android:id="@+id/platformRadioGroup"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/tele_move_litter"
+                />
 
-
-                android:orientation="horizontal"
-              >
-
-
-                <RadioButton android:id="@+id/telePlat1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:checked="true"
-                    android:text="1"/>
-
-                <RadioButton android:id="@+id/telePlat2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="2"/>
-
-                <RadioButton android:id="@+id/telePlatA"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="A"/>
-
-            </RadioGroup>
-
-
+            <CheckBox android:id="@+id/teleMoveLitter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
         </LinearLayout>
     </LinearLayout>
-
-    <!--blank-->
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="@dimen/activity_top_margin">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text=""
-            />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text=""
-            />
-
-    </LinearLayout>
-
-    <!--pick up litter-->
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="@dimen/activity_top_margin">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/tele_pick_up_litter"
-
-            />
-=======
-        android:text="@string/teleop"
-        android:background="@color/yellow"
-        style="?android:listSeparatorTextViewStyle"/>
->>>>>>> parent of 0300133... Teleop now saves!  fragment_team.xml is complete!
-=======
-        android:text="@string/teleop"
-        android:background="@color/yellow"
-        style="?android:listSeparatorTextViewStyle"/>
->>>>>>> parent of 0300133... Teleop now saves!  fragment_team.xml is complete!
-
-    <!--TODO: add teleop views here -->
-
-
-
-</LinearLayout>
 </ScrollView>

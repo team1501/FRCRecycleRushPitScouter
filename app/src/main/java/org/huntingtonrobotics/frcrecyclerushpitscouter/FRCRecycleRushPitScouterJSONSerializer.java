@@ -18,8 +18,10 @@ package org.huntingtonrobotics.frcrecyclerushpitscouter;
 
 import android.content.Context;
 
+import org.huntingtonrobotics.frcrecyclerushpitscouter.common.logger.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import java.io.BufferedReader;
@@ -37,9 +39,11 @@ import java.util.ArrayList;
  */
 
 public class FRCRecycleRushPitScouterJSONSerializer {
-
+    private static final String TAG = "FRCRecycleRushPitScouterJSONSerializer";
     private Context mContext;
     private String mFileName;
+    ArrayList<Team> mTeams = new ArrayList<Team>();
+
 
     public FRCRecycleRushPitScouterJSONSerializer(Context c, String f) {
         mContext = c;
@@ -48,7 +52,6 @@ public class FRCRecycleRushPitScouterJSONSerializer {
 
     //load teams from file system
     public ArrayList<Team> loadTeams() throws IOException, JSONException {
-        ArrayList<Team> teams = new ArrayList<Team>();
         BufferedReader reader = null;
         try {
             //open and read the file into a stringBuilder
@@ -63,8 +66,10 @@ public class FRCRecycleRushPitScouterJSONSerializer {
             //parse the JSON using JSONTokener
             JSONArray array = (JSONArray) new JSONTokener(jsonString.toString()).nextValue();
             //build the array of teams from JSONObjects
+            ArrayList<Integer> mCheckForDuplicates = new ArrayList<Integer>();
             for (int i = 0; i < array.length(); i++) {
-                teams.add(new Team(array.getJSONObject(i)));
+                mTeams.add(new Team(array.getJSONObject(i)));
+
             }
         } catch (FileNotFoundException e) {
             //ignore
@@ -73,18 +78,19 @@ public class FRCRecycleRushPitScouterJSONSerializer {
             if (reader != null)
                 reader.close();
         }
-        return teams;
+        return mTeams;
     }
 
-
-
-
-    public void saveTeams(ArrayList<Team> teams) throws JSONException, IOException{
+    public void saveTeams(ArrayList<Team> t) throws JSONException, IOException{
         //Build an array in JSON
         JSONArray array = new JSONArray();
-        for (Team c : teams) {
-            array.put(c.toJSON());
-        }
+        //check for duplicates
+
+        for (Team c : t) {
+             array.put(c.toJSON());
+         }
+
+
         //write file to disk
         Writer writer = null;
         try{
@@ -95,7 +101,58 @@ public class FRCRecycleRushPitScouterJSONSerializer {
             if (writer!= null)
                 writer.close();
         }
-
+        mTeams = t;
     }
 
+    //returns string version of json file
+    public String getJSONString() throws JSONException, IOException{
+        //Build an array in JSON
+        JSONArray array = new JSONArray();
+        loadTeams();
+        for (Team c : mTeams) {
+            array.put(c.toJSON());
+        }
+        return array.toString();
+    }
+
+    //load teams from file system
+    public Boolean saveBluetoothTeams(String s) throws IOException, JSONException {
+        BufferedReader reader = null;
+        try {
+
+            //parse the JSON using JSONTokener
+
+            JSONArray jsonArray = new JSONArray(s);
+
+            ArrayList<Team> bluetoothListData = new ArrayList<Team>();
+
+            //build the array of teams from JSONObjects
+            for (int i = 0; i < jsonArray.length(); i++) {
+                bluetoothListData.add(new Team(jsonArray.getJSONObject(i)));
+            }
+            mTeams.addAll(bluetoothListData);
+            saveTeams(mTeams);
+            return true;
+        }catch (FileNotFoundException e) {
+            //ignore
+            return false;
+        }catch (Exception e){
+            Log.d(TAG, "Error: " + e);
+            return false;
+
+        }finally {
+            //ensures the underlying file handle is freed up
+            if (reader != null)
+                reader.close();
+        }
+    }
+
+    public String convertStandardJSONString(String data_json){
+        data_json = data_json.replace("\\", "");
+        data_json = data_json.replace("\"{", "{");
+        data_json = data_json.replace("}\",", "},");
+        data_json = data_json.replace("}\"", "}");
+        data_json = data_json.replace("\n","");
+        return data_json;
+    }
 }

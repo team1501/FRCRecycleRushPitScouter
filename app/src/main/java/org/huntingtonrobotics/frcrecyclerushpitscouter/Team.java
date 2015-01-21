@@ -34,7 +34,20 @@ public class Team {
     private static final String JSON_AUTO_MOVE_TOTE = "autoMoveTote";
     private static final String JSON_AUTO_POS = "autoPos";
 
-    //include other things to save here
+    //tele
+    private static final String JSON_TELE_STACK_TOTES = "teleStackTotes";
+    private static final String JSON_TELE_STACK_CONTAINERS = "teleStackContainers";
+    private static final String JSON_TELE_PLACE_LITTER = "telePlaceLitter";
+    private static final String JSON_TELE_PLACE_TOTE ="telePlaceTote";
+    private static final String JSON_TELE_CARRY_TOTE = "teleCarryTote";
+    private static final String JSON_TELE_COOP_SET = "teleCoopSet";
+    private static final String JSON_TELE_COOP_STACK = "teleCoopStack";
+    private static final String JSON_TELE_STACK_DIRECTION = "teleStackDirection";
+    private static final String JSON_TELE_PLATFORM = "telePlatform";
+    private static final String JSON_TELE_HUMAN_STATION="teleHumanStation";
+    private static final String JSON_TELE_PICK_UP_LITTER = "telePickUpLitter";
+    private static final String JSON_TELE_MOVE_LITTER="teleMoveLitter";
+
 
     private UUID mID;
 
@@ -59,6 +72,22 @@ public class Team {
     //private int mAutoHeight;  //deleted from auto
     private boolean mAutoMoveTote;
     private int mAutoPos;
+
+    //tele
+    private int mTeleTotes;
+    private int mTeleContainer;
+    private int mTelePlaceLitter;
+    private int mTelePlaceTotes;
+    private int mTeleCarryTotes;
+    private int mTeleCoopSet;
+    private int mTeleCoopStack;
+
+    private int mTeleStackingDirection;
+    private int mTelePlatform;
+    private int mTeleHumanStation;
+
+    private boolean mTelePickUpLitter;
+    private boolean mTeleMoveLitter;
 
     //Constructor for Team
     public Team(){
@@ -121,6 +150,46 @@ public class Team {
             mAutoPos = json.getInt(JSON_AUTO_POS);
         }
 
+        //tele
+        if (json.has(JSON_TELE_STACK_TOTES)){
+            mTeleTotes = json.getInt(JSON_TELE_STACK_TOTES);
+        }
+        if (json.has(JSON_TELE_STACK_CONTAINERS)){
+            mTeleContainer = json.getInt(JSON_TELE_STACK_CONTAINERS);
+        }
+        if (json.has(JSON_TELE_PLACE_LITTER)){
+            mTelePlaceLitter = json.getInt(JSON_TELE_PLACE_LITTER);
+        }
+        if (json.has(JSON_TELE_PLACE_TOTE)){
+            mTelePlaceTotes = json.getInt(JSON_TELE_PLACE_TOTE);
+        }
+        if (json.has(JSON_TELE_CARRY_TOTE)){
+            mTeleCarryTotes = json.getInt(JSON_TELE_CARRY_TOTE);
+        }
+        if (json.has(JSON_TELE_COOP_SET)){
+            mTeleCoopSet = json.getInt(JSON_TELE_COOP_SET);
+        }
+        if (json.has(JSON_TELE_COOP_STACK)){
+            mTeleCoopStack = json.getInt(JSON_TELE_COOP_STACK);
+        }
+
+        if (json.has(JSON_TELE_STACK_DIRECTION)){
+            mTeleStackingDirection = json.getInt(JSON_TELE_STACK_DIRECTION);
+        }
+        if (json.has(JSON_TELE_PLATFORM)){
+            mTelePlatform = json.getInt(JSON_TELE_PLATFORM);
+        }
+        if (json.has(JSON_TELE_HUMAN_STATION)){
+            mTeleHumanStation = json.getInt(JSON_TELE_HUMAN_STATION);
+        }
+
+        if (json.has(JSON_TELE_PICK_UP_LITTER)){
+            mTelePickUpLitter = json.getBoolean(JSON_TELE_PICK_UP_LITTER);
+        }
+        if (json.has(JSON_TELE_MOVE_LITTER)){
+            mTeleMoveLitter = json.getBoolean(JSON_TELE_MOVE_LITTER);
+        }
+
     }
     //---constructor that accepts JSON object
 
@@ -150,6 +219,22 @@ public class Team {
         //json.put(JSON_AUTO_HEIGHT, mAutoHeight);      //deleted from auto
         json.put(JSON_AUTO_MOVE_TOTE, mAutoMoveTote);
         json.put(JSON_AUTO_POS, mAutoPos);
+
+        //tele
+        json.put(JSON_TELE_STACK_TOTES, mTeleTotes);
+        json.put(JSON_TELE_STACK_CONTAINERS, mTeleContainer);
+        json.put(JSON_TELE_PLACE_LITTER, mTelePlaceLitter);
+        json.put(JSON_TELE_PLACE_TOTE, mTelePlaceTotes);
+        json.put(JSON_TELE_CARRY_TOTE, mTeleCarryTotes);
+        json.put(JSON_TELE_COOP_SET, mTeleCoopSet);
+        json.put(JSON_TELE_COOP_STACK, mTeleCoopStack);
+
+        json.put(JSON_TELE_STACK_DIRECTION, mTeleStackingDirection);
+        json.put(JSON_TELE_PLATFORM, mTelePlatform);
+        json.put(JSON_TELE_HUMAN_STATION, mTeleHumanStation);
+
+        json.put(JSON_TELE_PICK_UP_LITTER, mTelePickUpLitter);
+        json.put(JSON_TELE_MOVE_LITTER, mTeleMoveLitter);
 
         return json;
     }
@@ -295,6 +380,109 @@ public class Team {
 
     //----Getter and Setters for Auto
 
+
+    //Getter and Setters for Tele
+
+    public int getTeleTotes() {
+        return mTeleTotes;
+    }
+
+    public void setTeleTotes(int tt) {
+        this.mTeleTotes = tt;
+    }
+
+    public int getTeleContainer() {
+        return mTeleContainer;
+    }
+
+    public void setTeleContainer(int tc) {
+        this.mTeleContainer = tc;
+    }
+
+    public int getTelePlaceLitter() {
+        return mTelePlaceLitter;
+    }
+
+    public void setTelePlaceLitter(int pl) {
+        this.mTelePlaceLitter = pl;
+    }
+
+    public int getTelePlaceTotes() {
+        return mTelePlaceTotes;
+    }
+
+    public void setTelePlaceTotes(int pt) {
+        this.mTelePlaceTotes = pt;
+    }
+
+    public int getTeleCarryTotes() {
+        return mTeleCarryTotes;
+    }
+
+    public void setTeleCarryTotes(int ct) {
+        this.mTeleCarryTotes = ct;
+    }
+
+    public int getTeleCoopSet() {
+        return mTeleCoopSet;
+    }
+
+    public void setTeleCoopSet(int cs) {
+        this.mTeleCoopSet = cs;
+    }
+
+    public int getTeleCoopStack() {
+        return mTeleCoopStack;
+    }
+
+    public void setTeleCoopStack(int cs) {
+        this.mTeleCoopStack = cs;
+    }
+
+    public int getTeleStackingDirection() {
+        return mTeleStackingDirection;
+    }
+
+    public void setTeleStackingDirection(int sd) {
+        this.mTeleStackingDirection = sd;
+    }
+
+    public int getTelePlatform() {
+        return mTelePlatform;
+    }
+
+    public void setTelePlatform(int tp) {
+        this.mTelePlatform = tp;
+    }
+
+    public int getTeleHumanStation() {
+        return mTeleHumanStation;
+    }
+
+    public void setTeleHumanStation(int hs) {
+        this.mTeleHumanStation = hs;
+    }
+
+    public boolean isTelePickUpLitter() {
+        return mTelePickUpLitter;
+    }
+
+    public void setTelePickUpLitter(Boolean pl) {
+        this.mTelePickUpLitter = pl;
+    }
+
+    public boolean isTeleMoveLitter() {
+        return mTeleMoveLitter;
+    }
+
+    public void setTeleMoveLitter(Boolean ml) {
+        this.mTeleMoveLitter = ml;
+    }
+
+
+    //---Getter and Setters for Tele
+
+
     //for bubble sort
     public int compareTo(Team t){
         int res=0;
@@ -303,3 +491,4 @@ public class Team {
         return res;
     }
 }
+

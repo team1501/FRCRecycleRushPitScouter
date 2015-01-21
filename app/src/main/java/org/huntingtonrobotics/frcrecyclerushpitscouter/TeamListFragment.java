@@ -24,6 +24,8 @@ import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import org.huntingtonrobotics.frcrecyclerushpitscouter.bluetoothchat.MainActivity;
+
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -43,11 +45,7 @@ public class TeamListFragment extends ListFragment {
         setHasOptionsMenu(true);    //to tell fm to recieve a call for onCreateOptionsMenu()
 
         getActivity().setTitle(R.string.teams_title);
-        mTeams = TeamLab.get(getActivity()).getTeams();
-
-        bubbleSort(mTeams);
-        TeamAdapter adapter = new TeamAdapter(mTeams);
-        setListAdapter(adapter);
+        loadListTeams();
         setRetainInstance(true);
     }
 
@@ -133,6 +131,14 @@ public class TeamListFragment extends ListFragment {
         startActivity(i);
     }
 
+    private void loadListTeams(){
+        mTeams = TeamLab.get(getActivity()).getTeams();
+
+        bubbleSort(mTeams);
+        TeamAdapter adapter = new TeamAdapter(mTeams);
+        setListAdapter(adapter);
+    }
+
     //hooks up dataset of crimes
     private class TeamAdapter extends ArrayAdapter<Team> {
 
@@ -167,6 +173,7 @@ public class TeamListFragment extends ListFragment {
     public void onResume() {
         super.onResume();
         ((TeamAdapter) getListAdapter()).notifyDataSetChanged();
+        loadListTeams();
     }
     //---Reload team list onResume
 
@@ -192,7 +199,7 @@ public class TeamListFragment extends ListFragment {
             //TODO set subtitle
             case R.id.menu_item_send_teams:
                 //TODO open dialog
-                Intent i2 = new Intent(getActivity(), SendActivity.class);
+                Intent i2 = new Intent(getActivity(), MainActivity.class);
                 startActivity(i2);
                 return true;
             default:
@@ -277,11 +284,17 @@ public class TeamListFragment extends ListFragment {
     }
     //---Load the image
 
+
+
     //unload the image
     @Override
     public void onStop(){
         super.onStop();
-        PictureUtils.cleanImageView(imageView);
+        try {
+            PictureUtils.cleanImageView(imageView);
+        }catch (Exception e){
+
+        }
     }
     //---unload the image
 }
