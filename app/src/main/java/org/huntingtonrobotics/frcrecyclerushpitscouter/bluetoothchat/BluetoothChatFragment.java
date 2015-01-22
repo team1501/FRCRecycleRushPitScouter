@@ -44,22 +44,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.huntingtonrobotics.frcrecyclerushpitscouter.FRCRecycleRushPitScouterJSONSerializer;
+import org.huntingtonrobotics.frcrecyclerushpitscouter.R;
+import org.huntingtonrobotics.frcrecyclerushpitscouter.Team;
+import org.huntingtonrobotics.frcrecyclerushpitscouter.TeamLab;
+import org.huntingtonrobotics.frcrecyclerushpitscouter.TeamListActivity;
+import org.huntingtonrobotics.frcrecyclerushpitscouter.TeamListFragment;
 import org.huntingtonrobotics.frcrecyclerushpitscouter.common.logger.Log;
 
-import org.huntingtonrobotics.frcrecyclerushpitscouter.R;
-import org.json.JSONException;
-
-import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * This fragment controls Bluetooth to communicate with other devices.
  */
 public class BluetoothChatFragment extends Fragment {
-
-    //get string to transfer
-    private static final String FILENAME = "teams.json";
-    private FRCRecycleRushPitScouterJSONSerializer mSerilizer;
-    private String mConversationJSONString;
 
     private static final String TAG = "BluetoothChatFragment";
 
@@ -98,28 +95,27 @@ public class BluetoothChatFragment extends Fragment {
      */
     private BluetoothChatService mChatService = null;
 
+    private FRCRecycleRushPitScouterJSONSerializer mSerializer = new FRCRecycleRushPitScouterJSONSerializer(getActivity(), "bluetoothTeams.txt");
+
+    private ArrayList<String> mTeams;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         // Get local Bluetooth adapter
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-
+        try {
+            mTeams = mSerializer.getJSONString();
+        }catch(Exception e){
+            Log.d(TAG, "ERROR" + e);
+        }
         // If the adapter is null, then Bluetooth is not supported
         if (mBluetoothAdapter == null) {
             FragmentActivity activity = getActivity();
             Toast.makeText(activity, "Bluetooth is not available", Toast.LENGTH_LONG).show();
             activity.finish();
-        }
-
-        mSerilizer = new FRCRecycleRushPitScouterJSONSerializer(getActivity(), FILENAME);
-
-        try {
-            mConversationJSONString = mSerilizer.getJSONString();
-        }catch (JSONException je){
-
-        }catch (IOException e){
-
         }
     }
 
@@ -196,8 +192,11 @@ public class BluetoothChatFragment extends Fragment {
                 View view = getView();
                 if (null != view) {
                     TextView textView = (TextView) view.findViewById(R.id.edit_text_out);
-                    String message = mConversationJSONString.toString();
-                    sendMessage(message);
+                    for (int i = 0; i < mTeams.size(); i++) {
+                        Log.d(TAG,mTeams.size()+"");
+                        Log.d(TAG,mTeams.get(i));
+                        sendMessage(mTeams.get(i));
+                    }
                 }
             }
         });
@@ -270,9 +269,8 @@ public class BluetoothChatFragment extends Fragment {
         if (null == activity) {
             return;
         }
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB) {
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB) {
             final ActionBar actionBar = activity.getActionBar();
-
             if (null == actionBar) {
                 return;
             }
@@ -295,7 +293,6 @@ public class BluetoothChatFragment extends Fragment {
             if (null == actionBar) {
                 return;
             }
-
             actionBar.setSubtitle(subTitle);
         }
     }
@@ -326,20 +323,17 @@ public class BluetoothChatFragment extends Fragment {
                 case Constants.MESSAGE_WRITE:
                     byte[] writeBuf = (byte[]) msg.obj;
                     // construct a string from the buffer
-                    String writeMessage = mConversationJSONString;
+                    String writeMessage = new String(writeBuf);
                     mConversationArrayAdapter.add("Me:  " + writeMessage);
                     break;
                 case Constants.MESSAGE_READ:
                     byte[] readBuf = (byte[]) msg.obj;
                     // construct a string from the valid bytes in the buffer
                     String readMessage = new String(readBuf, 0, msg.arg1);
-                    //Log.i(TAG, readMessage);
                     try {
-                        mSerilizer.saveBluetoothTeams(readMessage);
-                    }catch (JSONException je){
-                        Log.d(TAG, "Error: " + je);
-                    }catch (Exception e){
-                        Log.d(TAG, "Error: " + e);
+                        mSerializer.saveBluetoothTeams(readMessage);
+                    }catch(Exception e){
+
                     }
 
                     mConversationArrayAdapter.add(mConnectedDeviceName + ":  " + readMessage);
@@ -394,7 +388,7 @@ public class BluetoothChatFragment extends Fragment {
     /**
      * Establish connection with other divice
      *
-     * @param data   An {@link android.content.Intent} with {@link DeviceListActivity#EXTRA_DEVICE_ADDRESS} extra.
+     * @param data   An {@link Intent} with {@link DeviceListActivity#EXTRA_DEVICE_ADDRESS} extra.
      * @param secure Socket Security type - Secure (true) , Insecure (false)
      */
     private void connectDevice(Intent data, boolean secure) {

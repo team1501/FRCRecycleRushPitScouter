@@ -28,9 +28,17 @@ import android.os.Message;
 
 import org.huntingtonrobotics.frcrecyclerushpitscouter.common.logger.Log;
 
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.io.StreamCorruptedException;
 import java.util.UUID;
 
 /**
@@ -61,6 +69,8 @@ public class BluetoothChatService {
     private ConnectThread mConnectThread;
     private ConnectedThread mConnectedThread;
     private int mState;
+    private ObjectInputStream ois;
+    private ObjectOutputStream oos;
 
     // Constants that indicate the current connection state
     public static final int STATE_NONE = 0;       // we're doing nothing
@@ -303,7 +313,7 @@ public class BluetoothChatService {
                     tmp = mAdapter.listenUsingRfcommWithServiceRecord(NAME_SECURE,
                             MY_UUID_SECURE);
                 } else {
-                    if (Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD) {
+                    if(Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD) {
                         tmp = mAdapter.listenUsingInsecureRfcommWithServiceRecord(
                                 NAME_INSECURE, MY_UUID_INSECURE);
                     }
@@ -392,8 +402,10 @@ public class BluetoothChatService {
                     tmp = device.createRfcommSocketToServiceRecord(
                             MY_UUID_SECURE);
                 } else {
-                    tmp = device.createInsecureRfcommSocketToServiceRecord(
-                            MY_UUID_INSECURE);
+                    if(Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD) {
+                        tmp = device.createInsecureRfcommSocketToServiceRecord(
+                                MY_UUID_INSECURE);
+                    }
                 }
             } catch (IOException e) {
                 Log.e(TAG, "Socket Type: " + mSocketType + "create() failed", e);

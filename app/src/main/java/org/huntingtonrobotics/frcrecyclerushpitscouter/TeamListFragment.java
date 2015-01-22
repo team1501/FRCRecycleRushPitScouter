@@ -139,6 +139,7 @@ public class TeamListFragment extends ListFragment {
         setListAdapter(adapter);
     }
 
+
     //hooks up dataset of crimes
     private class TeamAdapter extends ArrayAdapter<Team> {
 

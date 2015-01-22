@@ -32,6 +32,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -105,14 +106,25 @@ public class FRCRecycleRushPitScouterJSONSerializer {
     }
 
     //returns string version of json file
-    public String getJSONString() throws JSONException, IOException{
+    public ArrayList<String> getJSONString() throws JSONException, IOException{
         //Build an array in JSON
+        /*
         JSONArray array = new JSONArray();
         loadTeams();
         for (Team c : mTeams) {
             array.put(c.toJSON());
         }
-        return array.toString();
+        */
+        loadTeams();
+        ArrayList<String> strings = new ArrayList<>();
+        for (int i = 0; i < mTeams.size(); i++) {
+            JSONArray array = new JSONArray();
+            array.put(mTeams.get(i).toJSON());
+            strings.add(array.toString());
+        }
+
+
+        return strings;
     }
 
     //load teams from file system
