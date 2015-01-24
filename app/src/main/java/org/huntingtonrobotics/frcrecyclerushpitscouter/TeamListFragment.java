@@ -1,11 +1,14 @@
 package org.huntingtonrobotics.frcrecyclerushpitscouter;
 
 import android.annotation.TargetApi;
+import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+
 import android.support.v7.internal.widget.AdapterViewCompat;
 import android.util.Log;
 import android.view.ActionMode;
@@ -45,6 +48,14 @@ public class TeamListFragment extends ListFragment {
         setHasOptionsMenu(true);    //to tell fm to recieve a call for onCreateOptionsMenu()
 
         getActivity().setTitle(R.string.teams_title);
+
+        /*
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB) {
+            ActionBar bar = getActivity().getActionBar();
+            bar.setBackgroundDrawable(new ColorDrawable(R.color.teamred));
+        }
+        */
+
         loadListTeams();
         setRetainInstance(true);
     }

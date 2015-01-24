@@ -44,19 +44,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.huntingtonrobotics.frcrecyclerushpitscouter.FRCRecycleRushPitScouterJSONSerializer;
-import org.huntingtonrobotics.frcrecyclerushpitscouter.R;
-import org.huntingtonrobotics.frcrecyclerushpitscouter.Team;
-import org.huntingtonrobotics.frcrecyclerushpitscouter.TeamLab;
-import org.huntingtonrobotics.frcrecyclerushpitscouter.TeamListActivity;
-import org.huntingtonrobotics.frcrecyclerushpitscouter.TeamListFragment;
 import org.huntingtonrobotics.frcrecyclerushpitscouter.common.logger.Log;
 
-import java.util.ArrayList;
+import org.huntingtonrobotics.frcrecyclerushpitscouter.R;
+import org.json.JSONException;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
 
 /**
  * This fragment controls Bluetooth to communicate with other devices.
  */
 public class BluetoothChatFragment extends Fragment {
+
+    //get string to transfer
+    private static final String FILENAME = "teams.json";
+    private FRCRecycleRushPitScouterJSONSerializer mSerilizer;
+    private String mConversationJSONString;
 
     private static final String TAG = "BluetoothChatFragment";
 
@@ -95,27 +99,28 @@ public class BluetoothChatFragment extends Fragment {
      */
     private BluetoothChatService mChatService = null;
 
-    private FRCRecycleRushPitScouterJSONSerializer mSerializer = new FRCRecycleRushPitScouterJSONSerializer(getActivity(), "bluetoothTeams.txt");
-
-    private ArrayList<String> mTeams;
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         // Get local Bluetooth adapter
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        try {
-            mTeams = mSerializer.getJSONString();
-        }catch(Exception e){
-            Log.d(TAG, "ERROR" + e);
-        }
+
         // If the adapter is null, then Bluetooth is not supported
         if (mBluetoothAdapter == null) {
             FragmentActivity activity = getActivity();
             Toast.makeText(activity, "Bluetooth is not available", Toast.LENGTH_LONG).show();
             activity.finish();
+        }
+
+        mSerilizer = new FRCRecycleRushPitScouterJSONSerializer(getActivity(), FILENAME);
+
+        try {
+            mConversationJSONString = mSerilizer.getJSONString();
+        }catch (JSONException je){
+
+        }catch (IOException e){
+
         }
     }
 
@@ -162,6 +167,7 @@ public class BluetoothChatFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_bluetooth_chat, container, false);
+
     }
 
     @Override
@@ -169,6 +175,18 @@ public class BluetoothChatFragment extends Fragment {
         mConversationView = (ListView) view.findViewById(R.id.in);
         mOutEditText = (EditText) view.findViewById(R.id.edit_text_out);
         mSendButton = (Button) view.findViewById(R.id.button_send);
+
+        mSendButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Send a message using content of the edit text widget
+                View view = getView();
+                if (null != view) {
+                    TextView textView = (TextView) view.findViewById(R.id.edit_text_out);
+                    String message = mConversationJSONString;
+                    sendMessage(message);
+                }
+            }
+        });
     }
 
     /**
@@ -183,23 +201,10 @@ public class BluetoothChatFragment extends Fragment {
         mConversationView.setAdapter(mConversationArrayAdapter);
 
         // Initialize the compose field with a listener for the return key
-        mOutEditText.setOnEditorActionListener(mWriteListener);
+       // mOutEditText.setOnEditorActionListener(mWriteListener);
 
         // Initialize the send button with a listener that for click events
-        mSendButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Send a message using content of the edit text widget
-                View view = getView();
-                if (null != view) {
-                    TextView textView = (TextView) view.findViewById(R.id.edit_text_out);
-                    for (int i = 0; i < mTeams.size(); i++) {
-                        Log.d(TAG,mTeams.size()+"");
-                        Log.d(TAG,mTeams.get(i));
-                        sendMessage(mTeams.get(i));
-                    }
-                }
-            }
-        });
+
 
         // Initialize the BluetoothChatService to perform bluetooth connections
         mChatService = new BluetoothChatService(getActivity(), mHandler);
@@ -235,8 +240,8 @@ public class BluetoothChatFragment extends Fragment {
         // Check that there's actually something to send
         if (message.length() > 0) {
             // Get the message bytes and tell the BluetoothChatService to write
-            byte[] send = message.getBytes();
-            mChatService.write(send);
+            //byte[] send = message.getBytes();
+            mChatService.write(message);
 
             // Reset out string buffer to zero and clear the edit text field
             mOutStringBuffer.setLength(0);
@@ -247,6 +252,7 @@ public class BluetoothChatFragment extends Fragment {
     /**
      * The action listener for the EditText widget, to listen for the return key
      */
+    /*
     private TextView.OnEditorActionListener mWriteListener
             = new TextView.OnEditorActionListener() {
         public boolean onEditorAction(TextView view, int actionId, KeyEvent event) {
@@ -258,6 +264,7 @@ public class BluetoothChatFragment extends Fragment {
             return true;
         }
     };
+    */
 
     /**
      * Updates the status on the action bar.
@@ -269,8 +276,9 @@ public class BluetoothChatFragment extends Fragment {
         if (null == activity) {
             return;
         }
-        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB) {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB) {
             final ActionBar actionBar = activity.getActionBar();
+
             if (null == actionBar) {
                 return;
             }
@@ -293,6 +301,7 @@ public class BluetoothChatFragment extends Fragment {
             if (null == actionBar) {
                 return;
             }
+
             actionBar.setSubtitle(subTitle);
         }
     }
@@ -323,20 +332,34 @@ public class BluetoothChatFragment extends Fragment {
                 case Constants.MESSAGE_WRITE:
                     byte[] writeBuf = (byte[]) msg.obj;
                     // construct a string from the buffer
-                    String writeMessage = new String(writeBuf);
+                    String writeMessage = mConversationJSONString;
                     mConversationArrayAdapter.add("Me:  " + writeMessage);
                     break;
                 case Constants.MESSAGE_READ:
-                    byte[] readBuf = (byte[]) msg.obj;
-                    // construct a string from the valid bytes in the buffer
-                    String readMessage = new String(readBuf, 0, msg.arg1);
+                    Byte[] b = (Byte[])msg.obj;
+                    b.toString();
+                    /*
                     try {
-                        mSerializer.saveBluetoothTeams(readMessage);
-                    }catch(Exception e){
-
+                        //ObjectInputStream read = new ObjectInputStream(b);
+                    }catch (Exception e){
+                        Log.e(TAG, "msg.obj" + e);
                     }
+                    */
+                    // construct a string from the valid bytes in the buffer
+                    //String readMessage = new String(readBuf, 0, msg.arg1);
+                    //Log.i(TAG, readMessage);
+                    /*
+                    try {
+                        mSerilizer.saveBluetoothTeams(readMessage);
+                    }catch (JSONException je){
+                        Log.d(TAG, "Error: " + je);
+                    }catch (Exception e){
+                        Log.d(TAG, "Error: " + e);
+                    }
+                    */
 
-                    mConversationArrayAdapter.add(mConnectedDeviceName + ":  " + readMessage);
+                    mConversationArrayAdapter.add(mConnectedDeviceName + ":  " );
+
                     break;
                 case Constants.MESSAGE_DEVICE_NAME:
                     // save the connected device's name
@@ -388,7 +411,7 @@ public class BluetoothChatFragment extends Fragment {
     /**
      * Establish connection with other divice
      *
-     * @param data   An {@link Intent} with {@link DeviceListActivity#EXTRA_DEVICE_ADDRESS} extra.
+     * @param data   An {@link android.content.Intent} with {@link DeviceListActivity#EXTRA_DEVICE_ADDRESS} extra.
      * @param secure Socket Security type - Secure (true) , Insecure (false)
      */
     private void connectDevice(Intent data, boolean secure) {
@@ -431,3 +454,4 @@ public class BluetoothChatFragment extends Fragment {
     }
 
 }
+

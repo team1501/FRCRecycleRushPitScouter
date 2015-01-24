@@ -28,11 +28,10 @@ import android.os.Message;
 
 import org.huntingtonrobotics.frcrecyclerushpitscouter.common.logger.Log;
 
-
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -69,8 +68,6 @@ public class BluetoothChatService {
     private ConnectThread mConnectThread;
     private ConnectedThread mConnectedThread;
     private int mState;
-    private ObjectInputStream ois;
-    private ObjectOutputStream oos;
 
     // Constants that indicate the current connection state
     public static final int STATE_NONE = 0;       // we're doing nothing
@@ -248,10 +245,10 @@ public class BluetoothChatService {
     /**
      * Write to the ConnectedThread in an unsynchronized manner
      *
-     * @param out The bytes to write
-     * @see ConnectedThread#write(byte[])
+     *
+     * //@see ConnectedThread#write(byte[])
      */
-    public void write(byte[] out) {
+    public void write(String msg) {
         // Create temporary object
         ConnectedThread r;
         // Synchronize a copy of the ConnectedThread
@@ -260,7 +257,8 @@ public class BluetoothChatService {
             r = mConnectedThread;
         }
         // Perform the write unsynchronized
-        r.write(out);
+        //r.write(out, context);
+        r.write(msg);
     }
 
     /**
@@ -313,7 +311,7 @@ public class BluetoothChatService {
                     tmp = mAdapter.listenUsingRfcommWithServiceRecord(NAME_SECURE,
                             MY_UUID_SECURE);
                 } else {
-                    if(Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD) {
+                    if (Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD) {
                         tmp = mAdapter.listenUsingInsecureRfcommWithServiceRecord(
                                 NAME_INSECURE, MY_UUID_INSECURE);
                     }
@@ -402,7 +400,7 @@ public class BluetoothChatService {
                     tmp = device.createRfcommSocketToServiceRecord(
                             MY_UUID_SECURE);
                 } else {
-                    if(Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD) {
+                    if (Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD) {
                         tmp = device.createInsecureRfcommSocketToServiceRecord(
                                 MY_UUID_INSECURE);
                     }
@@ -461,25 +459,43 @@ public class BluetoothChatService {
      */
     private class ConnectedThread extends Thread {
         private final BluetoothSocket mmSocket;
-        private final InputStream mmInStream;
-        private final OutputStream mmOutStream;
+        private ObjectInputStream mmInStream;
+        private ObjectOutputStream mmOutStream;
+
 
         public ConnectedThread(BluetoothSocket socket, String socketType) {
             Log.d(TAG, "create ConnectedThread: " + socketType);
             mmSocket = socket;
+            /*
+            ObjectInputStream tmpObIn = null;
             InputStream tmpIn = null;
-            OutputStream tmpOut = null;
+            ObjectOutputStream tmpOut = null;
 
             // Get the BluetoothSocket input and output streams
+
             try {
-                tmpIn = socket.getInputStream();
-                tmpOut = socket.getOutputStream();
-            } catch (IOException e) {
-                Log.e(TAG, "temp sockets not created", e);
+                //input stream
+                //mmFileIn = new FileInputStream("t.tmp");
+                //tmpIn = socket.getInputStream();
+                //tmpObIn.readObject(new tmpIn);
+                //output stream
+                //tmpOut.flush();
+                //tmpOut = new ObjectOutputStream(mmFileOut);
+                //tmpOut.writeObject(socket.getOutputStream());
+
+
+
+            }catch (FileNotFoundException fnfe){
+                System.out.println("FileOutPutStream: "+ fnfe);
+            }catch (IOException ie){
+                System.out.print("ObjectOutputStream: " + ie);
+            }catch (Exception e){
+                System.out.print(e);
             }
 
-            mmInStream = tmpIn;
+            //mmInStream = tmpOu;
             mmOutStream = tmpOut;
+            */
         }
 
         public void run() {
@@ -490,12 +506,34 @@ public class BluetoothChatService {
             // Keep listening to the InputStream while connected
             while (true) {
                 try {
-                    // Read from the InputStream
-                    bytes = mmInStream.read(buffer);
 
-                    // Send the obtained bytes to the UI Activity
-                    mHandler.obtainMessage(Constants.MESSAGE_READ, bytes, -1, buffer)
-                            .sendToTarget();
+                    FileInputStream mmFileInput = null;
+                    /*
+                    File file = new File(context.getFilesDir(), "t2.tmp");
+                    mmFileInput = new FileInputStream(file);
+                    mmFileInput.read(buffer);
+                    */
+                    try {
+                        mmInStream = new ObjectInputStream(mmSocket.getInputStream());
+                    }catch(StreamCorruptedException sce){
+                        Log.e(TAG, "Stream Corrupted");
+                    }
+                    catch (Exception e){
+                        Log.e(TAG, "mmInStream" + e);
+                    }
+
+                    //mmInStream.readObj(mmFileIn);
+                    if(mmInStream != null) {
+                        bytes = mmInStream.read(buffer);
+                        mmInStream.close();
+                        try {
+                            // Send the obtained bytes to the UI Activity
+                            mHandler.obtainMessage(Constants.MESSAGE_READ, bytes, -1, buffer)
+                                    .sendToTarget();
+                        }catch (Exception e){
+                            Log.e(TAG, "mHandler" + e);
+                        }
+                    }
                 } catch (IOException e) {
                     Log.e(TAG, "disconnected", e);
                     connectionLost();
@@ -509,16 +547,37 @@ public class BluetoothChatService {
         /**
          * Write to the connected OutStream.
          *
-         * @param buffer The bytes to write
+         *
          */
-        public void write(byte[] buffer) {
+        public void write(String msg) {
+
+            FileOutputStream mmFileOut = null;
             try {
-                mmOutStream.write(buffer);
+                if (msg != null) {
+                    try {
+                        /*
+                        File file = new File(context.getFilesDir(), "t.tmp");
+                        mmFileOut = new FileOutputStream(file);
+                        mmFileOut.write(buffer);
+                        */
+                        //mmOutStream.write(buffer.length);
+
+                        //mmOutStream.write("Hello");
+                        mmOutStream.reset();
+                        mmOutStream = new ObjectOutputStream(mmSocket.getOutputStream());
+                        mmOutStream.writeUTF(msg);
+                        mmOutStream.flush();
+                        mmOutStream.close();
+
+                    }catch(Exception e){
+                        System.out.println("ERROR: " + e);
+                    }
+                }
 
                 // Share the sent message back to the UI Activity
-                mHandler.obtainMessage(Constants.MESSAGE_WRITE, -1, -1, buffer)
+                mHandler.obtainMessage(Constants.MESSAGE_WRITE, -1, -1, mmOutStream)
                         .sendToTarget();
-            } catch (IOException e) {
+            } catch (Exception e) {
                 Log.e(TAG, "Exception during write", e);
             }
         }
@@ -532,3 +591,4 @@ public class BluetoothChatService {
         }
     }
 }
+

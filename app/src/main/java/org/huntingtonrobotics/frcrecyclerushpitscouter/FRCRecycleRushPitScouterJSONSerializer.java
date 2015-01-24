@@ -32,7 +32,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -62,7 +61,7 @@ public class FRCRecycleRushPitScouterJSONSerializer {
             String line = null;
             while ((line = reader.readLine()) != null) {
                 //line breaks are omitted and irrelevant
-                 jsonString.append(line);
+                jsonString.append(line);
             }
             //parse the JSON using JSONTokener
             JSONArray array = (JSONArray) new JSONTokener(jsonString.toString()).nextValue();
@@ -88,8 +87,8 @@ public class FRCRecycleRushPitScouterJSONSerializer {
         //check for duplicates
 
         for (Team c : t) {
-             array.put(c.toJSON());
-         }
+            array.put(c.toJSON());
+        }
 
 
         //write file to disk
@@ -106,25 +105,14 @@ public class FRCRecycleRushPitScouterJSONSerializer {
     }
 
     //returns string version of json file
-    public ArrayList<String> getJSONString() throws JSONException, IOException{
+    public String getJSONString() throws JSONException, IOException{
         //Build an array in JSON
-        /*
         JSONArray array = new JSONArray();
         loadTeams();
         for (Team c : mTeams) {
             array.put(c.toJSON());
         }
-        */
-        loadTeams();
-        ArrayList<String> strings = new ArrayList<>();
-        for (int i = 0; i < mTeams.size(); i++) {
-            JSONArray array = new JSONArray();
-            array.put(mTeams.get(i).toJSON());
-            strings.add(array.toString());
-        }
-
-
-        return strings;
+        return array.toString();
     }
 
     //load teams from file system
@@ -168,3 +156,4 @@ public class FRCRecycleRushPitScouterJSONSerializer {
         return data_json;
     }
 }
+

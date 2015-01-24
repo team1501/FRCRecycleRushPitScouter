@@ -16,4 +16,7 @@
     <color name="blue">#0000FF</color>
     <color name="navy">#000080</color>
     <color name="black">#000000</color>
+
+    <color name="teamRed">#ed2224</color>
+
 </resources>
