@@ -61,6 +61,8 @@ public class BluetoothChatFragment extends Fragment {
     private static final String FILENAME = "teams.json";
     private FRCRecycleRushPitScouterJSONSerializer mSerilizer;
     private String mConversationJSONString;
+    private String finalChunk = "";
+    private final String SuperSecretPassword = "~~~";
 
     private static final String TAG = "BluetoothChatFragment";
 
@@ -213,9 +215,9 @@ public class BluetoothChatFragment extends Fragment {
         mOutStringBuffer = new StringBuffer("");
     }
 
-    /**
-     * Makes this device discoverable.
-     */
+
+
+    //Makes this device discoverable.
     private void ensureDiscoverable() {
         if (mBluetoothAdapter.getScanMode() !=
                 BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE) {
@@ -240,31 +242,18 @@ public class BluetoothChatFragment extends Fragment {
         // Check that there's actually something to send
         if (message.length() > 0) {
             // Get the message bytes and tell the BluetoothChatService to write
-            //byte[] send = message.getBytes();
-            mChatService.write(message);
+            //Byte ETB = 0x23;
+            //message += Byte.toString(ETB);
+            message = message + SuperSecretPassword;
+            byte[] send = message.getBytes();
+
+            mChatService.write(send);
 
             // Reset out string buffer to zero and clear the edit text field
             mOutStringBuffer.setLength(0);
             mOutEditText.setText(mOutStringBuffer);
         }
     }
-
-    /**
-     * The action listener for the EditText widget, to listen for the return key
-     */
-    /*
-    private TextView.OnEditorActionListener mWriteListener
-            = new TextView.OnEditorActionListener() {
-        public boolean onEditorAction(TextView view, int actionId, KeyEvent event) {
-            // If the action is a key-up event on the return key, send the message
-            if (actionId == EditorInfo.IME_NULL && event.getAction() == KeyEvent.ACTION_UP) {
-                String message = view.getText().toString();
-                sendMessage(message);
-            }
-            return true;
-        }
-    };
-    */
 
     /**
      * Updates the status on the action bar.
@@ -332,34 +321,26 @@ public class BluetoothChatFragment extends Fragment {
                 case Constants.MESSAGE_WRITE:
                     byte[] writeBuf = (byte[]) msg.obj;
                     // construct a string from the buffer
-                    String writeMessage = mConversationJSONString;
+                    String writeMessage = new String(writeBuf);
                     mConversationArrayAdapter.add("Me:  " + writeMessage);
                     break;
                 case Constants.MESSAGE_READ:
-                    Byte[] b = (Byte[])msg.obj;
-                    b.toString();
-                    /*
-                    try {
-                        //ObjectInputStream read = new ObjectInputStream(b);
-                    }catch (Exception e){
-                        Log.e(TAG, "msg.obj" + e);
-                    }
-                    */
+                    byte[] readBuf = (byte[]) msg.obj;
                     // construct a string from the valid bytes in the buffer
-                    //String readMessage = new String(readBuf, 0, msg.arg1);
-                    //Log.i(TAG, readMessage);
-                    /*
-                    try {
-                        mSerilizer.saveBluetoothTeams(readMessage);
-                    }catch (JSONException je){
-                        Log.d(TAG, "Error: " + je);
-                    }catch (Exception e){
-                        Log.d(TAG, "Error: " + e);
+                    String readMessage = new String(readBuf, 0, msg.arg1);
+
+                    finalChunk = finalChunk + readMessage;
+                    if ((finalChunk.substring(finalChunk.length()-SuperSecretPassword.length()).equals(SuperSecretPassword))){
+
+                        try {
+                            finalChunk = finalChunk.substring(0,finalChunk.length()-SuperSecretPassword.length());
+                            mConversationArrayAdapter.add(mConnectedDeviceName + ":  " + finalChunk);
+                            mSerilizer.saveBluetoothTeams(finalChunk);
+                            finalChunk = "";
+                        }catch (Exception e){
+
+                        }
                     }
-                    */
-
-                    mConversationArrayAdapter.add(mConnectedDeviceName + ":  " );
-
                     break;
                 case Constants.MESSAGE_DEVICE_NAME:
                     // save the connected device's name

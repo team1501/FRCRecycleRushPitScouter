@@ -248,7 +248,7 @@ public class BluetoothChatService {
      *
      * //@see ConnectedThread#write(byte[])
      */
-    public void write(String msg) {
+    public void write(byte[] out) {
         // Create temporary object
         ConnectedThread r;
         // Synchronize a copy of the ConnectedThread
@@ -257,8 +257,7 @@ public class BluetoothChatService {
             r = mConnectedThread;
         }
         // Perform the write unsynchronized
-        //r.write(out, context);
-        r.write(msg);
+        r.write(out);
     }
 
     /**
@@ -459,81 +458,54 @@ public class BluetoothChatService {
      */
     private class ConnectedThread extends Thread {
         private final BluetoothSocket mmSocket;
-        private ObjectInputStream mmInStream;
-        private ObjectOutputStream mmOutStream;
-
+        private final InputStream mmInStream;
+        private final OutputStream mmOutStream;
 
         public ConnectedThread(BluetoothSocket socket, String socketType) {
             Log.d(TAG, "create ConnectedThread: " + socketType);
             mmSocket = socket;
-            /*
-            ObjectInputStream tmpObIn = null;
             InputStream tmpIn = null;
-            ObjectOutputStream tmpOut = null;
+            OutputStream tmpOut = null;
 
             // Get the BluetoothSocket input and output streams
-
             try {
-                //input stream
-                //mmFileIn = new FileInputStream("t.tmp");
-                //tmpIn = socket.getInputStream();
-                //tmpObIn.readObject(new tmpIn);
-                //output stream
-                //tmpOut.flush();
-                //tmpOut = new ObjectOutputStream(mmFileOut);
-                //tmpOut.writeObject(socket.getOutputStream());
-
-
-
-            }catch (FileNotFoundException fnfe){
-                System.out.println("FileOutPutStream: "+ fnfe);
-            }catch (IOException ie){
-                System.out.print("ObjectOutputStream: " + ie);
-            }catch (Exception e){
-                System.out.print(e);
+                tmpIn = socket.getInputStream();
+                tmpOut = socket.getOutputStream();
+            } catch (IOException e) {
+                Log.e(TAG, "temp sockets not created", e);
             }
 
-            //mmInStream = tmpOu;
+            mmInStream = tmpIn;
             mmOutStream = tmpOut;
-            */
         }
 
         public void run() {
             Log.i(TAG, "BEGIN mConnectedThread");
-            byte[] buffer = new byte[1024];
+            byte[] buffer = new byte[2000];
+            byte inputByte = 0;
+
             int bytes;
 
             // Keep listening to the InputStream while connected
             while (true) {
                 try {
+                    // Read from the InputStream
 
-                    FileInputStream mmFileInput = null;
+                    bytes = mmInStream.read(buffer);
+
+
                     /*
-                    File file = new File(context.getFilesDir(), "t2.tmp");
-                    mmFileInput = new FileInputStream(file);
-                    mmFileInput.read(buffer);
+                    String strInputBuffer = "";
+                    mmInStream.read(ch);
+                    while (ch != 0x23) {
+                        strInputBuffer += ch;
+                    }
                     */
-                    try {
-                        mmInStream = new ObjectInputStream(mmSocket.getInputStream());
-                    }catch(StreamCorruptedException sce){
-                        Log.e(TAG, "Stream Corrupted");
-                    }
-                    catch (Exception e){
-                        Log.e(TAG, "mmInStream" + e);
-                    }
 
-                    //mmInStream.readObj(mmFileIn);
-                    if(mmInStream != null) {
-                        bytes = mmInStream.read(buffer);
-                        mmInStream.close();
-                        try {
-                            // Send the obtained bytes to the UI Activity
-                            mHandler.obtainMessage(Constants.MESSAGE_READ, bytes, -1, buffer)
-                                    .sendToTarget();
-                        }catch (Exception e){
-                            Log.e(TAG, "mHandler" + e);
-                        }
-                    }
+
+                    // Send the obtained bytes to the UI Activity
+                    mHandler.obtainMessage(Constants.MESSAGE_READ, bytes, -1, buffer)
+                            .sendToTarget();
                 } catch (IOException e) {
                     Log.e(TAG, "disconnected", e);
                     connectionLost();
@@ -547,37 +519,16 @@ public class BluetoothChatService {
         /**
          * Write to the connected OutStream.
          *
-         *
+         * @param buffer The bytes to write
          */
-        public void write(String msg) {
-
-            FileOutputStream mmFileOut = null;
+        public void write(byte[] buffer) {
             try {
-                if (msg != null) {
-                    try {
-                        /*
-                        File file = new File(context.getFilesDir(), "t.tmp");
-                        mmFileOut = new FileOutputStream(file);
-                        mmFileOut.write(buffer);
-                        */
-                        //mmOutStream.write(buffer.length);
-
-                        //mmOutStream.write("Hello");
-                        mmOutStream.reset();
-                        mmOutStream = new ObjectOutputStream(mmSocket.getOutputStream());
-                        mmOutStream.writeUTF(msg);
-                        mmOutStream.flush();
-                        mmOutStream.close();
-
-                    }catch(Exception e){
-                        System.out.println("ERROR: " + e);
-                    }
-                }
+                mmOutStream.write(buffer);
 
                 // Share the sent message back to the UI Activity
-                mHandler.obtainMessage(Constants.MESSAGE_WRITE, -1, -1, mmOutStream)
+                mHandler.obtainMessage(Constants.MESSAGE_WRITE, -1, -1, buffer)
                         .sendToTarget();
-            } catch (Exception e) {
+            } catch (IOException e) {
                 Log.e(TAG, "Exception during write", e);
             }
         }
@@ -591,4 +542,3 @@ public class BluetoothChatService {
         }
     }
 }
-
