@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NavUtils;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,19 +16,21 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import org.huntingtonrobotics.frcrecyclerushpitscouter.bluetoothchat.BluetoothMainActivity;
+
 import java.util.ArrayList;
 import java.util.Set;
-import java.util.UUID;
 
 /**
  * Created by 2015H_000 on 1/15/2015.
  */
 public class SendFragment extends Fragment {
 
-    private Button mOn,mOff,mVisible,mList;
-    private BluetoothAdapter BA;
-    private Set<BluetoothDevice> pairedDevices;
-    private ListView lv;
+    //bluetooth
+    private Button mBlueOn, mBlueOff,mBlueVisible, mBlueList, mBlueSend;
+    private BluetoothAdapter mBluetoothAdapter;
+    private Set<BluetoothDevice> mPairedDevices;
+    private ListView mPairedDevicesList;
 
     //fragment is created
     @Override
@@ -44,6 +45,8 @@ public class SendFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
         final View v = inflater.inflate(R.layout.fragment_send, parent, false);
 
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
             //no parent no carret
             if (NavUtils.getParentActivityName(getActivity())==null) {
@@ -51,37 +54,36 @@ public class SendFragment extends Fragment {
             }
         }
 
-        mOn = (Button)v.findViewById(R.id.blueOn);
-        mOn.setOnClickListener(new View.OnClickListener() {
+        mBlueOn = (Button)v.findViewById(R.id.blueOn);
+        mBlueOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!BA.isEnabled()) {
+                if (!mBluetoothAdapter.isEnabled()) {
                     Intent turnOn = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                     startActivityForResult(turnOn, 0);
                     Toast.makeText(getActivity().getApplicationContext(), "Turned on"
                             , Toast.LENGTH_LONG).show();
-                }
-                else{
-                    Toast.makeText(getActivity().getApplicationContext(),"Already on",
+                } else {
+                    Toast.makeText(getActivity().getApplicationContext(), "Already on",
                             Toast.LENGTH_LONG).show();
                 }
             }
         });
 
 
-        mOff = (Button)v.findViewById(R.id.blueOff);
-        mOff.setOnClickListener(new View.OnClickListener() {
+        mBlueOff = (Button)v.findViewById(R.id.blueOff);
+        mBlueOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BA.disable();
-                Toast.makeText(getActivity().getApplicationContext(),"Turned off" ,
+                mBluetoothAdapter.disable();
+                Toast.makeText(getActivity().getApplicationContext(), "Turned off",
                         Toast.LENGTH_LONG).show();
             }
         });
 
 
-        mVisible = (Button)v.findViewById(R.id.blueVisible);
-        mVisible.setOnClickListener(new View.OnClickListener() {
+        mBlueVisible = (Button)v.findViewById(R.id.blueVisible);
+        mBlueVisible.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent getVisible = new Intent(BluetoothAdapter.
@@ -90,26 +92,33 @@ public class SendFragment extends Fragment {
             }
         });
 
-        mList = (Button)v.findViewById(R.id.blueList);
-        mList.setOnClickListener(new View.OnClickListener() {
+        mBlueList = (Button)v.findViewById(R.id.blueList);
+        mBlueList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pairedDevices = BA.getBondedDevices();
+                mPairedDevices = mBluetoothAdapter.getBondedDevices();
 
                 ArrayList list = new ArrayList();
-                for(BluetoothDevice bt : pairedDevices)
+                for (BluetoothDevice bt : mPairedDevices)
                     list.add(bt.getName());
 
-                Toast.makeText(getActivity().getApplicationContext(),"Showing Paired Devices",
+                Toast.makeText(getActivity().getApplicationContext(), "Showing Paired Devices",
                         Toast.LENGTH_SHORT).show();
-                ArrayAdapter adapter = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1, list);
-                lv.setAdapter(adapter);
+                ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, list);
+                mPairedDevicesList.setAdapter(adapter);
             }
         });
 
-        lv = (ListView)v.findViewById(R.id.blueListView);
+        mPairedDevicesList = (ListView)v.findViewById(R.id.blueListView);
 
-        BA = BluetoothAdapter.getDefaultAdapter();
+        mBlueSend = (Button)v.findViewById(R.id.blueSend);
+        mBlueSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), BluetoothMainActivity.class);
+                startActivity(i);
+            }
+        });
 
         return v;
     }

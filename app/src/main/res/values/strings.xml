@@ -34,6 +34,7 @@
     <string name="blue_off">Turn Off</string>
     <string name="blue_visible">Get Visible</string>
     <string name="blue_list">List Devices</string>
+    <string name="blue_send">Open Bluetooth Sender</string>
     <string name="sms">SMS</string>
     <string name="send_title">Send Teams</string>
 

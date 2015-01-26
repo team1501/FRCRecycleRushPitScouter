@@ -44,6 +44,11 @@
                 android:layout_height="wrap_content"
                 android:text="@string/blue_list" />
 
+            <Button android:id="@+id/blueSend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/blue_send" />
+
             <ListView android:id="@+id/blueListView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

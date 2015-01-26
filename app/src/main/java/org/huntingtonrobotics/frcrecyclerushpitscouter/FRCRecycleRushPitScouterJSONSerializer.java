@@ -66,10 +66,9 @@ public class FRCRecycleRushPitScouterJSONSerializer {
             //parse the JSON using JSONTokener
             JSONArray array = (JSONArray) new JSONTokener(jsonString.toString()).nextValue();
             //build the array of teams from JSONObjects
-            ArrayList<Integer> mCheckForDuplicates = new ArrayList<Integer>();
+
             for (int i = 0; i < array.length(); i++) {
                 mTeams.add(new Team(array.getJSONObject(i)));
-
             }
         } catch (FileNotFoundException e) {
             //ignore
@@ -84,12 +83,10 @@ public class FRCRecycleRushPitScouterJSONSerializer {
     public void saveTeams(ArrayList<Team> t) throws JSONException, IOException{
         //Build an array in JSON
         JSONArray array = new JSONArray();
-        //check for duplicates
 
         for (Team c : t) {
             array.put(c.toJSON());
         }
-
 
         //write file to disk
         Writer writer = null;
@@ -119,25 +116,47 @@ public class FRCRecycleRushPitScouterJSONSerializer {
     public Boolean saveBluetoothTeams(String s) throws IOException, JSONException {
         BufferedReader reader = null;
         try {
-
             //parse the JSON using JSONTokener
-
             JSONArray jsonArray = new JSONArray(s);
-
             ArrayList<Team> bluetoothListData = new ArrayList<Team>();
+            ArrayList<Team> bluetoothListDataToAdd = new ArrayList<Team>();
 
-            //build the array of teams from JSONObjects
+
+            //build the array of teams from JSONObjects from bluetooth
             for (int i = 0; i < jsonArray.length(); i++) {
                 bluetoothListData.add(new Team(jsonArray.getJSONObject(i)));
             }
-            mTeams.addAll(bluetoothListData);
-            saveTeams(mTeams);
+
+            mTeams.clear();
+            loadTeams();
+            //loops through list data
+            for (int k = 0; k < bluetoothListData.size(); k++) {
+                Boolean duplicate = false;
+                //loops through list teams
+                for(int j = 0; j < mTeams.size(); j++) {
+                    if (mTeams.get(j).getTeamNum() == bluetoothListData.get(k).getTeamNum()) {
+                        duplicate = true;
+                    }
+                }
+                if(!duplicate){
+                try {
+                    bluetoothListDataToAdd.add(bluetoothListData.get(k));
+                }catch (IndexOutOfBoundsException iobe){
+                    //end try
+                }
+                }
+            }
+                mTeams.addAll(bluetoothListDataToAdd);
+                saveTeams(mTeams);
+
+
             return true;
+
         }catch (FileNotFoundException e) {
             //ignore
             return false;
         }catch (Exception e){
-            Log.d(TAG, "Error: " + e);
+            Log.e(TAG, "Error: " + e);
             return false;
 
         }finally {
@@ -145,15 +164,6 @@ public class FRCRecycleRushPitScouterJSONSerializer {
             if (reader != null)
                 reader.close();
         }
-    }
-
-    public String convertStandardJSONString(String data_json){
-        data_json = data_json.replace("\\", "");
-        data_json = data_json.replace("\"{", "{");
-        data_json = data_json.replace("}\",", "},");
-        data_json = data_json.replace("}\"", "}");
-        data_json = data_json.replace("\n","");
-        return data_json;
     }
 }
 

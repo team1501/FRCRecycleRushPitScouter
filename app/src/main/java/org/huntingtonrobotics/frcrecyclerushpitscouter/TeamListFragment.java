@@ -1,15 +1,11 @@
 package org.huntingtonrobotics.frcrecyclerushpitscouter;
 
 import android.annotation.TargetApi;
-import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-
-import android.support.v7.internal.widget.AdapterViewCompat;
 import android.util.Log;
 import android.view.ActionMode;
 import android.view.ContextMenu;
@@ -24,23 +20,38 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Switch;
 import android.widget.TextView;
 
-import org.huntingtonrobotics.frcrecyclerushpitscouter.bluetoothchat.MainActivity;
-
 import java.util.ArrayList;
-import java.util.UUID;
 
 /**
  * Created by 2015H_000 on 1/6/2015.
  */
 public class TeamListFragment extends ListFragment {
+    private static final String TAG = "TeamListFragment";
     Team mTeam;
     ImageView imageView;
     private ArrayList<Team> mTeams;
-    private static final String TAG = "TeamListFragment";
 
+    //bubble sort
+    public static void bubbleSort(ArrayList<Team> list) {
+        Team team;
+        if (list.size() > 1) // check if the number of teams is larger than 1
+        {
+            for (int x = 0; x < list.size(); x++) // bubble sort outer loop
+            {
+
+                for (int i = 0; i < list.size() - x - 1; i++) {
+                    if (list.get(i).compareTo(list.get(i + 1)) > 0) {
+                        team = list.get(i);
+                        list.set(i, list.get(i + 1));
+                        list.set(i + 1, team);
+                    }
+                }
+            }
+        }
+
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,10 +79,10 @@ public class TeamListFragment extends ListFragment {
         ListView listView = (ListView) v.findViewById(android.R.id.list);
 
         //set choice mode
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
             //use floating context menus on Froyo and Gingerbread
             registerForContextMenu(listView);
-        }else{
+        } else {
             //use contextual action bar on Honeycomb and above
             listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
 
@@ -99,12 +110,12 @@ public class TeamListFragment extends ListFragment {
 
                 @Override
                 public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-                    switch (item.getItemId()){
+                    switch (item.getItemId()) {
                         case R.id.menu_item_delete_team:
-                            TeamAdapter adapter = (TeamAdapter)getListAdapter();
+                            TeamAdapter adapter = (TeamAdapter) getListAdapter();
                             TeamLab teamLab = TeamLab.get(getActivity());
-                            for (int i = adapter.getCount() - 1; i >= 0; i--){
-                                if (getListView().isItemChecked(i)){
+                            for (int i = adapter.getCount() - 1; i >= 0; i--) {
+                                if (getListView().isItemChecked(i)) {
                                     teamLab.deleteTeam(adapter.getItem(i));
                                 }
                             }
@@ -112,11 +123,9 @@ public class TeamListFragment extends ListFragment {
                             adapter.notifyDataSetChanged();
                             return true;
                         default:
-                        return false;
+                            return false;
                     }
-
                 }
-
                 @Override
                 public void onDestroyActionMode(ActionMode mode) {
                     //not used
@@ -126,7 +135,6 @@ public class TeamListFragment extends ListFragment {
 
         return v;
     }
-
 
     //team from teamlist is clicked
     @Override
@@ -142,42 +150,17 @@ public class TeamListFragment extends ListFragment {
         startActivity(i);
     }
 
-    private void loadListTeams(){
+    private void loadListTeams() {
+        /*
+        if (mTeams != null) {
+            mTeams.clear();
+        }
+        */
         mTeams = TeamLab.get(getActivity()).getTeams();
 
         bubbleSort(mTeams);
         TeamAdapter adapter = new TeamAdapter(mTeams);
         setListAdapter(adapter);
-    }
-
-
-    //hooks up dataset of crimes
-    private class TeamAdapter extends ArrayAdapter<Team> {
-
-        public TeamAdapter(ArrayList<Team> teams) {
-            super(getActivity(), 0, teams);
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            //inflate a view if none is given
-            if (convertView == null) {
-                convertView = getActivity().getLayoutInflater().inflate(R.layout.list_item_team, null);
-            }
-
-            //Configure the view for the team
-            Team t = getItem(position);
-            //for the list view
-            TextView titleTextView = (TextView) convertView.findViewById(R.id.team_list_item_titleTextView);
-            titleTextView.setText("" + t.getTeamNum());
-
-            imageView = (ImageView)convertView.findViewById(R.id.team_list_item_imageView);
-            showPhoto(t);
-
-            //TODO add views to list items here
-
-            return convertView;
-        }
     }
 
     //Reload team list onResume
@@ -211,7 +194,7 @@ public class TeamListFragment extends ListFragment {
             //TODO set subtitle
             case R.id.menu_item_send_teams:
                 //TODO open dialog
-                Intent i2 = new Intent(getActivity(), MainActivity.class);
+                Intent i2 = new Intent(getActivity(), SendActivity.class);
                 startActivity(i2);
                 return true;
             default:
@@ -251,61 +234,66 @@ public class TeamListFragment extends ListFragment {
         return super.onContextItemSelected(item);
     }
 
-    //bubble sort
-    public static void bubbleSort(ArrayList<Team> list)
-    {
-        Team team;
-        if (list.size()>1) // check if the number of teams is larger than 1
-        {
-            for (int x=0; x<list.size(); x++) // bubble sort outer loop
-            {
-
-                for (int i=0; i < list.size() - x - 1; i++){
-                    if (list.get(i).compareTo(list.get(i+1)) > 0)
-                    {
-                        team = list.get(i);
-                        list.set(i,list.get(i+1) );
-                        list.set(i+1, team);
-                    }
-                }
-            }
-        }
-
-    }
-
     //load picture
     //shows the photo
-    private void showPhoto(Team team){
+    private void showPhoto(Team team) {
         //(Re)set the image buttons image based on your photo
 
         Photo p = team.getPhoto();
         BitmapDrawable b = null;
-        if (p != null){
+        if (p != null) {
             String path = getActivity().getFileStreamPath(p.getFileName()).getAbsolutePath();
             b = PictureUtils.getScaledDrawable(getActivity(), path);
         }
         imageView.setImageDrawable(b);
     }
-    //---shows the photo in photoview
 
     //Load the image
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
-
+        loadListTeams();
     }
-    //---Load the image
-
-
+    //---shows the photo in photoview
 
     //unload the image
     @Override
-    public void onStop(){
+    public void onStop() {
         super.onStop();
         try {
             PictureUtils.cleanImageView(imageView);
-        }catch (Exception e){
+        } catch (Exception e) {
 
+        }
+    }
+    //---Load the image
+
+    //hooks up dataset of crimes
+    private class TeamAdapter extends ArrayAdapter<Team> {
+
+        public TeamAdapter(ArrayList<Team> teams) {
+            super(getActivity(), 0, teams);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            //inflate a view if none is given
+            if (convertView == null) {
+                convertView = getActivity().getLayoutInflater().inflate(R.layout.list_item_team, null);
+            }
+
+            //Configure the view for the team
+            Team t = getItem(position);
+            //for the list view
+            TextView titleTextView = (TextView) convertView.findViewById(R.id.team_list_item_titleTextView);
+            titleTextView.setText("" + t.getTeamNum());
+
+            imageView = (ImageView) convertView.findViewById(R.id.team_list_item_imageView);
+            showPhoto(t);
+
+            //TODO add views to list items here
+
+            return convertView;
         }
     }
     //---unload the image

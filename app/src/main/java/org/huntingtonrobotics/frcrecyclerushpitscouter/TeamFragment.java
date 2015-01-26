@@ -861,6 +861,7 @@ public class TeamFragment extends Fragment {
     public void onStop(){
         super.onStop();
         PictureUtils.cleanImageView(mPhotoView);
+        TeamLab.get(getActivity()).saveTeams();
     }
     //---unload the image
 

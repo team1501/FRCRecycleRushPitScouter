@@ -1,0 +1,74 @@
+private static final String JSON_ID = "id";
+    private static final String JSON_TEAM_NUM = "teamNum";
+    private static final String JSON_PHOTO = "photo";
+
+    //mech
+    private static final String JSON_MECH_LITTER_INSERTER = "mechLitterInserter";
+    private static final String JSON_MECH_LITTER_PUSHER = "mechLitterPusher";
+
+    private static final String JSON_MECH_TOTE_FEEDER = "mechToteFeeder";
+
+    private static final String JSON_MECH_CONTAINER_FLIPPER = "mechContainerFlipper";
+    private static final String JSON_MECH_CONTAINER_STEP_REMOVER = "mechContainerStepRemover";
+
+    //auto
+    private static final String JSON_AUTO_PROGS = "autoProgs";
+    private static final String JSON_AUTO_MOVE = "autoMove";
+    private static final String JSON_AUTO_TOTES = "autoTotes";
+    private static final String JSON_AUTO_CONTAINERS = "autoContainers";
+    //private static final String JSON_AUTO_HEIGHT = "autoHeight";      //deleted from auto
+    private static final String JSON_AUTO_MOVE_TOTE = "autoMoveTote";
+    private static final String JSON_AUTO_POS = "autoPos";
+
+    //tele
+    private static final String JSON_TELE_STACK_TOTES = "teleStackTotes";
+    private static final String JSON_TELE_STACK_CONTAINERS = "teleStackContainers";
+    private static final String JSON_TELE_PLACE_LITTER = "telePlaceLitter";
+    private static final String JSON_TELE_PLACE_TOTE ="telePlaceTote";
+    private static final String JSON_TELE_CARRY_TOTE = "teleCarryTote";
+    private static final String JSON_TELE_COOP_SET = "teleCoopSet";
+    private static final String JSON_TELE_COOP_STACK = "teleCoopStack";
+    private static final String JSON_TELE_STACK_DIRECTION = "teleStackDirection";
+    private static final String JSON_TELE_PLATFORM = "telePlatform";
+    private static final String JSON_TELE_HUMAN_STATION="teleHumanStation";
+    private static final String JSON_TELE_PICK_UP_LITTER = "telePickUpLitter";
+    private static final String JSON_TELE_MOVE_LITTER="teleMoveLitter";
+
+
+    ---TO--->
+
+    private static final String JSON_ID = "id";
+        private static final String JSON_TEAM_NUM = "tNum";
+        private static final String JSON_PHOTO = "photo";
+
+        //mech
+        private static final String JSON_MECH_LITTER_INSERTER = "mli";
+        private static final String JSON_MECH_LITTER_PUSHER = "mlp";
+
+        private static final String JSON_MECH_TOTE_FEEDER = "mtf";
+
+        private static final String JSON_MECH_CONTAINER_FLIPPER = "mcf";
+        private static final String JSON_MECH_CONTAINER_STEP_REMOVER = "mcr";
+
+        //auto
+        private static final String JSON_AUTO_PROGS = "ap";
+        private static final String JSON_AUTO_MOVE = "am";
+        private static final String JSON_AUTO_TOTES = "at";
+        private static final String JSON_AUTO_CONTAINERS = "ac";
+        //private static final String JSON_AUTO_HEIGHT = "autoHeight";      //deleted from auto
+        private static final String JSON_AUTO_MOVE_TOTE = "amt";
+        private static final String JSON_AUTO_POS = "aps";
+
+        //tele
+        private static final String JSON_TELE_STACK_TOTES = "tst";
+        private static final String JSON_TELE_STACK_CONTAINERS = "tsc";
+        private static final String JSON_TELE_PLACE_LITTER = "tpl";
+        private static final String JSON_TELE_PLACE_TOTE ="tpt";
+        private static final String JSON_TELE_CARRY_TOTE = "tct";
+        private static final String JSON_TELE_COOP_SET = "tcs";
+        private static final String JSON_TELE_COOP_STACK = "tcsk";
+        private static final String JSON_TELE_STACK_DIRECTION = "tsd";
+        private static final String JSON_TELE_PLATFORM = "tp";
+        private static final String JSON_TELE_HUMAN_STATION="ths";
+        private static final String JSON_TELE_PICK_UP_LITTER = "tpul";
+        private static final String JSON_TELE_MOVE_LITTER="tml";
