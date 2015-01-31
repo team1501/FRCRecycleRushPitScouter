@@ -6,6 +6,7 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:orientation="vertical"
         android:weightSum="1">
@@ -13,19 +14,10 @@
         <!--Team Info-->
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp">
+            style="@style/LinearLayoutStyle1">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginRight="4dp"
-                android:layout_marginTop="@dimen/activity_top_margin">
-
+                style="@style/LinearLayoutStyle2">
 
                 <ImageView android:id="@+id/team_imageView"
                     android:layout_width="80dp"
@@ -44,12 +36,7 @@
 
 
             <LinearLayout
-
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/activity_top_margin"
-                android:layout_weight="1">
+               style="@style/LinearLayoutStyle2"  >
 
                 <TextView
                     android:layout_width="match_parent"
@@ -76,12 +63,12 @@
             android:background="@color/red"
             style="?android:listSeparatorTextViewStyle"/>
 
-
-
         <LinearLayout
-            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginLeft="16dp"
+            android:layout_weight="1">
 
             <!--litter-->
 
@@ -89,28 +76,20 @@
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="@dimen/activity_top_margin">
+                android:layout_weight="1">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    style="@style/LinearItem"
                     android:text="@string/mech_litter"
                     />
 
                 <CheckBox android:id="@+id/mechLitterInserter"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    style="@style/LinearItem"
                     android:text="@string/mech_inserter"
                     />
 
                 <CheckBox android:id="@+id/mechLitterPusher"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    style="@style/LinearItem"
                     android:text="@string/mech_pusher"
                     />
             </LinearLayout>
@@ -119,12 +98,7 @@
         <!--Tote-->
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="@dimen/activity_top_margin">
+            style="@style/LinearLayoutStyle3">
 
             <TextView
                 android:layout_width="match_parent"
@@ -134,9 +108,7 @@
                 />
 
             <CheckBox android:id="@+id/mechToteFeeder"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                style="@style/LinearItem"
                 android:text="@string/mech_feeder"
                 />
         </LinearLayout>
@@ -145,31 +117,20 @@
         <!--Tote-->
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="@dimen/activity_top_margin">
+            style="@style/LinearLayoutStyle3">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                style="@style/LinearItem"
                 android:text="@string/mech_container"
                 />
 
             <CheckBox android:id="@+id/mechContainerFlipper"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                style="@style/LinearItem"
                 android:text="@string/mech_flipper"
                 />
 
             <CheckBox android:id="@+id/mechContainerStepRemover"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                style="@style/LinearItem"
                 android:text="@string/mech_step_remover"
                 />
         </LinearLayout>
@@ -184,31 +145,20 @@
             style="?android:listSeparatorTextViewStyle"/>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            style="@style/LinearLayoutStyle2">
 
             <!--num of programs-->
 
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="@dimen/activity_top_margin">
+                style="@style/LinearLayoutStyle3">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    style="@style/LinearItem"
                     android:text="@string/auto_programs"
                     />
 
                 <EditText android:id="@+id/auto_programs"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    style="@style/LinearItem"
                     android:inputType="number"
                     android:maxLength="2"
                     />
@@ -217,24 +167,15 @@
             <!-- move-->
 
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="@dimen/activity_top_margin">
+                style="@style/LinearLayoutStyle3">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    style="@style/LinearItem"
                     android:text="@string/auto_move"
                     />
 
                 <CheckBox android:id="@+id/auto_move"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
+                    style="@style/LinearItem"/>
             </LinearLayout>
 
 
@@ -242,24 +183,15 @@
             <!-- totes to az-->
 
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="@dimen/activity_top_margin">
+                style="@style/LinearLayoutStyle3">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    style="@style/LinearItem"
                     android:text="@string/auto_totes"
                     />
 
                 <EditText android:id="@+id/auto_totes"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    style="@style/LinearItem"
                     android:inputType="number"
                     android:maxLength="1"
                     android:hint="@string/between_0_and_3"
@@ -270,24 +202,15 @@
             <!-- Containers to az-->
 
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="@dimen/activity_top_margin">
+                style="@style/LinearLayoutStyle3">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    style="@style/LinearItem"
                     android:text="@string/auto_containers"
                     />
 
                 <EditText android:id="@+id/auto_containers"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    style="@style/LinearItem"
                     android:inputType="number"
                     android:maxLength="1"
                     android:hint="@string/between_0_and_3"
@@ -326,41 +249,26 @@
             <!-- move tote stack-->
 
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="@dimen/activity_top_margin">
+                style="@style/LinearLayoutStyle3">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    style="@style/LinearItem"
                     android:text="@string/auto_move_tote_stack"
                     />
 
                 <CheckBox android:id="@+id/auto_move_tote_stack"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
+                    style="@style/LinearItem"/>
             </LinearLayout>
 
 
             <!-- prefered starting position-->
 
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="@dimen/activity_top_margin">
+                style="@style/LinearLayoutStyle3"
+                >
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    style="@style/LinearItem"
                     android:text="@string/auto_start_pos"
                     />
 
@@ -400,6 +308,7 @@
 
                 </RadioGroup>
             </LinearLayout>
+
         </LinearLayout>
 
 
@@ -411,42 +320,24 @@
             style="?android:listSeparatorTextViewStyle"/>
 
 
-
-
-
-
-
-
-
         <!--Teleop-->
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            style="@style/LinearLayoutStyle2">
 
             <!--Headers-->
 
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="@dimen/activity_top_margin">
+                style="@style/LinearLayoutStyle3">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    style="@style/LinearItem"
                     android:text="@string/tele_actions"
                     android:gravity="center_horizontal"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    style="@style/LinearItem"
                     android:text="@string/tele_max_height"
                     android:gravity="center_horizontal"
                     android:textStyle="bold" />
@@ -455,24 +346,15 @@
             <!-- stack totes-->
 
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="@dimen/activity_top_margin">
+                style="@style/LinearLayoutStyle3">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    style="@style/LinearItem"
                     android:text="@string/tele_stack_totes"
                     />
 
                 <EditText android:id="@+id/teleStackTotes"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    style="@style/LinearItem"
                     android:inputType="number"
                     android:maxLength="1"
                     android:hint="@string/between_0_and_6"
@@ -485,24 +367,15 @@
             <!-- Stack Containers-->
 
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="@dimen/activity_top_margin">
+                style="@style/LinearLayoutStyle3">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    style="@style/LinearItem"
                     android:text="@string/tele_stack_container"
                     />
 
                 <EditText android:id="@+id/teleStackContainer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    style="@style/LinearItem"
                     android:inputType="number"
                     android:maxLength="1"
                     android:hint="@string/between_0_and_6"
@@ -513,24 +386,15 @@
             <!-- place litter-->
 
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="@dimen/activity_top_margin">
+                style="@style/LinearLayoutStyle3">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    style="@style/LinearItem"
                     android:text="@string/tele_place_litter"
                     />
 
                 <EditText android:id="@+id/telePlaceLitter"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    style="@style/LinearItem"
                     android:inputType="number"
                     android:maxLength="1"
                     android:hint="@string/between_0_and_6"
@@ -541,24 +405,15 @@
             <!-- place tote stack-->
 
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="@dimen/activity_top_margin">
+                style="@style/LinearLayoutStyle3">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    style="@style/LinearItem"
                     android:text="@string/tele_place_totes_on_stack"
                     />
 
                 <EditText android:id="@+id/teleStackToteStack"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    style="@style/LinearItem"
                     android:inputType="number"
                     android:maxLength="1"
                     android:hint="@string/between_0_and_6"
@@ -569,24 +424,15 @@
             <!-- carry totes-->
 
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="@dimen/activity_top_margin">
+                style="@style/LinearLayoutStyle3">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    style="@style/LinearItem"
                     android:text="@string/tele_carry_totes"
                     />
 
                 <EditText android:id="@+id/teleCarryTotes"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    style="@style/LinearItem"
                     android:inputType="number"
                     android:maxLength="1"
                     android:hint="@string/between_0_and_6"
@@ -597,24 +443,15 @@
             <!--Coop set-->
 
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="@dimen/activity_top_margin">
+                style="@style/LinearLayoutStyle3">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    style="@style/LinearItem"
                     android:text="@string/tele_coop_set"
                     />
 
                 <EditText android:id="@+id/teleCoopSet"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    style="@style/LinearItem"
                     android:inputType="number"
                     android:maxLength="1"
                     android:hint="@string/between_0_and_6"
@@ -624,24 +461,15 @@
 
             <!--Coop stack-->
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="@dimen/activity_top_margin">
+                style="@style/LinearLayoutStyle3">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    style="@style/LinearItem"
                     android:text="@string/tele_coop_stack"
                     />
 
                 <EditText android:id="@+id/teleCoopStack"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    style="@style/LinearItem"
                     android:inputType="number"
                     android:maxLength="1"
                     android:hint="@string/between_0_and_6"
@@ -651,24 +479,15 @@
 
             <!--blank-->
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="@dimen/activity_top_margin">
+                style="@style/LinearLayoutStyle3">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    style="@style/LinearItem"
                     android:text=""
                     />
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    style="@style/LinearItem"
                     android:text=""
                     />
 
@@ -678,18 +497,13 @@
         <!--Stacking Direction-->
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="@dimen/activity_top_margin"
             android:layout_weight="1">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                style="@style/LinearItem"
                 android:text="@string/tele_stack_direction"
                 />
 
@@ -707,22 +521,16 @@
 
 
                     <RadioButton android:id="@+id/teleDirectionL"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        style="@style/LinearItem"
                         android:checked="true"
                         android:text="@string/tele_plat_long"/>
 
                     <RadioButton android:id="@+id/teleDirectionS"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        style="@style/LinearItem"
                         android:text="@string/tele_plat_short"/>
 
                     <RadioButton android:id="@+id/teleDNS"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        style="@style/LinearItem"
                         android:text="@string/tele_does_not_stack"/>
 
                 </RadioGroup>
@@ -733,18 +541,10 @@
 
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="@dimen/activity_top_margin"
-            android:layout_weight="1">
+            style="@style/LinearLayoutStyle3">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                style="@style/LinearItem"
                 android:text="@string/tele_human_station"
                 />
 
@@ -762,22 +562,16 @@
 
 
                     <RadioButton android:id="@+id/teleHumanStation1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        style="@style/LinearItem"
                         android:checked="true"
                         android:text="1"/>
 
                     <RadioButton android:id="@+id/teleHumanStation2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        style="@style/LinearItem"
                         android:text="2"/>
 
                     <RadioButton android:id="@+id/teleHumanStationA"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        style="@style/LinearItem"
                         android:text="A"/>
 
                 </RadioGroup>
@@ -787,17 +581,10 @@
         <!-- prefered starting position-->
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="@dimen/activity_top_margin">
+            style="@style/LinearLayoutStyle3">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                style="@style/LinearItem"
                 android:text="@string/tele_platform"
                 />
 
@@ -810,29 +597,21 @@
                 <RadioGroup android:id="@+id/platformRadioGroup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
-
                     android:orientation="horizontal"
                     android:checkedButton="@+id/telePlat1" >
 
 
                     <RadioButton android:id="@+id/telePlat1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        style="@style/LinearItem"
                         android:checked="true"
                         android:text="1"/>
 
                     <RadioButton android:id="@+id/telePlat2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        style="@style/LinearItem"
                         android:text="2"/>
 
                     <RadioButton android:id="@+id/telePlatA"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        style="@style/LinearItem"
                         android:text="A"/>
 
                 </RadioGroup>
@@ -843,24 +622,15 @@
 
         <!--blank-->
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="@dimen/activity_top_margin">
+            style="@style/LinearLayoutStyle3">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                style="@style/LinearItem"
                 android:text=""
                 />
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                style="@style/LinearItem"
                 android:text=""
                 />
 
@@ -868,47 +638,26 @@
 
         <!--pick up litter-->
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="@dimen/activity_top_margin">
+            style="@style/LinearLayoutStyle3">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/tele_pick_up_litter"
-
-                />
+                style="@style/LinearItem"
+                android:text="@string/tele_pick_up_litter"/>
 
             <CheckBox android:id="@+id/telePickUpLitter"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                style="@style/LinearItem"/>
         </LinearLayout>
 
         <!--move litter-->
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="@dimen/activity_top_margin">
+            style="@style/LinearLayoutStyle3">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/tele_move_litter"
-                />
+                style="@style/LinearItem"
+                android:text="@string/tele_move_litter"/>
 
             <CheckBox android:id="@+id/teleMoveLitter"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                style="@style/LinearItem"/>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

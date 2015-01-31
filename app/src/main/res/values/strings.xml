@@ -38,8 +38,6 @@
     <string name="sms">SMS</string>
     <string name="send_title">Send Teams</string>
 
-
-
     <string name="tele_stack_totes">Stack Totes:</string>
     <string name="tele_stack_container">Stack Container:</string>
     <string name="tele_place_litter">Place litter on/in container:</string>
@@ -116,5 +114,10 @@
     <string name="sms_tele_human_station">Prefered human station:</string>
     <string name="sms_tele_platfrom">Prefered platform:</string>
     <string name="sms_send_match">Send Match</string>
+
+
+
+
+
 
 </resources>
