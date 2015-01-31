@@ -38,6 +38,8 @@
     <string name="sms">SMS</string>
     <string name="send_title">Send Teams</string>
 
+
+
     <string name="tele_stack_totes">Stack Totes:</string>
     <string name="tele_stack_container">Stack Container:</string>
     <string name="tele_place_litter">Place litter on/in container:</string>
@@ -82,5 +84,37 @@
     <string name="sample_show_log">Show Log</string>
     <string name="sample_hide_log">Hide Log</string>
     <string name="app_name_short">RR Pit Scouter</string>
+    <string name="team_report_text">Send Team Report</string>
+    <string name="team_report_litter_inserter">Has litter inserter.</string>
+    <string name="team_report_no_litter_inserter">Does not have litter inserter.</string>
+    <string name="team_report_litter_pusher">Has litter pusher.</string>
+    <string name="team_report_no_litter_pusher">Does not have litter pusher.</string>
+    <string name="sms_match_num">Enter match number.</string>
+    <string name="sms_team_num">Team Number:</string>
+    <string name="sms_litter_pusher">Litter Pusher.</string>
+    <string name="sms_litter_inserter">Litter Inserter.</string>
+    <string name="sms_tote_feeder">Tote Feeder.</string>
+    <string name="sms_container_flipper">Container Flipper.</string>
+    <string name="sms_container_step_remover">Container Step Remover.</string>
+    <string name="sms_has_mech">HAS MECHANISMS:</string>
+    <string name="sms_dnh_mech">DOES NOT HAVE MECHANISMS:</string>
+    <string name="sms_auto_progs"># of Auto Programs:</string>
+    <string name="sms_auto_can_move_az">Can move to auto zone.</string>
+    <string name="sms_auto_can_not_move_az">Can NOT move to AZ.</string>
+    <string name="sms_auto">AUTO</string>
+    <string name="sms_auto_totes"># of totes able to move to auto zone:</string>
+    <string name="sms_auto_conatiners"># of conatiners able to move to auto zone:</string>
+    <string name="sms_auto_can_move_tote_stack">Can move tote stack to auto zone.</string>
+    <string name="sms_auto_can_not_move_tote_stack">Can NOT move tote stack to auto zone.</string>
+    <string name="sms_auto_pos">Prefered Auto Position:</string>
+    <string name="sms_tele">TELEOP</string>
+    <string name="sms_tele_totes">Tote stack height:</string>
+    <string name="sms_tele_conatiner">Container stack height:</string>
+    <string name="sms_tele_litter">Litter on/in container height:</string>
+    <string name="sms_tele_tote_stack">Place totes on stack height:</string>
+    <string name="sms_tele_carry_totes">Carry totes height:</string>
+    <string name="sms_tele_human_station">Prefered human station:</string>
+    <string name="sms_tele_platfrom">Prefered platform:</string>
+    <string name="sms_send_match">Send Match</string>
 
 </resources>

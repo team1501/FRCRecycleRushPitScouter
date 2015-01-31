@@ -34,7 +34,7 @@ import java.io.IOException;
 public class BluetoothChatFragment extends Fragment {
     //for debugging
     private static final String TAG = "BluetoothChatFragment";
-    //to put on end of string to tell
+    //to put on end of string being sent over bluetooth
     private static final String SUPER_SECRET_PASSWORD = "~~~";
     //for creating string to transfer
     private static final String FILENAME = "teams.json";
