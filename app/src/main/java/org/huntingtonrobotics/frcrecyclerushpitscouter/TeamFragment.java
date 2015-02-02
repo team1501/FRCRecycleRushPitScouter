@@ -73,7 +73,7 @@ public class TeamFragment extends Fragment {
     private EditText mTelePlaceTotes;
     private EditText mTeleCarryTotes;
     private EditText mTeleCoopSet;
-    private EditText mTeleCoopStack;
+    private CheckBox mTeleCoopStack;
 
     private RadioGroup mTeleStackingDirection;
     private RadioGroup mTelePlatform;
@@ -669,35 +669,19 @@ public class TeamFragment extends Fragment {
             }
         });
 
-        mTeleCoopStack = (EditText)v.findViewById(R.id.teleCoopStack);
+        mTeleCoopStack = (CheckBox)v.findViewById(R.id.teleCoopStack);
         //set filter to only allow numbers 0-6
-        mTeleCoopStack.setFilters(new InputFilter[]{ new InputFilterMinMax(0, 6,getActivity().getApplicationContext())});
-        mTeleCoopStack.setText(""+mTeam.getTeleCoopStack());
-        mTeleCoopStack.addTextChangedListener(new TextWatcher() {
+        mTeleCoopStack.setChecked(mTeam.isTeleCoopStack());
+        mTeleCoopStack.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                //left blank
-            }
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                if(isChecked){
+                    mTeam.setTeleCoopStack(true);
+                }else if (!isChecked){
+                    mTeam.setTeleCoopStack(false);
+                }else{
 
-            //user changes text of auto progs
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                //use try catch in case nothing is in text view
-                try {
-                    //saves text after converting CS to integer
-                    mTeam.setTeleCoopStack(Integer.parseInt(s.toString()));
-                } catch (Exception e) {
-                    //exception is thrown so setAutoContainers to 0 so program can carry on
-                    Log.d(TAG, "ERROR: " + e);
-                    mTeam.setTeleCoopStack(0);
                 }
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                //also left blank
             }
         });
 

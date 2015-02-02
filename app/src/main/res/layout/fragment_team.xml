@@ -328,7 +328,7 @@
         <!--Teleop-->
 
         <LinearLayout
-            style="@style/LinearLayoutStyle2">
+            style="@style/LinearLayoutStyle4">
 
             <!--Headers-->
 
@@ -464,23 +464,7 @@
 
             </LinearLayout>
 
-            <!--Coop stack-->
-            <LinearLayout
-                style="@style/LinearLayoutStyle3">
 
-                <TextView
-                    style="@style/LinearItem"
-                    android:text="@string/tele_coop_stack"
-                    />
-
-                <EditText android:id="@+id/teleCoopStack"
-                    style="@style/LinearItem"
-                    android:inputType="number"
-                    android:maxLength="1"
-                    android:hint="@string/between_0_and_6"
-                    />
-
-            </LinearLayout>
 
             <!--blank-->
             <LinearLayout
@@ -499,6 +483,22 @@
             </LinearLayout>
         </LinearLayout>
 
+        <!--Coop stack-->
+        <LinearLayout
+            style="@style/LinearLayoutStyle3">
+
+            <TextView
+                style="@style/LinearItem"
+                android:text="@string/tele_coop_stack"
+                android:layout_marginBottom="4dp"
+                />
+
+            <CheckBox android:id="@+id/teleCoopStack"
+                style="@style/LinearItem"
+                />
+
+        </LinearLayout>
+
         <!--Stacking Direction-->
 
         <LinearLayout
@@ -510,6 +510,7 @@
             <TextView
                 style="@style/LinearItem"
                 android:text="@string/tele_stack_direction"
+                android:layout_marginLeft="4dp"
                 />
 
             <LinearLayout

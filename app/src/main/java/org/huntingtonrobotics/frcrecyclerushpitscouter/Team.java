@@ -83,7 +83,7 @@ public class Team {
     private int mTelePlaceTotes;
     private int mTeleCarryTotes;
     private int mTeleCoopSet;
-    private int mTeleCoopStack;
+    private boolean mTeleCoopStack;
 
     private int mTeleStackingDirection;
     private int mTelePlatform;
@@ -185,7 +185,7 @@ public class Team {
             mTeleCoopSet = json.getInt(JSON_TELE_COOP_SET);
         }
         if (json.has(JSON_TELE_COOP_STACK)){
-            mTeleCoopStack = json.getInt(JSON_TELE_COOP_STACK);
+            mTeleCoopStack = json.getBoolean(JSON_TELE_COOP_STACK);
         }
 
         if (json.has(JSON_TELE_STACK_DIRECTION)){
@@ -452,12 +452,12 @@ public class Team {
         this.mTeleCoopSet = cs;
     }
 
-    public int getTeleCoopStack() {
+    public boolean isTeleCoopStack() {
         return mTeleCoopStack;
     }
 
-    public void setTeleCoopStack(int cs) {
-        this.mTeleCoopStack = cs;
+    public void setTeleCoopStack(Boolean ml) {
+        this.mTeleCoopStack = ml;
     }
 
     public int getTeleStackingDirection() {

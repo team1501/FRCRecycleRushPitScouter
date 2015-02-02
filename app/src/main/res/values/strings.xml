@@ -47,9 +47,9 @@
     <string name="tele_max_height">MAX HEIGHT</string>
     <string name="between_0_and_6"># between 0-6</string>
     <string name="tele_coop_set">Coopertition set:</string>
-    <string name="tele_coop_stack">Coopertition height:</string>
-    <string name="tele_platform">Prefered platform:</string>
-    <string name="tele_human_station">Prefered human station:</string>
+    <string name="tele_coop_stack">Can place bin on 4th level of Coop set:</string>
+    <string name="tele_platform">Preferred platform:</string>
+    <string name="tele_human_station">Preferred human station:</string>
     <string name="tele_plat_long">Long w/ ramp</string>
     <string name="tele_plat_short">Short across ramp</string>
     <string name="tele_pick_up_litter">Can pick up litter:</string>
