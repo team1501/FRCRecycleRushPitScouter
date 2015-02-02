@@ -94,4 +94,15 @@ public class TeamLab {
     }
     //---getter for team (returns a specific team)
 
+    //getter for team (returns a specific team)
+    public Team getTeamByNum(int num){
+        for (Team t : mTeams){
+            if (t.getTeamNum() == num) {
+                return t;
+            }
+        }
+        return null;
+    }
+    //---getter for team (returns a specific team)
+
 }

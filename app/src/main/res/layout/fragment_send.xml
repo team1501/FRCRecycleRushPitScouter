@@ -67,6 +67,21 @@
                 android:layout_height="wrap_content"
                 android:text="@string/sms"
                 style="?android:listSeparatorTextViewStyle"/>
+
+            <Button android:id="@+id/smsSendOneTeam"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sms_send_one_team" />
+            <EditText android:id="@+id/smsTeam1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="@string/sms_team_1"/>
+            <Button android:id="@+id/smsSendAllTeams"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sms_send_all_teams" />
+
             <Button android:id="@+id/smsSendMatch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -80,36 +95,34 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
-                android:hint="@string/sms_match_num"/>
+                android:hint="@string/sms_team_1"/>
             <EditText android:id="@+id/smsMatchTeam2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
-                android:hint="@string/sms_match_num"/>
+                android:hint="@string/sms_team_2"/>
             <EditText android:id="@+id/smsMatchTeam3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
-                android:hint="@string/sms_match_num"/>
+                android:hint="@string/sms_team_3"/>
             <EditText android:id="@+id/smsMatchTeam4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
-                android:hint="@string/sms_match_num"/>
+                android:hint="@string/sms_team_4"/>
             <EditText android:id="@+id/smsMatchTeam5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
-                android:hint="@string/sms_match_num"/>
+                android:hint="@string/sms_team_5"/>
             <EditText android:id="@+id/smsMatchTeam6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
-                android:hint="@string/sms_match_num"/>
-            <Button android:id="@+id/smsSendTems"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/send_teams" />
+                android:hint="@string/sms_team_6"/>
+
+
 
 
 

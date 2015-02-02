@@ -114,10 +114,14 @@
     <string name="sms_tele_human_station">Prefered human station:</string>
     <string name="sms_tele_platfrom">Prefered platform:</string>
     <string name="sms_send_match">Send Match</string>
-
-
-
-
+    <string name="sms_send_all_teams">Send All Teams</string>
+    <string name="sms_send_one_team">Send One Team</string>
+    <string name="sms_team_1">Enter Team 1</string>
+    <string name="sms_team_2">Enter Team 2</string>
+    <string name="sms_team_3">Enter Team 3</string>
+    <string name="sms_team_4">Enter Team 4</string>
+    <string name="sms_team_5">Enter Team 5</string>
+    <string name="sms_team_6">Enter Team 6</string>
 
 
 </resources>
