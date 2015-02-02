@@ -288,8 +288,7 @@ public class TeamListFragment extends ListFragment {
             TextView titleTextView = (TextView) convertView.findViewById(R.id.team_list_item_titleTextView);
             titleTextView.setText("" + t.getTeamNum());
 
-            imageView = (ImageView) convertView.findViewById(R.id.team_list_item_imageView);
-            showPhoto(t);
+
 
             //TODO add views to list items here
 

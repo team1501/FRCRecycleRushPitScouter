@@ -51,6 +51,11 @@
                     android:inputType="number"
                     android:maxLength="4"
                     android:hint="@string/team_number_hint"/>
+                <EditText android:id="@+id/scoutName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:hint="@string/scout_name"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -454,7 +459,7 @@
                     style="@style/LinearItem"
                     android:inputType="number"
                     android:maxLength="1"
-                    android:hint="@string/between_0_and_6"
+                    android:hint="@string/between_0_and_3"
                     />
 
             </LinearLayout>

@@ -1,5 +1,8 @@
 package org.huntingtonrobotics.frcrecyclerushpitscouter;
 
+import android.bluetooth.BluetoothAdapter;
+import android.os.Build;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -13,6 +16,7 @@ public class Team {
 
     private static final String JSON_ID = "id";
     private static final String JSON_TEAM_NUM = "tNum";
+    private static final String JSON_SCOUT_NAME = "sct";
     private static final String JSON_PHOTO = "photo";
 
     //mech
@@ -51,6 +55,7 @@ public class Team {
 
     //team info
     private int mTeamNum;
+    private String mScoutName;
     private Photo mPhoto;
 
     //mech
@@ -90,7 +95,16 @@ public class Team {
     //Constructor for Team
     public Team(){
         //generate unique identifier
+        String deviceName="";
+        try {
+            BluetoothAdapter myDevice = BluetoothAdapter.getDefaultAdapter();
+            deviceName = myDevice.getName();
+        }catch(Exception e){
+            deviceName = Build.MODEL;
+        }
+
         mID = UUID.randomUUID();
+        mScoutName = deviceName;
     }
     //---Constructor for Team
 
@@ -99,6 +113,9 @@ public class Team {
         mID = UUID.fromString(json.getString(JSON_ID));
         if (json.has(JSON_TEAM_NUM)){
             mTeamNum = json.getInt(JSON_TEAM_NUM);
+        }
+        if (json.has(JSON_SCOUT_NAME)){
+            mScoutName = json.getString(JSON_SCOUT_NAME);
         }
         if (json.has(JSON_PHOTO)){
             mPhoto = new Photo(json.getJSONObject(JSON_PHOTO));
@@ -196,6 +213,7 @@ public class Team {
         JSONObject json = new JSONObject();
         json.put(JSON_ID, mID.toString());
         json.put(JSON_TEAM_NUM, mTeamNum);
+        json.put(JSON_SCOUT_NAME, mScoutName);
         if (mPhoto!=null){
             json.put(JSON_PHOTO, mPhoto.toJSON());
         }
@@ -261,6 +279,11 @@ public class Team {
     }
     //---Getter and Setter for mTeamNum
 
+    //Getter for scout name
+    public String getScoutName() {
+        return mScoutName;
+    }
+    //---getter for scout name
 
     //Getter and Setter for mPhoto
     public Photo getPhoto() {

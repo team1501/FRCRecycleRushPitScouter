@@ -33,7 +33,9 @@
             ></activity>
         <activity
             android:name=".SendActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:configChanges="orientation|keyboardHidden">
+
             <meta-data android:name="android.support.PARENT_ACTIVITY"
                 android:value=".TeamListActivity"/>
         </activity>
@@ -41,6 +43,8 @@
             android:name=".bluetoothchat.BluetoothMainActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/app_name">
+        <meta-data android:name="android.support.PARENT_ACTIVITY"
+            android:value=".SendActivity"/>
 
         </activity>
 

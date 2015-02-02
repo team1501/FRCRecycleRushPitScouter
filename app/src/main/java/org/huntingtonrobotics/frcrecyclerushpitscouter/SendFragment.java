@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -33,18 +34,16 @@ public class SendFragment extends Fragment {
     private String m_Text = "";
     //bluetooth
     private Button mBlueOn, mBlueOff, mBlueVisible, mBlueList, mBlueSend;
-    private BluetoothAdapter mBluetoothAdapter;
-    private Set<BluetoothDevice> mPairedDevices;
-    private ListView mPairedDevicesList;
+    
 
-    //sms
-    private Button mSMSendOneTeam;
-    private EditText mSMSTeam;
+    //txt
+    private Button mTXTSendOneTeam;
+    private EditText mTXTTeam;
 
-    private Button mSMSendAllTeams;
-    private Button mSMSendMatch;
-    private EditText mSMSMatchNum;
-    private EditText mSMSMatchTeam1, mSMSMatchTeam2, mSMSMatchTeam3, mSMSMatchTeam4, mSMSMatchTeam5, mSMSMatchTeam6;
+    private Button mTXTSendAllTeams;
+    private Button mTXTSendMatch;
+    private EditText mTXTMatchNum;
+    private EditText mTXTMatchTeam1, mTXTMatchTeam2, mTXTMatchTeam3, mTXTMatchTeam4, mTXTMatchTeam5, mTXTMatchTeam6;
 
     //attach extra argument to team fragment
     public static SendFragment newInstance() {
@@ -63,6 +62,7 @@ public class SendFragment extends Fragment {
         super.onCreate(savedInstanceState);
         getActivity().setTitle(R.string.send_title);
         setHasOptionsMenu(true);
+        this.getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
     /*
@@ -87,17 +87,17 @@ public class SendFragment extends Fragment {
             }
         });
 
-        mSMSendOneTeam = (Button) v.findViewById(R.id.smsSendOneTeam);
-        mSMSendOneTeam.setOnClickListener(new View.OnClickListener() {
+        mTXTSendOneTeam = (Button) v.findViewById(R.id.txtSendOneTeam);
+        mTXTSendOneTeam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if ((mSMSTeam.isShown())){
+                if ((mTXTTeam.isShown())){
 
                     Team team;
                     int num = 0;
                     try {
-                        num = Integer.parseInt(mSMSTeam.getText().toString());
+                        num = Integer.parseInt(mTXTTeam.getText().toString());
                     }catch (Exception e){
 
                     }
@@ -108,8 +108,8 @@ public class SendFragment extends Fragment {
                         i.putExtra(Intent.EXTRA_TEXT, buildReport(team));
                         i.putExtra(Intent.EXTRA_SUBJECT, "Team Report for Team " + num);
                         startActivity(i);
-                        mSMSTeam.setText("");
-                        mSMSTeam.setVisibility(View.GONE);
+                        mTXTTeam.setText("");
+                        mTXTTeam.setVisibility(View.GONE);
                     }else{
                         Vibrator vibrator = (Vibrator) getActivity().getApplicationContext().getSystemService(getActivity().getApplicationContext().VIBRATOR_SERVICE);
                         // Vibrate for 500 milliseconds
@@ -118,21 +118,21 @@ public class SendFragment extends Fragment {
                     }
                     
                 }else{
-                    mSMSTeam.setVisibility(View.VISIBLE);
+                    mTXTTeam.setVisibility(View.VISIBLE);
                     Toast.makeText(getActivity().getApplicationContext(), "Enter any team number your little heart desires and press Send One Team",Toast.LENGTH_LONG).show();
                 }
             }
         });
 
-        mSMSTeam = (EditText) v.findViewById(R.id.smsTeam1);
-        mSMSTeam.setVisibility(View.GONE);
+        mTXTTeam = (EditText) v.findViewById(R.id.txtTeam1);
+        mTXTTeam.setVisibility(View.GONE);
 
-        mSMSendAllTeams = (Button)v.findViewById(R.id.smsSendAllTeams);
-        mSMSendAllTeams.setOnClickListener(new View.OnClickListener(){
+        mTXTSendAllTeams = (Button)v.findViewById(R.id.txtSendAllTeams);
+        mTXTSendAllTeams.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 String beginReport = "PIT SCOUT REPORT FOR ALL TEAMS " + "----------->" + DOUBLE_LINE_BREAK;
-                String endReport = "<----------- END OF PIT SCOUT REPORT FOR ALL TEAMS" + mSMSMatchNum.getText().toString();
+                String endReport = "<----------- END OF PIT SCOUT REPORT FOR ALL TEAMS" + mTXTMatchNum.getText().toString();
 
                 String report = beginReport;
 
@@ -156,8 +156,8 @@ public class SendFragment extends Fragment {
             }
         });
 
-        mSMSMatchNum = (EditText) v.findViewById(R.id.smsMatchNum);
-        mSMSMatchNum.addTextChangedListener(new TextWatcher() {
+        mTXTMatchNum = (EditText) v.findViewById(R.id.txtMatchNum);
+        mTXTMatchNum.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -165,10 +165,10 @@ public class SendFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (mSMSMatchNum.getText().toString().equals("")) {
-                    mSMSendMatch.setEnabled(false);
+                if (mTXTMatchNum.getText().toString().equals("")) {
+                    mTXTSendMatch.setEnabled(false);
                 } else {
-                    mSMSendMatch.setEnabled(true);
+                    mTXTSendMatch.setEnabled(true);
                 }
             }
 
@@ -178,155 +178,163 @@ public class SendFragment extends Fragment {
             }
         });
 
-        //SMS
+        //TXT
 
 
-        mSMSendMatch = (Button) v.findViewById(R.id.smsSendMatch);
-        mSMSendMatch.setEnabled(false);
-        mSMSendMatch.setOnClickListener(new View.OnClickListener() {
+        mTXTSendMatch = (Button) v.findViewById(R.id.txtSendMatch);
+        mTXTSendMatch.setEnabled(false);
+        mTXTSendMatch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String fullReport = "";
-                String beginReport = "PIT SCOUT REPORT FOR MATCH NUMBER " + mSMSMatchNum.getText().toString() + "----------->";
-                String endReport = "<----------- END OF PIT SCOUT REPORT FOR MATCH NUMBER " + mSMSMatchNum.getText().toString();
+                String beginReport = "PIT SCOUT REPORT FOR MATCH NUMBER " + mTXTMatchNum.getText().toString() + "----------->";
+                String endReport = "<----------- END OF PIT SCOUT REPORT FOR MATCH NUMBER " + mTXTMatchNum.getText().toString();
                 Boolean allTeamsFound = true;
 
                 fullReport += beginReport;
-                if ((mSMSMatchTeam1.isShown())) {
+                if ((mTXTMatchTeam1.isShown())) {
                     Team team;
                     int num = 0;
                     //1
                     try {
-                        num = Integer.parseInt(mSMSMatchTeam1.getText().toString());
+                        num = Integer.parseInt(mTXTMatchTeam1.getText().toString());
                     }catch (Exception e) {
                     }
                      team = TeamLab.get(getActivity().getApplicationContext()).getTeamByNum(num);
                     if (team != null){
                         fullReport += DOUBLE_LINE_BREAK + buildReport(team);
-                        mSMSMatchTeam1.setText("");
-                        mSMSMatchTeam1.setVisibility(View.GONE);
+
+
                     }else{
                         teamNotFound(num);
                         allTeamsFound =false;
                     }
                     //2
                     try {
-                        num = Integer.parseInt(mSMSMatchTeam2.getText().toString());
+                        num = Integer.parseInt(mTXTMatchTeam2.getText().toString());
                     }catch (Exception e) {
                     }
                     team = TeamLab.get(getActivity().getApplicationContext()).getTeamByNum(num);
                     if (team != null){
                         fullReport += DOUBLE_LINE_BREAK + buildReport(team);
-                        mSMSMatchTeam2.setText("");
-                        mSMSMatchTeam2.setVisibility(View.GONE);
+
+
                     }else{
                         teamNotFound(num);
                         allTeamsFound =false;
                     }
                     //3
                     try {
-                        num = Integer.parseInt(mSMSMatchTeam3.getText().toString());
+                        num = Integer.parseInt(mTXTMatchTeam3.getText().toString());
                     }catch (Exception e) {
                     }
                     team = TeamLab.get(getActivity().getApplicationContext()).getTeamByNum(num);
                     if (team != null){
                         fullReport += DOUBLE_LINE_BREAK + buildReport(team);
-                        mSMSMatchTeam3.setText("");
-                        mSMSMatchTeam3.setVisibility(View.GONE);
+
+
                     }else{
                         teamNotFound(num);
                         allTeamsFound =false;
                     }
                     //4
                     try {
-                        num = Integer.parseInt(mSMSMatchTeam4.getText().toString());
+                        num = Integer.parseInt(mTXTMatchTeam4.getText().toString());
                     }catch (Exception e) {
                     }
                     team = TeamLab.get(getActivity().getApplicationContext()).getTeamByNum(num);
                     if (team != null){
                         fullReport += DOUBLE_LINE_BREAK + buildReport(team);
-                        mSMSMatchTeam4.setText("");
-                        mSMSMatchTeam4.setVisibility(View.GONE);
+
                     }else{
                         teamNotFound(num);
                         allTeamsFound =false;
                     }
                     //5
                     try {
-                        num = Integer.parseInt(mSMSMatchTeam5.getText().toString());
+                        num = Integer.parseInt(mTXTMatchTeam5.getText().toString());
                     }catch (Exception e) {
                     }
                     team = TeamLab.get(getActivity().getApplicationContext()).getTeamByNum(num);
                     if (team != null){
                         fullReport += DOUBLE_LINE_BREAK + buildReport(team);
-                        mSMSMatchTeam5.setText("");
-                        mSMSMatchTeam5.setVisibility(View.GONE);
+
                     }else{
                         teamNotFound(num);
                         allTeamsFound =false;
                     }
                     //6
                     try {
-                        num = Integer.parseInt(mSMSMatchTeam6.getText().toString());
+                        num = Integer.parseInt(mTXTMatchTeam6.getText().toString());
                     }catch (Exception e) {
                     }
                     team = TeamLab.get(getActivity().getApplicationContext()).getTeamByNum(num);
                     if (team != null){
                         fullReport += DOUBLE_LINE_BREAK + buildReport(team);
-                        mSMSMatchTeam6.setText("");
-                        mSMSMatchTeam6.setVisibility(View.GONE);
+
                     }else{
                         teamNotFound(num);
                         allTeamsFound =false;
                     }
 
-                    if(allTeamsFound){
+                    if(allTeamsFound) {
                         fullReport += DOUBLE_LINE_BREAK + endReport;
                         Intent i = new Intent(Intent.ACTION_SEND);
                         i.setType("text/plain");
                         i.putExtra(Intent.EXTRA_TEXT, fullReport);
-                        i.putExtra(Intent.EXTRA_SUBJECT, "Team Report For Match Number " + mSMSMatchNum.getText().toString());
+                        i.putExtra(Intent.EXTRA_SUBJECT, "Team Report For Match Number " + mTXTMatchNum.getText().toString());
                         startActivity(i);
-                        mSMSMatchNum.setText("");
-
+                        mTXTMatchNum.setText("");
+                        mTXTMatchTeam1.setVisibility(View.GONE);
+                        mTXTMatchTeam1.setText("");
+                        mTXTMatchTeam2.setVisibility(View.GONE);
+                        mTXTMatchTeam2.setText("");
+                        mTXTMatchTeam3.setVisibility(View.GONE);
+                        mTXTMatchTeam3.setText("");
+                        mTXTMatchTeam4.setVisibility(View.GONE);
+                        mTXTMatchTeam4.setText("");
+                        mTXTMatchTeam5.setVisibility(View.GONE);
+                        mTXTMatchTeam5.setText("");
+                        mTXTMatchTeam6.setVisibility(View.GONE);
+                        mTXTMatchTeam6.setText("");
                     }else{
 
-                        mSMSMatchTeam1.setVisibility(View.VISIBLE);
-                        mSMSMatchTeam2.setVisibility(View.VISIBLE);
-                        mSMSMatchTeam3.setVisibility(View.VISIBLE);
-                        mSMSMatchTeam4.setVisibility(View.VISIBLE);
-                        mSMSMatchTeam5.setVisibility(View.VISIBLE);
-                        mSMSMatchTeam6.setVisibility(View.VISIBLE);
+                        mTXTMatchTeam1.setVisibility(View.VISIBLE);
+                        mTXTMatchTeam2.setVisibility(View.VISIBLE);
+                        mTXTMatchTeam3.setVisibility(View.VISIBLE);
+                        mTXTMatchTeam4.setVisibility(View.VISIBLE);
+                        mTXTMatchTeam5.setVisibility(View.VISIBLE);
+                        mTXTMatchTeam6.setVisibility(View.VISIBLE);
                     }
                 }else{
                     Toast.makeText(getActivity().getApplicationContext(), "Enter any team numbers your little heart desires and press Send Match",Toast.LENGTH_LONG).show();
-                    mSMSMatchTeam1.setVisibility(View.VISIBLE);
-                    mSMSMatchTeam2.setVisibility(View.VISIBLE);
-                    mSMSMatchTeam3.setVisibility(View.VISIBLE);
-                    mSMSMatchTeam4.setVisibility(View.VISIBLE);
-                    mSMSMatchTeam5.setVisibility(View.VISIBLE);
-                    mSMSMatchTeam6.setVisibility(View.VISIBLE);
+                    mTXTMatchTeam1.setVisibility(View.VISIBLE);
+                    mTXTMatchTeam2.setVisibility(View.VISIBLE);
+                    mTXTMatchTeam3.setVisibility(View.VISIBLE);
+                    mTXTMatchTeam4.setVisibility(View.VISIBLE);
+                    mTXTMatchTeam5.setVisibility(View.VISIBLE);
+                    mTXTMatchTeam6.setVisibility(View.VISIBLE);
                 }
 
             }
         });
-        mSMSMatchTeam1 = (EditText) v.findViewById(R.id.smsMatchTeam1);
-        mSMSMatchTeam1.setVisibility(View.GONE);
+        mTXTMatchTeam1 = (EditText) v.findViewById(R.id.txtMatchTeam1);
+        mTXTMatchTeam1.setVisibility(View.GONE);
 
-        mSMSMatchTeam2 = (EditText) v.findViewById(R.id.smsMatchTeam2);
-        mSMSMatchTeam2.setVisibility(View.GONE);
+        mTXTMatchTeam2 = (EditText) v.findViewById(R.id.txtMatchTeam2);
+        mTXTMatchTeam2.setVisibility(View.GONE);
 
-        mSMSMatchTeam3 = (EditText) v.findViewById(R.id.smsMatchTeam3);
-        mSMSMatchTeam3.setVisibility(View.GONE);
+        mTXTMatchTeam3 = (EditText) v.findViewById(R.id.txtMatchTeam3);
+        mTXTMatchTeam3.setVisibility(View.GONE);
 
-        mSMSMatchTeam4 = (EditText) v.findViewById(R.id.smsMatchTeam4);
-        mSMSMatchTeam4.setVisibility(View.GONE);
+        mTXTMatchTeam4 = (EditText) v.findViewById(R.id.txtMatchTeam4);
+        mTXTMatchTeam4.setVisibility(View.GONE);
 
-        mSMSMatchTeam5 = (EditText) v.findViewById(R.id.smsMatchTeam5);
-        mSMSMatchTeam5.setVisibility(View.GONE);
+        mTXTMatchTeam5 = (EditText) v.findViewById(R.id.txtMatchTeam5);
+        mTXTMatchTeam5.setVisibility(View.GONE);
 
-        mSMSMatchTeam6 = (EditText) v.findViewById(R.id.smsMatchTeam6);
-        mSMSMatchTeam6.setVisibility(View.GONE);
+        mTXTMatchTeam6 = (EditText) v.findViewById(R.id.txtMatchTeam6);
+        mTXTMatchTeam6.setVisibility(View.GONE);
 
 
         return v;
@@ -350,8 +358,8 @@ public class SendFragment extends Fragment {
 
     private String buildReport(Team t) {
         /*
-        String beginReport = "PIT SCOUT DATA FOR MATCH NUMBER " + mSMSMatchNum.getText().toString() + "----------->";
-        String endReport = "<----------- END OF PIT SCOUT REPORT FOR MATCH NUMBER " + mSMSMatchNum.getText().toString();
+        String beginReport = "PIT SCOUT DATA FOR MATCH NUMBER " + mTXTMatchNum.getText().toString() + "----------->";
+        String endReport = "<----------- END OF PIT SCOUT REPORT FOR MATCH NUMBER " + mTXTMatchNum.getText().toString();
 
         String report = beginReport;
         */
@@ -360,41 +368,41 @@ public class SendFragment extends Fragment {
         //for (int i = 0; i < mTeams.size(); i++) {
             try {
                 String teamNum = "" + t.getTeamNum();
-                report = report +"---"+ getResources().getString(R.string.sms_team_num) + SPACE + teamNum+"---";
+                report = report +"---"+ getResources().getString(R.string.txt_team_num) + SPACE + teamNum+"---";
 
 
                 //mech
-                report = report + DOUBLE_LINE_BREAK + getResources().getString(R.string.sms_has_mech);
+                report = report + DOUBLE_LINE_BREAK + getResources().getString(R.string.txt_has_mech);
 
                 ArrayList<String> mechHas = new ArrayList<String>();
                 ArrayList<String> mechDNH = new ArrayList<String>();
 
                 if (t.isMechLitterPusher()) {
-                    mechHas.add("" + getResources().getString(R.string.sms_litter_pusher));
+                    mechHas.add("" + getResources().getString(R.string.txt_litter_pusher));
                 } else {
-                    mechDNH.add("" + getResources().getString(R.string.sms_litter_pusher));
+                    mechDNH.add("" + getResources().getString(R.string.txt_litter_pusher));
                 }
                 if (t.isMechLitterInserter()) {
-                    mechHas.add("" + getResources().getString(R.string.sms_litter_inserter));
+                    mechHas.add("" + getResources().getString(R.string.txt_litter_inserter));
                 } else {
-                    mechDNH.add("" + getResources().getString(R.string.sms_litter_inserter));
+                    mechDNH.add("" + getResources().getString(R.string.txt_litter_inserter));
                 }
 
                 if (t.isMechToteFeeder()) {
-                    mechHas.add("" + getResources().getString(R.string.sms_tote_feeder));
+                    mechHas.add("" + getResources().getString(R.string.txt_tote_feeder));
                 } else {
-                    mechDNH.add("" + getResources().getString(R.string.sms_tote_feeder));
+                    mechDNH.add("" + getResources().getString(R.string.txt_tote_feeder));
                 }
 
                 if (t.isMechContainerFlipper()) {
-                    mechHas.add("" + getResources().getString(R.string.sms_container_flipper));
+                    mechHas.add("" + getResources().getString(R.string.txt_container_flipper));
                 } else {
-                    mechDNH.add("" + getResources().getString(R.string.sms_container_flipper));
+                    mechDNH.add("" + getResources().getString(R.string.txt_container_flipper));
                 }
                 if (t.isMechContainerStepRemover()) {
-                    mechHas.add("" + getResources().getString(R.string.sms_container_step_remover));
+                    mechHas.add("" + getResources().getString(R.string.txt_container_step_remover));
                 } else {
-                    mechDNH.add("" + getResources().getString(R.string.sms_container_step_remover));
+                    mechDNH.add("" + getResources().getString(R.string.txt_container_step_remover));
                 }
 
                 for (int m = 0; m < mechHas.size(); m++) {
@@ -405,7 +413,7 @@ public class SendFragment extends Fragment {
                     }
                 }
 
-                report = report + DOUBLE_LINE_BREAK + getResources().getString(R.string.sms_dnh_mech);
+                report = report + DOUBLE_LINE_BREAK + getResources().getString(R.string.txt_dnh_mech);
 
                 for (int d = 0; d < mechDNH.size(); d++) {
                     try {
@@ -416,40 +424,40 @@ public class SendFragment extends Fragment {
                 }
 
                 //auto
-                report = report + DOUBLE_LINE_BREAK + getResources().getString(R.string.sms_auto);
+                report = report + DOUBLE_LINE_BREAK + getResources().getString(R.string.txt_auto);
 
-                report = report + DOUBLE_LINE_BREAK + getResources().getString(R.string.sms_auto_progs) + SPACE + t.getAutoProgs();
+                report = report + DOUBLE_LINE_BREAK + getResources().getString(R.string.txt_auto_progs) + SPACE + t.getAutoProgs();
 
                 if (t.isAutoMove()) {
-                    report = report + LINE_BREAK + getResources().getString(R.string.sms_auto_can_move_az);
+                    report = report + LINE_BREAK + getResources().getString(R.string.txt_auto_can_move_az);
                 } else {
-                    report = report + LINE_BREAK + getResources().getString(R.string.sms_auto_can_not_move_az);
+                    report = report + LINE_BREAK + getResources().getString(R.string.txt_auto_can_not_move_az);
                 }
 
-                report = report + LINE_BREAK + getResources().getString(R.string.sms_auto_totes) + SPACE + t.getAutoTotes();
+                report = report + LINE_BREAK + getResources().getString(R.string.txt_auto_totes) + SPACE + t.getAutoTotes();
 
-                report = report + LINE_BREAK + getResources().getString(R.string.sms_auto_conatiners) + SPACE + t.getAutoContainers();
+                report = report + LINE_BREAK + getResources().getString(R.string.txt_auto_conatiners) + SPACE + t.getAutoContainers();
 
                 if (t.isAutoMoveTote()) {
-                    report = report + LINE_BREAK + getResources().getString(R.string.sms_auto_can_move_tote_stack);
+                    report = report + LINE_BREAK + getResources().getString(R.string.txt_auto_can_move_tote_stack);
                 } else {
-                    report = report + LINE_BREAK + getResources().getString(R.string.sms_auto_can_not_move_tote_stack);
+                    report = report + LINE_BREAK + getResources().getString(R.string.txt_auto_can_not_move_tote_stack);
                 }
 
-                report = report + LINE_BREAK + getResources().getString(R.string.sms_auto_pos) + SPACE + t.getAutoPos();
+                report = report + LINE_BREAK + getResources().getString(R.string.txt_auto_pos) + SPACE + t.getAutoPos();
 
 
                 //teleop
-                report = report + DOUBLE_LINE_BREAK + getResources().getString(R.string.sms_tele);
+                report = report + DOUBLE_LINE_BREAK + getResources().getString(R.string.txt_tele);
 
-                report = report + DOUBLE_LINE_BREAK + getResources().getString(R.string.sms_tele_totes) + SPACE + t.getTeleTotes();
-                report = report + LINE_BREAK + getResources().getString(R.string.sms_tele_conatiner) + SPACE + t.getTeleContainer();
-                report = report + LINE_BREAK + getResources().getString(R.string.sms_tele_litter) + SPACE + t.getTeleContainer();
-                report = report + LINE_BREAK + getResources().getString(R.string.sms_tele_tote_stack) + SPACE + t.getTelePlaceTotes();
-                report = report + LINE_BREAK + getResources().getString(R.string.sms_tele_carry_totes) + SPACE + t.getTeleCarryTotes();
+                report = report + DOUBLE_LINE_BREAK + getResources().getString(R.string.txt_tele_totes) + SPACE + t.getTeleTotes();
+                report = report + LINE_BREAK + getResources().getString(R.string.txt_tele_conatiner) + SPACE + t.getTeleContainer();
+                report = report + LINE_BREAK + getResources().getString(R.string.txt_tele_litter) + SPACE + t.getTeleContainer();
+                report = report + LINE_BREAK + getResources().getString(R.string.txt_tele_tote_stack) + SPACE + t.getTelePlaceTotes();
+                report = report + LINE_BREAK + getResources().getString(R.string.txt_tele_carry_totes) + SPACE + t.getTeleCarryTotes();
 
-                report = report + LINE_BREAK + getResources().getString(R.string.sms_tele_human_station) + SPACE + t.getTeleHumanStation();
-                report = report + LINE_BREAK + getResources().getString(R.string.sms_tele_platfrom) + SPACE + t.getTelePlatform();
+                report = report + LINE_BREAK + getResources().getString(R.string.txt_tele_human_station) + SPACE + t.getTeleHumanStation();
+                report = report + LINE_BREAK + getResources().getString(R.string.txt_tele_platfrom) + SPACE + t.getTelePlatform();
 
             } catch (ArrayIndexOutOfBoundsException aiobe) {
 

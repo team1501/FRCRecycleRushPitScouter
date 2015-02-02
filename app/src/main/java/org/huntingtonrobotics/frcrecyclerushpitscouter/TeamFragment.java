@@ -44,6 +44,7 @@ public class TeamFragment extends Fragment {
 
     private Team mTeam;
     private EditText mTeamNum;
+    private EditText mScoutName;
     private ImageButton mPhotoButton;
     private ImageView mPhotoView;
 
@@ -142,6 +143,13 @@ public class TeamFragment extends Fragment {
                 //also left blank
             }
         });
+
+
+        //Scout name edit text
+        mScoutName = (EditText)v.findViewById(R.id.scoutName);
+        mScoutName.setText(""+mTeam.getScoutName());
+        mScoutName.setEnabled(false);
+
 
         //photo button
         mPhotoButton = (ImageButton)v.findViewById(R.id.team_imageButton);
@@ -630,8 +638,8 @@ public class TeamFragment extends Fragment {
 
 
         mTeleCoopSet = (EditText)v.findViewById(R.id.teleCoopSet);
-        //set filter to only allow numbers 0-6
-        mTeleCoopSet.setFilters(new InputFilter[]{ new InputFilterMinMax(0, 6,getActivity().getApplicationContext())});
+        //set filter to only allow numbers 0-3
+        mTeleCoopSet.setFilters(new InputFilter[]{ new InputFilterMinMax(0, 3,getActivity().getApplicationContext())});
         mTeleCoopSet.setText(""+mTeam.getTeleCoopSet());
         mTeleCoopSet.addTextChangedListener(new TextWatcher() {
             @Override
