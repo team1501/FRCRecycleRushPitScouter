@@ -79,8 +79,12 @@ public class TeamFragment extends Fragment {
     private RadioGroup mTelePlatform;
     private RadioGroup mTeleHumanStation;
 
+    private CheckBox mTeleFlipTote;
+    private CheckBox mTeleRemoveContainer;
     private CheckBox mTelePickUpLitter;
     private CheckBox mTeleMoveLitter;
+
+    private EditText mComments;
 
 
     //fragment is created
@@ -250,20 +254,7 @@ public class TeamFragment extends Fragment {
         });
 
 
-        mMechContainerStepRemover = (CheckBox)v.findViewById(R.id.mechContainerStepRemover);
-        mMechContainerStepRemover.setChecked(mTeam.isMechContainerStepRemover());
-        mMechContainerStepRemover.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    mTeam.setMechContainerStepRemover(true);
-                } else if (!isChecked) {
-                    mTeam.setMechContainerStepRemover(false);
-                } else {
 
-                }
-            }
-        });
 
         //PUT AUTO VIEWS HERE
 
@@ -377,40 +368,6 @@ public class TeamFragment extends Fragment {
                 //also left blank
             }
         });
-
-        /*deleted from auto
-        mAutoHeight = (EditText)v.findViewById(R.id.auto_tote_height);
-        //set filter to only allow numbers 0-6
-        mAutoHeight.setFilters(new InputFilter[]{ new InputFilterMinMax(0, 6,getActivity().getApplicationContext())});
-        mAutoHeight.setText(""+mTeam.getAutoHeight());
-        mAutoHeight.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                //left blank
-            }
-
-            //user changes text of auto height
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                //use try catch in case nothing is in text view
-                try {
-                    //saves text after converting CS to integer
-                    mTeam.setAutoHeight(Integer.parseInt(s.toString()));
-                } catch (Exception e) {
-                    //exception is thrown so setAutoHeight to 0 so program can carry on
-                    Log.d(TAG, "ERROR: " + e);
-                    mTeam.setAutoHeight(0);
-                }
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                //also left blank
-            }
-        });
-        */
 
 
         mAutoMoveTote = (CheckBox)v.findViewById(R.id.auto_move_tote_stack);
@@ -790,6 +747,35 @@ public class TeamFragment extends Fragment {
 
         });
 
+        mTeleFlipTote = (CheckBox)v.findViewById(R.id.teleFlipTotes);
+        mTeleFlipTote.setChecked(mTeam.isTeleFlipTote());
+        mTeleFlipTote.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                if(isChecked){
+                    mTeam.setTeleFlipTote(true);
+                }else if (!isChecked){
+                    mTeam.setTeleFlipTote(false);
+                }else{
+
+                }
+            }
+        });
+
+        mTeleRemoveContainer = (CheckBox)v.findViewById(R.id.teleRemoveContainer);
+        mTeleRemoveContainer.setChecked(mTeam.isTeleRemoveContainer());
+        mTeleRemoveContainer.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                if(isChecked){
+                    mTeam.setTeleRemoveContainer(true);
+                }else if (!isChecked){
+                    mTeam.setTeleRemoveContainer(false);
+                }else{
+
+                }
+            }
+        });
 
         mTelePickUpLitter = (CheckBox)v.findViewById(R.id.telePickUpLitter);
         mTelePickUpLitter.setChecked(mTeam.isTelePickUpLitter());
@@ -819,6 +805,39 @@ public class TeamFragment extends Fragment {
                 }else{
 
                 }
+            }
+        });
+
+        
+        //comments
+
+        mComments = (EditText)v.findViewById(R.id.comments);
+        mComments.setText(""+mTeam.getComments());
+        mComments.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //left blank
+            }
+
+            //user changes text of auto progs
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                //use try catch in case nothing is in text view
+                try {
+                    //saves text after converting CS to integer
+                    mTeam.setComments(s.toString());
+                } catch (Exception e) {
+                    //exception is thrown so setAutoContainers to 0 so program can carry on
+                    Log.d(TAG, "ERROR: " + e);
+                    mTeam.setComments("");
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                //also left blank
             }
         });
 

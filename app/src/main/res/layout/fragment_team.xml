@@ -126,6 +126,7 @@
 
             <TextView
                 style="@style/LinearItem"
+                android:layout_weight="2"
                 android:text="@string/mech_container"
                 />
 
@@ -134,10 +135,6 @@
                 android:text="@string/mech_flipper"
                 />
 
-            <CheckBox android:id="@+id/mechContainerStepRemover"
-                style="@style/LinearItem"
-                android:text="@string/mech_step_remover"
-                />
         </LinearLayout>
 
 
@@ -177,6 +174,7 @@
                 <TextView
                     style="@style/LinearItem"
                     android:text="@string/auto_move"
+
                     />
 
                 <CheckBox android:id="@+id/auto_move"
@@ -259,6 +257,7 @@
                 <TextView
                     style="@style/LinearItem"
                     android:text="@string/auto_move_tote_stack"
+
                     />
 
                 <CheckBox android:id="@+id/auto_move_tote_stack"
@@ -642,6 +641,30 @@
 
         </LinearLayout>
 
+        <!--flip totes-->
+        <LinearLayout
+            style="@style/LinearLayoutStyle3">
+
+            <TextView
+                style="@style/LinearItem"
+                android:text="@string/tele_can_flip_totes"/>
+
+            <CheckBox android:id="@+id/teleFlipTotes"
+                style="@style/LinearItem"/>
+        </LinearLayout>
+
+        <!--step remover-->
+        <LinearLayout
+            style="@style/LinearLayoutStyle3">
+
+            <TextView
+                style="@style/LinearItem"
+                android:text="@string/tele_can_remove_container"/>
+
+            <CheckBox android:id="@+id/teleRemoveContainer"
+                style="@style/LinearItem"/>
+        </LinearLayout>
+
         <!--pick up litter-->
         <LinearLayout
             style="@style/LinearLayoutStyle3">
@@ -665,5 +688,17 @@
             <CheckBox android:id="@+id/teleMoveLitter"
                 style="@style/LinearItem"/>
         </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/comments"
+            android:background="@color/gray"
+            style="?android:listSeparatorTextViewStyle"/>
+
+        <EditText android:id="@+id/comments"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/enter_comments"/>
     </LinearLayout>
 </ScrollView>

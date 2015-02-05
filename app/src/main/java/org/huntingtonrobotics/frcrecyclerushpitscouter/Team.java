@@ -48,8 +48,12 @@ public class Team {
     private static final String JSON_TELE_STACK_DIRECTION = "tsd";
     private static final String JSON_TELE_PLATFORM = "tp";
     private static final String JSON_TELE_HUMAN_STATION="ths";
+    private static final String JSON_TELE_FLIP_TOTES = "ft";
+    private static final String JSON_TELE_REMOVE_CONTAINER= "rc";
     private static final String JSON_TELE_PICK_UP_LITTER = "tpul";
     private static final String JSON_TELE_MOVE_LITTER="tml";
+
+    private static final String JSON_COMMENTS="c";
 
     private UUID mID;
 
@@ -89,9 +93,12 @@ public class Team {
     private int mTelePlatform;
     private int mTeleHumanStation;
 
+    private boolean mTeleFlipTote;
+    private boolean mTeleRemoveContainer;
     private boolean mTelePickUpLitter;
     private boolean mTeleMoveLitter;
 
+    private String mComments;
     //Constructor for Team
     public Team(){
         //generate unique identifier
@@ -198,6 +205,12 @@ public class Team {
             mTeleHumanStation = json.getInt(JSON_TELE_HUMAN_STATION);
         }
 
+        if (json.has(JSON_TELE_FLIP_TOTES)){
+            mTeleFlipTote = json.getBoolean(JSON_TELE_FLIP_TOTES);
+        }
+        if (json.has(JSON_TELE_REMOVE_CONTAINER)){
+            mTeleRemoveContainer = json.getBoolean(JSON_TELE_REMOVE_CONTAINER);
+        }
         if (json.has(JSON_TELE_PICK_UP_LITTER)){
             mTelePickUpLitter = json.getBoolean(JSON_TELE_PICK_UP_LITTER);
         }
@@ -205,6 +218,9 @@ public class Team {
             mTeleMoveLitter = json.getBoolean(JSON_TELE_MOVE_LITTER);
         }
 
+        if (json.has(JSON_COMMENTS)){
+            mComments = json.getString(JSON_COMMENTS);
+        }
     }
     //---constructor that accepts JSON object
 
@@ -249,8 +265,12 @@ public class Team {
         json.put(JSON_TELE_PLATFORM, mTelePlatform);
         json.put(JSON_TELE_HUMAN_STATION, mTeleHumanStation);
 
+        json.put(JSON_TELE_FLIP_TOTES, mTeleFlipTote);
+        json.put(JSON_TELE_REMOVE_CONTAINER, mTeleRemoveContainer);
         json.put(JSON_TELE_PICK_UP_LITTER, mTelePickUpLitter);
         json.put(JSON_TELE_MOVE_LITTER, mTeleMoveLitter);
+
+        json.put(JSON_COMMENTS, mComments);
 
         return json;
     }
@@ -373,16 +393,6 @@ public class Team {
         this.mAutoContainers = ac;
     }
 
-    /*deleted from auto
-    public int getAutoHeight() {
-        return mAutoHeight;
-    }
-
-    public void setAutoHeight(int ah) {
-        this.mAutoHeight = ah;
-    }
-    */
-
     public boolean isAutoMoveTote() {
         return mAutoMoveTote;
     }
@@ -484,6 +494,22 @@ public class Team {
         this.mTeleHumanStation = hs;
     }
 
+    public boolean isTeleFlipTote() {
+        return mTeleFlipTote;
+    }
+
+    public void setTeleFlipTote(boolean ft) {
+        this.mTeleFlipTote = ft;
+    }
+
+    public boolean isTeleRemoveContainer() {
+        return mTeleRemoveContainer;
+    }
+
+    public void setTeleRemoveContainer(boolean rc) {
+        this.mTeleRemoveContainer = rc;
+    }
+
     public boolean isTelePickUpLitter() {
         return mTelePickUpLitter;
     }
@@ -500,6 +526,13 @@ public class Team {
         this.mTeleMoveLitter = ml;
     }
 
+    public String getComments() {
+        return mComments;
+    }
+
+    public void setComments(String c) {
+        this.mComments = c;
+    }
 
     //---Getter and Setters for Tele
 

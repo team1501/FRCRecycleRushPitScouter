@@ -369,7 +369,7 @@ public class SendFragment extends Fragment {
             try {
                 String teamNum = "" + t.getTeamNum();
                 report = report +"---"+ getResources().getString(R.string.txt_team_num) + SPACE + teamNum+"---";
-
+                report = report + DOUBLE_LINE_BREAK + getResources().getString(R.string.txt_scout_name) + SPACE + t.getScoutName();
 
                 //mech
                 report = report + DOUBLE_LINE_BREAK + getResources().getString(R.string.txt_has_mech);
@@ -398,11 +398,6 @@ public class SendFragment extends Fragment {
                     mechHas.add("" + getResources().getString(R.string.txt_container_flipper));
                 } else {
                     mechDNH.add("" + getResources().getString(R.string.txt_container_flipper));
-                }
-                if (t.isMechContainerStepRemover()) {
-                    mechHas.add("" + getResources().getString(R.string.txt_container_step_remover));
-                } else {
-                    mechDNH.add("" + getResources().getString(R.string.txt_container_step_remover));
                 }
 
                 for (int m = 0; m < mechHas.size(); m++) {
@@ -455,9 +450,56 @@ public class SendFragment extends Fragment {
                 report = report + LINE_BREAK + getResources().getString(R.string.txt_tele_litter) + SPACE + t.getTeleContainer();
                 report = report + LINE_BREAK + getResources().getString(R.string.txt_tele_tote_stack) + SPACE + t.getTelePlaceTotes();
                 report = report + LINE_BREAK + getResources().getString(R.string.txt_tele_carry_totes) + SPACE + t.getTeleCarryTotes();
+                report = report + LINE_BREAK + getResources().getString(R.string.txt_tele_coop_set) + SPACE + t.getTeleCoopSet();
 
+                if (t.isTeleCoopStack()) {
+                    report = report + LINE_BREAK + getResources().getString(R.string.txt_tele_can_place_bin);
+                } else {
+                    report = report + LINE_BREAK + getResources().getString(R.string.txt_tele_can_not_place_bin);
+                }
+
+                report = report + LINE_BREAK + getResources().getString(R.string.txt_tele_stacking_direction) + SPACE;
+                switch (t.getTeleStackingDirection()){
+                    case (0):
+                         report = report +  getResources().getString(R.string.tele_does_not_stack);
+                        break;
+                    case (1):
+                         report = report +  getResources().getString(R.string.tele_plat_long);
+                        break;
+                    case (2):
+                        report = report +  getResources().getString(R.string.tele_plat_short);
+                        break;
+                }
                 report = report + LINE_BREAK + getResources().getString(R.string.txt_tele_human_station) + SPACE + t.getTeleHumanStation();
                 report = report + LINE_BREAK + getResources().getString(R.string.txt_tele_platfrom) + SPACE + t.getTelePlatform();
+
+
+                if (t.isTeleFlipTote()) {
+                    report = report + LINE_BREAK + getResources().getString(R.string.txt_tele_can_flip_totes);
+                } else {
+                    report = report + LINE_BREAK + getResources().getString(R.string.txt_tele_can_not_flip_totes);
+                }
+
+                if (t.isTeleRemoveContainer()) {
+                    report = report + LINE_BREAK + getResources().getString(R.string.txt_tele_can_remove_container);
+                } else {
+                    report = report + LINE_BREAK + getResources().getString(R.string.txt_tele_can_not_remove_conatiner);
+                }
+
+                if (t.isTelePickUpLitter()) {
+                    report = report + LINE_BREAK + getResources().getString(R.string.txt_tele_can_pick_litter);
+                } else {
+                    report = report + LINE_BREAK + getResources().getString(R.string.txt_tele_can_not_pick_litter);
+                }
+
+                if (t.isTeleMoveLitter()) {
+                    report = report + LINE_BREAK + getResources().getString(R.string.txt_tele_can_move_litter);
+                } else {
+                    report = report + LINE_BREAK + getResources().getString(R.string.txt_tele_can_not_move_litter);
+                }
+
+                //comments
+                report = report + DOUBLE_LINE_BREAK +getResources().getString(R.string.txt_comments) + SPACE + t.getComments();
 
             } catch (ArrayIndexOutOfBoundsException aiobe) {
 

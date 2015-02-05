@@ -17,7 +17,7 @@
     <string name="auto_totes">Number of totes able to move to AZ:</string>
     <string name="auto_containers">Number of containers to AZ:</string>
     <string name="auto_tote_height">Tote stack height in AZ:</string>
-    <string name="auto_move_tote_stack">Can move tote stack to AZ:</string>
+    <string name="auto_move_tote_stack">Can move tote stack:</string>
     <string name="auto_start_pos">Preferred starting position:</string>
     <string name="between_0_and_3"># between 0-3</string>
     <string name="mech">MECHANISMS</string>
@@ -123,6 +123,24 @@
     <string name="txt_team_5">Enter Team 5</string>
     <string name="txt_team_6">Enter Team 6</string>
     <string name="scout_name">Scout Name</string>
+    <string name="tele_can_flip_totes">Can flip totes:</string>
+    <string name="tele_can_remove_container">Can remove container from step:</string>
+    <string name="comments">COMMENTS</string>
+    <string name="txt_scout_name">Scouted by:</string>
+    <string name="enter_comments">Enter comments.</string>
+    <string name="txt_tele_can_flip_totes">Can flip totes.</string>
+    <string name="txt_tele_can_not_flip_totes">Can NOT flip totes.</string>
+    <string name="txt_tele_can_remove_container">Can remove container from step.</string>
+    <string name="txt_tele_can_not_remove_conatiner">Can NOT reomove container from step.</string>
+    <string name="txt_tele_can_pick_litter">Can pick up litter.</string>
+    <string name="txt_tele_can_not_pick_litter">Can NOT pick up litter.</string>
+    <string name="txt_tele_can_move_litter">Can move litter to landfill.</string>
+    <string name="txt_tele_can_not_move_litter">Can NOT move litter to landfill.</string>
+    <string name="txt_comments">Comments:</string>
+    <string name="txt_tele_can_place_bin">Can place bin on 4th level of Coop set.</string>
+    <string name="txt_tele_can_not_place_bin">Can NOT place bin on 4th level of Coop set.</string>
+    <string name="txt_tele_coop_set">Coop set height:</string>
+    <string name="txt_tele_stacking_direction">Prefered stacking direction:</string>
 
 
 </resources>
