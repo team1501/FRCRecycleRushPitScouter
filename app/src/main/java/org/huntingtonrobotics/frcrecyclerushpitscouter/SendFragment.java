@@ -20,7 +20,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import org.huntingtonrobotics.frcrecyclerushpitscouter.bluetoothchat.BluetoothMainActivity;
+import org.json.JSONException;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -32,9 +34,15 @@ public class SendFragment extends Fragment {
     private static final String DOUBLE_LINE_BREAK = "\n\n";
     private static final String SPACE = " ";
     private String m_Text = "";
+    private static final String FILENAME = "teams.json";
     //bluetooth
-    private Button mBlueOn, mBlueOff, mBlueVisible, mBlueList, mBlueSend;
-    
+    private Button mBlueSend;
+
+    private Button mJsonString;
+    private EditText mJsonCompetition;
+    private Button mJsonLoadButton;
+    private EditText mJsonLoadString;
+    private FRCRecycleRushPitScouterJSONSerializer mSerializer;
 
     //txt
     private Button mTXTSendOneTeam;
@@ -63,6 +71,8 @@ public class SendFragment extends Fragment {
         getActivity().setTitle(R.string.send_title);
         setHasOptionsMenu(true);
         this.getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        //create Serializer
+        mSerializer = new FRCRecycleRushPitScouterJSONSerializer(getActivity(), FILENAME);
     }
 
     /*
@@ -86,6 +96,94 @@ public class SendFragment extends Fragment {
                 startActivity(i);
             }
         });
+
+
+
+        mJsonString = (Button) v.findViewById(R.id.jsonSend);
+        mJsonString.setEnabled(false);
+        mJsonString.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                try{
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setType("text/plain");
+                i.putExtra(Intent.EXTRA_TEXT, mSerializer.getJSONString());
+                i.putExtra(Intent.EXTRA_SUBJECT, "JSON String for " + mJsonCompetition.getText().toString());
+                startActivity(i);
+                    mJsonCompetition.setText("");
+                }catch (JSONException je){
+
+                }catch (IOException ie){
+
+                }
+
+            }
+        });
+
+        mJsonCompetition = (EditText) v.findViewById(R.id.jsonCompetitionName);
+        mJsonCompetition.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (mJsonCompetition.getText().toString().equals("")) {
+                    mJsonString.setEnabled(false);
+                } else {
+                    mJsonString.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+
+        mJsonLoadButton = (Button) v.findViewById(R.id.jsonLoad);
+        mJsonLoadButton.setEnabled(false);
+        mJsonLoadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    mSerializer.saveBluetoothTeams(mJsonLoadString.getText().toString());
+                    Toast.makeText(getActivity().getApplicationContext(), "Load successful. Please close and reopen app.",Toast.LENGTH_LONG).show();
+                }catch (JSONException je){
+
+                }catch (IOException ie){
+
+                }
+                mJsonLoadString.setText("");
+
+            }
+        });
+
+        mJsonLoadString = (EditText) v.findViewById(R.id.jsonLoadString);
+        mJsonLoadString.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (mJsonLoadString.getText().toString().equals("")) {
+                    mJsonLoadButton.setEnabled(false);
+                } else {
+                    mJsonLoadButton.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
 
         mTXTSendOneTeam = (Button) v.findViewById(R.id.txtSendOneTeam);
         mTXTSendOneTeam.setOnClickListener(new View.OnClickListener() {
