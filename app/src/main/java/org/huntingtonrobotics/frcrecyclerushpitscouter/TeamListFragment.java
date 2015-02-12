@@ -122,6 +122,7 @@ public class TeamListFragment extends ListFragment {
                             mode.finish();
                             adapter.notifyDataSetChanged();
                             return true;
+                        case R.id.menu
                         default:
                             return false;
                     }

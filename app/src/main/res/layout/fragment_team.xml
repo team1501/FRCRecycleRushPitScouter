@@ -32,6 +32,10 @@
                     android:layout_height="wrap_content"
                     android:src="@android:drawable/ic_menu_camera"/>
 
+                <ImageButton android:id="@+id/team_imageButtonSave"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@android:drawable/ic_menu_save"/>
             </LinearLayout>
 
 
@@ -700,5 +704,13 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:hint="@string/enter_comments"/>
+        <ImageView android:id="@+id/team_imageViewSave"
+            android:layout_width="500dp"
+            android:layout_height="500dp"
+            android:scaleType="centerInside"
+            android:background="@android:color/darker_gray"
+            android:cropToPadding="true"/>
     </LinearLayout>
+
+
 </ScrollView>

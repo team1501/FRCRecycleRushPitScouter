@@ -2,13 +2,21 @@ package org.huntingtonrobotics.frcrecyclerushpitscouter;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.ContentResolver;
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.hardware.Camera;
 import android.nfc.Tag;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NavUtils;
@@ -30,6 +38,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.UUID;
 
 /**
@@ -46,7 +56,9 @@ public class TeamFragment extends Fragment {
     private EditText mTeamNum;
     private EditText mScoutName;
     private ImageButton mPhotoButton;
+    private ImageButton mPhotoSaveButton;
     private ImageView mPhotoView;
+    private ImageView mPhotoSaveView;
 
     //mech
     private CheckBox mMechLitterInserter;
@@ -154,7 +166,6 @@ public class TeamFragment extends Fragment {
         mScoutName.setText(""+mTeam.getScoutName());
         mScoutName.setEnabled(false);
 
-
         //photo button
         mPhotoButton = (ImageButton)v.findViewById(R.id.team_imageButton);
         mPhotoButton.setOnClickListener(new View.OnClickListener(){
@@ -163,6 +174,24 @@ public class TeamFragment extends Fragment {
                 Intent i = new Intent(getActivity(), RobotCameraActivity.class);
                 Log.d(TAG,"Photo button clicked");
                 startActivityForResult(i, REQUEST_PHOTO);
+            }
+        });
+
+        //photo button
+        mPhotoSaveButton = (ImageButton)v.findViewById(R.id.team_imageButtonSave);
+        mPhotoSaveButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                try {
+                    BitmapDrawable drawable = (BitmapDrawable) mPhotoSaveView.getDrawable();
+                    Bitmap bitmap = drawable.getBitmap();
+                    MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), bitmap, "" + mTeam.getTeamNum(), mComments.getText().toString());
+                    Toast.makeText(getActivity().getApplicationContext(), "Photo saved to the bottom of your camera roll.", Toast.LENGTH_LONG).show();
+                }catch (NullPointerException npe){
+                    Toast.makeText(getActivity().getApplicationContext(), "That's a null pointer ghost rider. Is there a picture in the image view to save?", Toast.LENGTH_LONG).show();
+                }catch (Exception e){
+                    Toast.makeText(getActivity().getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -179,6 +208,9 @@ public class TeamFragment extends Fragment {
                 ImageFragment.newInstance(path).show(fm, DIALOG_IMAGE);
             }
         });
+
+        mPhotoSaveView = (ImageView)v.findViewById(R.id.team_imageViewSave);
+        mPhotoSaveView.setVisibility(View.GONE);
 
         //if camera is not avilable, disable camera functionality
         PackageManager pm = getActivity().getPackageManager();
@@ -856,6 +888,7 @@ public class TeamFragment extends Fragment {
             b = PictureUtils.getScaledDrawable(getActivity(), path);
         }
         mPhotoView.setImageDrawable(b);
+        mPhotoSaveView.setImageDrawable(b);
     }
     //---shows the photo in photoview
 
@@ -933,5 +966,26 @@ public class TeamFragment extends Fragment {
         }
     }
     //---Respond to menu items being clicked
+
+    private String saveToInternalSorage(Bitmap bitmapImage){
+        ContextWrapper cw = new ContextWrapper(getActivity().getApplicationContext());
+        // path to /data/data/yourapp/app_data/imageDir
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        // Create imageDir
+        File mypath=new File(directory,"profile.jpg");
+
+        FileOutputStream fos = null;
+        try {
+
+            fos = new FileOutputStream(mypath);
+
+            // Use the compress method on the BitMap object to write image to the OutputStream
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            fos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return directory.getAbsolutePath();
+    }
 }
 

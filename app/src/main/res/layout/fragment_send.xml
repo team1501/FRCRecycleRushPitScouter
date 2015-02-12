@@ -28,27 +28,40 @@
                 android:layout_height="wrap_content"
                 android:text="@string/blue_send" />
 
-            <Button android:id="@+id/jsonSend"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/json_send" />
-            <EditText android:id="@+id/jsonCompetitionName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textAutoCorrect"
-                android:hint="@string/json_comp"
-                />
+        </LinearLayout>
 
-            <Button android:id="@+id/jsonLoad"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/json_load" />
-            <EditText android:id="@+id/jsonLoadString"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textMultiLine"
-                android:hint="@string/json_string"
-                />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/json"
+            style="?android:listSeparatorTextViewStyle"/>
+
+        <Button android:id="@+id/jsonSend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/json_send" />
+        <EditText android:id="@+id/jsonCompetitionName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textAutoCorrect"
+            android:hint="@string/json_comp"
+            />
+
+        <Button android:id="@+id/jsonLoad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/json_load" />
+        <EditText android:id="@+id/jsonLoadString"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:hint="@string/json_string"
+            />
         </LinearLayout>
 
         <LinearLayout
@@ -61,6 +74,11 @@
                 android:text="@string/txt"
                 style="?android:listSeparatorTextViewStyle"/>
 
+            <Button android:id="@+id/txtSendAllTeams"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_send_all_teams" />
+
             <Button android:id="@+id/txtSendOneTeam"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -70,10 +88,6 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:hint="@string/txt_team_1"/>
-            <Button android:id="@+id/txtSendAllTeams"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/txt_send_all_teams" />
 
             <Button android:id="@+id/txtSendMatch"
                 android:layout_width="match_parent"

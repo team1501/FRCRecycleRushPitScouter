@@ -101,18 +101,18 @@
     <string name="txt_auto_can_not_move_az">Can NOT move to AZ.</string>
     <string name="txt_auto">AUTO</string>
     <string name="txt_auto_totes"># of totes able to move to auto zone:</string>
-    <string name="txt_auto_conatiners"># of conatiners able to move to auto zone:</string>
+    <string name="txt_auto_conatiners"># of containers able to move to auto zone:</string>
     <string name="txt_auto_can_move_tote_stack">Can move tote stack to auto zone.</string>
     <string name="txt_auto_can_not_move_tote_stack">Can NOT move tote stack to auto zone.</string>
-    <string name="txt_auto_pos">Prefered Auto Position:</string>
+    <string name="txt_auto_pos">Preferred Auto Position:</string>
     <string name="txt_tele">TELEOP</string>
     <string name="txt_tele_totes">Tote stack height:</string>
     <string name="txt_tele_conatiner">Container stack height:</string>
     <string name="txt_tele_litter">Litter on/in container height:</string>
     <string name="txt_tele_tote_stack">Place totes on stack height:</string>
     <string name="txt_tele_carry_totes">Carry totes height:</string>
-    <string name="txt_tele_human_station">Prefered human station:</string>
-    <string name="txt_tele_platfrom">Prefered platform:</string>
+    <string name="txt_tele_human_station">Preferred human station:</string>
+    <string name="txt_tele_platfrom">Preferred platform:</string>
     <string name="txt_send_match">Send Match</string>
     <string name="txt_send_all_teams">Send All Teams</string>
     <string name="txt_send_one_team">Send One Team</string>
@@ -131,7 +131,7 @@
     <string name="txt_tele_can_flip_totes">Can flip totes.</string>
     <string name="txt_tele_can_not_flip_totes">Can NOT flip totes.</string>
     <string name="txt_tele_can_remove_container">Can remove container from step.</string>
-    <string name="txt_tele_can_not_remove_conatiner">Can NOT reomove container from step.</string>
+    <string name="txt_tele_can_not_remove_conatiner">Can NOT remove container from step.</string>
     <string name="txt_tele_can_pick_litter">Can pick up litter.</string>
     <string name="txt_tele_can_not_pick_litter">Can NOT pick up litter.</string>
     <string name="txt_tele_can_move_litter">Can move litter to landfill.</string>
@@ -140,7 +140,9 @@
     <string name="txt_tele_can_place_bin">Can place bin on 4th level of Coop set.</string>
     <string name="txt_tele_can_not_place_bin">Can NOT place bin on 4th level of Coop set.</string>
     <string name="txt_tele_coop_set">Coop set height:</string>
-    <string name="txt_tele_stacking_direction">Prefered stacking direction:</string>
+    <string name="txt_tele_stacking_direction">Preferred stacking direction:</string>
+
+    <string name="json">JSON</string>
     <string name="json_send">Send JSON String</string>
     <string name="json_comp">Enter Competition Name.</string>
     <string name="json_load">Load JSON String</string>
