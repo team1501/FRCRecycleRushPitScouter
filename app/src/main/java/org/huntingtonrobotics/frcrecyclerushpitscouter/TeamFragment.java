@@ -2,20 +2,16 @@ package org.huntingtonrobotics.frcrecyclerushpitscouter;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.hardware.Camera;
-import android.nfc.Tag;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -34,8 +30,8 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -70,6 +66,8 @@ public class TeamFragment extends Fragment {
     private CheckBox mMechContainerStepRemover;
 
     //auto
+    private TextView mAuto;
+    private ImageView mAutoField;
     private EditText mAutoProgs;
     private CheckBox mAutoMove;
     private EditText mAutoTotes;
@@ -79,6 +77,8 @@ public class TeamFragment extends Fragment {
     private RadioGroup mAutoPos;
 
     //teleop
+    private TextView mTele;
+    private ImageView mTeleField;
     private EditText mTeleTotes;
     private EditText mTeleContainer;
     private EditText mTelePlaceLitter;
@@ -97,6 +97,7 @@ public class TeamFragment extends Fragment {
     private CheckBox mTeleMoveLitter;
 
     private EditText mComments;
+    private Drawable drawable;
 
 
     //fragment is created
@@ -289,6 +290,21 @@ public class TeamFragment extends Fragment {
 
 
         //PUT AUTO VIEWS HERE
+        mAuto = (TextView)v.findViewById(R.id.auto);
+        mAuto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!(mAutoField.isShown())){
+                    mAutoField.setVisibility(View.VISIBLE);
+                }else{
+                    mAutoField.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        mAutoField = (ImageView)v.findViewById(R.id.autoImageViewField);
+        mAutoField.setVisibility(View.GONE);
+
 
         mAutoProgs = (EditText)v.findViewById(R.id.auto_programs);
         mAutoProgs.setText(""+mTeam.getAutoProgs());
@@ -461,6 +477,27 @@ public class TeamFragment extends Fragment {
 
 
         //Tele
+        mTele = (TextView)v.findViewById(R.id.tele);
+        mTele.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!(mTele
+                Field.isShown())){
+                    mTeleField.setVisibility(View.VISIBLE);
+                }else{
+                    mTeleField.setVisibility(View.GONE);
+                }
+            }
+        });
+
+
+        mTeleField = (ImageView)v.findViewById(R.id.teleImageViewField);
+        mTeleField.setVisibility(View.GONE);
+
+
+
+
+
         mTeleTotes = (EditText)v.findViewById(R.id.teleStackTotes);
         //set filter to only allow numbers 0-6
         mTeleTotes.setFilters(new InputFilter[]{ new InputFilterMinMax(0, 6,getActivity().getApplicationContext())});
@@ -876,7 +913,6 @@ public class TeamFragment extends Fragment {
         return v;
     }
     //---inflates the view
-
 
     //shows the photo
     private void showPhoto(){

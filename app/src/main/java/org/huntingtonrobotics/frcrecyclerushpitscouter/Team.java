@@ -109,7 +109,6 @@ public class Team {
         }catch(Exception e){
             deviceName = Build.MODEL;
         }
-
         mID = UUID.randomUUID();
         mScoutName = deviceName;
     }

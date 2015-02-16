@@ -223,17 +223,7 @@ public class TeamListFragment extends ListFragment {
 
         switch (item.getItemId()) {
             case R.id.menu_item_delete_team:
-                /*
-                TeamAdapter teamAdapter = (TeamAdapter)getListAdapter();
-                TeamLab teamLab = TeamLab.getInstance(getActivity());
-                for (int i= teamAdapter.getCount()-1; i>=0; i--) {
-                    if (getListView().isItemChecked(i)) {
-                        teamLab.deleteTeam(teamAdapter.getItem(i));
-                    }
-                }
-                teamAdapter.notifyDataSetChanged();
-                return true;
-                */
+
         }
 
         return super.onContextItemSelected(item);

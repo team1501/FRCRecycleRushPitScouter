@@ -143,12 +143,20 @@
 
 
         <!--Auto-->
-        <TextView
+        <TextView android:id="@+id/auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/auto"
-            android:background="@color/lime"
+
             style="?android:listSeparatorTextViewStyle"/>
+
+        <ImageView android:id="@+id/autoImageViewField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside"
+            android:background="@android:color/darker_gray"
+            android:cropToPadding="true"
+            android:src="@drawable/field"/>
 
         <LinearLayout
             style="@style/LinearLayoutStyle2">
@@ -225,35 +233,7 @@
 
             </LinearLayout>
 
-            <!-- totes stack height to az
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="@dimen/activity_top_margin">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/auto_tote_height"
-                    />
-
-                <EditText android:id="@+id/auto_tote_height"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:inputType="number"
-                    android:maxLength="1"
-                    android:hint="@string/between_0_and_3"
-                    />
-
-            </LinearLayout>
-            -->
-            <!-- move tote stack-->
 
             <LinearLayout
                 style="@style/LinearLayoutStyle3">
@@ -320,14 +300,19 @@
         </LinearLayout>
 
 
-        <TextView
+        <TextView android:id="@+id/tele"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/teleop"
-            android:background="@color/yellow"
             style="?android:listSeparatorTextViewStyle"/>
 
-
+        <ImageView android:id="@+id/teleImageViewField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside"
+            android:background="@android:color/darker_gray"
+            android:cropToPadding="true"
+            android:src="@drawable/field"/>
         <!--Teleop-->
 
         <LinearLayout
