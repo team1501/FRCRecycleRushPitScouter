@@ -46,7 +46,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/team_info"
-                    android:background="@color/aqua"
                     style="?android:listSeparatorTextViewStyle"/>
 
                 <EditText android:id="@+id/teamNum"
@@ -69,7 +68,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/mech"
-            android:background="@color/red"
             style="?android:listSeparatorTextViewStyle"/>
 
         <LinearLayout
@@ -265,7 +263,6 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/text"
                     android:orientation="horizontal"
-                    android:background="#abf234"
                     android:checkedButton="@+id/autoStartPos1" >
 
 
@@ -682,12 +679,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/comments"
-            android:background="@color/gray"
             style="?android:listSeparatorTextViewStyle"/>
 
         <EditText android:id="@+id/comments"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:hint="@string/enter_comments"/>
         <ImageView android:id="@+id/team_imageViewSave"
             android:layout_width="500dp"
@@ -696,6 +693,5 @@
             android:background="@android:color/darker_gray"
             android:cropToPadding="true"/>
     </LinearLayout>
-
 
 </ScrollView>

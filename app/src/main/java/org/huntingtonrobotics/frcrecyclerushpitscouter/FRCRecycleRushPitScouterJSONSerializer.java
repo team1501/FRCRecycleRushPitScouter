@@ -121,7 +121,6 @@ public class FRCRecycleRushPitScouterJSONSerializer {
             ArrayList<Team> bluetoothListData = new ArrayList<Team>();
             ArrayList<Team> bluetoothListDataToAdd = new ArrayList<Team>();
 
-
             //build the array of teams from JSONObjects from bluetooth
             for (int i = 0; i < jsonArray.length(); i++) {
                 bluetoothListData.add(new Team(jsonArray.getJSONObject(i)));
@@ -146,9 +145,9 @@ public class FRCRecycleRushPitScouterJSONSerializer {
                 }
                 }
             }
-                mTeams.addAll(bluetoothListDataToAdd);
-                saveTeams(mTeams);
 
+            mTeams.addAll(bluetoothListDataToAdd);
+            saveTeams(mTeams);
 
             return true;
 

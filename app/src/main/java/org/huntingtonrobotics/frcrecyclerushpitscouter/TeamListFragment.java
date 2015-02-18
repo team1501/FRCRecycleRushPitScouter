@@ -34,7 +34,7 @@ public class TeamListFragment extends ListFragment {
     ImageView imageView;
     private ArrayList<Team> mTeams;
 
-    //bubble sort
+    //bubble sort teams
     public static void bubbleSort(ArrayList<Team> list) {
         Team team;
         if (list.size() > 1) // check if the number of teams is larger than 1
@@ -60,14 +60,6 @@ public class TeamListFragment extends ListFragment {
         setHasOptionsMenu(true);    //to tell fm to recieve a call for onCreateOptionsMenu()
 
         getActivity().setTitle(R.string.teams_title);
-
-        /*
-        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB) {
-            ActionBar bar = getActivity().getActionBar();
-            bar.setBackgroundDrawable(new ColorDrawable(R.color.teamred));
-        }
-        */
-
         loadListTeams();
         setRetainInstance(true);
     }
@@ -122,6 +114,7 @@ public class TeamListFragment extends ListFragment {
                             }
                             mode.finish();
                             adapter.notifyDataSetChanged();
+                            teamLab.saveTeams();
                             return true;
 
                         default:
@@ -153,11 +146,6 @@ public class TeamListFragment extends ListFragment {
     }
 
     private void loadListTeams() {
-        /*
-        if (mTeams != null) {
-            mTeams.clear();
-        }
-        */
         mTeams = TeamLab.get(getActivity()).getTeams();
 
         bubbleSort(mTeams);

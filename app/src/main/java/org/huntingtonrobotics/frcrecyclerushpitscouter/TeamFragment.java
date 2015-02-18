@@ -481,8 +481,7 @@ public class TeamFragment extends Fragment {
         mTele.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!(mTele
-                Field.isShown())){
+                if (!(mTeleField.isShown())){
                     mTeleField.setVisibility(View.VISIBLE);
                 }else{
                     mTeleField.setVisibility(View.GONE);
@@ -721,7 +720,7 @@ public class TeamFragment extends Fragment {
                 mTeleStackingDirection.check(R.id.teleDirectionS);
                 break;
             case 0:
-                mAutoPos.check(R.id.teleDNS);
+                mTeleStackingDirection.check(R.id.teleDNS);
                 break;
         }
         mTeleStackingDirection.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -756,7 +755,7 @@ public class TeamFragment extends Fragment {
                 mTelePlatform.check(R.id.telePlat2);
                 break;
             case 0:
-                mAutoPos.check(R.id.telePlatA);
+                mTelePlatform.check(R.id.telePlatA);
                 break;
         }
         mTelePlatform.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -791,7 +790,7 @@ public class TeamFragment extends Fragment {
                 mTeleHumanStation.check(R.id.teleHumanStation2);
                 break;
             case 0:
-                mAutoPos.check(R.id.teleHumanStationA);
+                mTeleHumanStation.check(R.id.teleHumanStationA);
                 break;
         }
         mTeleHumanStation.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -940,7 +939,9 @@ public class TeamFragment extends Fragment {
     @Override
     public void onStop(){
         super.onStop();
-        PictureUtils.cleanImageView(mPhotoView);
+        //if (mPhotoView!=null) {
+        //    PictureUtils.cleanImageView(mPhotoView);
+        //}
         TeamLab.get(getActivity()).saveTeams();
     }
     //---unload the image

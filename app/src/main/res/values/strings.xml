@@ -147,6 +147,7 @@
     <string name="json_comp">Enter Competition Name.</string>
     <string name="json_load">Load JSON String</string>
     <string name="json_string">Enter JSON string here.</string>
+    <string name="help">Click Me For Help!</string>
 
 
 </resources>
