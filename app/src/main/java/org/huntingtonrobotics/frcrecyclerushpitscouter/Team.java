@@ -33,7 +33,6 @@ public class Team {
     private static final String JSON_AUTO_MOVE = "am";
     private static final String JSON_AUTO_TOTES = "at";
     private static final String JSON_AUTO_CONTAINERS = "ac";
-    //private static final String JSON_AUTO_HEIGHT = "autoHeight";      //deleted from auto
     private static final String JSON_AUTO_MOVE_TOTE = "amt";
     private static final String JSON_AUTO_POS = "aps";
 
