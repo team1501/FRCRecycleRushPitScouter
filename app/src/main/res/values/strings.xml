@@ -3,7 +3,7 @@
 
     <string name="app_name">FRC Recycle Rush Pit Scouter</string>
     <string name="team_number_hint">Enter a team number.</string>
-    <string name="auto">AUTO</string>
+    <string name="auto">AUTO &lt;----Push me!</string>
     <string name="teleop">TELEOP</string>
     <string name="coopertition">COOPERTITION</string>
     <string name="team_info">TEAM INFO</string>
@@ -14,12 +14,12 @@
     <string name="take">Take!</string>
     <string name="auto_programs">Number of Programs:</string>
     <string name="auto_move">Can move to AZ:</string>
-    <string name="auto_totes">Number of totes able to move to AZ:</string>
+    <string name="auto_totes">Number of totes \nable to move to AZ:</string>
     <string name="auto_containers">Number of containers to AZ:</string>
     <string name="auto_tote_height">Tote stack height in AZ:</string>
     <string name="auto_move_tote_stack">Can move tote stack:</string>
     <string name="auto_start_pos">Preferred starting position:</string>
-    <string name="between_0_and_3"># between 0-3</string>
+    <string name="between_0_and_3"># btw 0-3</string>
     <string name="mech">MECHANISMS</string>
     <string name="mech_litter">Litter(Noodle):</string>
     <string name="mech_inserter">Inserter</string>
@@ -28,7 +28,7 @@
     <string name="mech_feeder">Feeder</string>
     <string name="mech_container">Container</string>
     <string name="mech_flipper">Flipper</string>
-    <string name="mech_step_remover">Stp Rmvr</string>
+    <string name="mech_step_remover">Step Remover</string>
     <string name="blue">BLUETOOTH</string>
     <string name="blue_on">Turn On</string>
     <string name="blue_off">Turn Off</string>
@@ -45,9 +45,9 @@
     <string name="tele_carry_totes">Carry Totes:</string>
     <string name="tele_actions">ACTIONS</string>
     <string name="tele_max_height">MAX HEIGHT</string>
-    <string name="between_0_and_6"># between 0-6</string>
+    <string name="between_0_and_6"># btw 0-6</string>
     <string name="tele_coop_set">Coopertition set:</string>
-    <string name="tele_coop_stack">Can place bin on 4th level of Coop set:</string>
+    <string name="tele_coop_stack">Can place bin on 3rd or \n4th level of Coop set:</string>
     <string name="tele_platform">Preferred platform:</string>
     <string name="tele_human_station">Preferred human station:</string>
     <string name="tele_plat_long">Long w/ ramp</string>

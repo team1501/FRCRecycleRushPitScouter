@@ -12,6 +12,7 @@
     <style name="Theme.Sample" parent="Theme.Base" />
 
     <!--<style name="AppTheme" parent="Theme.Sample" />-->
+
     <!-- Widget styling -->
 
     <style name="Widget" />
@@ -27,6 +28,76 @@
         <item name="android:shadowDy">-3.5</item>
         <item name="android:shadowRadius">2</item>
     </style>
+
+
+    <!-- for fragment_team_main-->
+
+    <style name = "TableLayout">
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginLeft">@dimen/marginLeft</item>
+        <item name="android:layout_marginRight">@dimen/marginRight</item>
+        <item name="android:layout_marginTop">@dimen/marginTop</item>
+        <item name="android:layout_marginBottom">@dimen/marginBottom</item>
+        <item name="android:stretchColumns">*</item>
+
+    </style>
+
+    <style name = "TableRow">
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_marginBottom">@dimen/marginBottom</item>
+
+    </style>
+
+    <style name = "TextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:listSeparatorTextViewStyle">?android:listSeparatorTextViewStyle</item>
+    </style>
+
+    <style name = "ImageView">
+        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_height">80dp</item>
+        <item name="android:scaleType">centerInside</item>
+        <item name="android:background">@android:color/darker_gray</item>
+        <item name="android:cropToPadding">true</item>
+    </style>
+
+    <style name = "EditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name = "CheckBox">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name = "ImageButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="Space">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">20dp</item>
+    </style>
+
+    <style name="RadioGroup">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="RadioButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
 
     <style name="LinearLayoutStyle1">
         <item name="android:orientation">horizontal</item>

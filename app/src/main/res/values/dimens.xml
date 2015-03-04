@@ -4,4 +4,10 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <dimen name="activity_top_margin">16dp</dimen>
+    <!--team fragment-->
+
+    <dimen name="marginLeft">10dp</dimen>
+    <dimen name="marginRight">10dp</dimen>
+    <dimen name="marginTop">10dp</dimen>
+    <dimen name="marginBottom">10dp</dimen>
 </resources>

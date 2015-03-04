@@ -596,7 +596,7 @@ public class TeamFragment extends Fragment {
         });
 
 
-        mTelePlaceTotes = (EditText)v.findViewById(R.id.teleStackToteStack);
+        mTelePlaceTotes = (EditText)v.findViewById(R.id.telePlaceToteStack);
         //set filter to only allow numbers 0-6
         mTelePlaceTotes.setFilters(new InputFilter[]{ new InputFilterMinMax(0, 6,getActivity().getApplicationContext())});
         mTelePlaceTotes.setText(""+mTeam.getTelePlaceTotes());

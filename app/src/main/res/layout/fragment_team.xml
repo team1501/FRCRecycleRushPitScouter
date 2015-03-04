@@ -26,7 +26,6 @@
                     android:background="@android:color/darker_gray"
                     android:cropToPadding="true"/>
 
-
                 <ImageButton android:id="@+id/team_imageButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -231,15 +230,12 @@
 
             </LinearLayout>
 
-
-
             <LinearLayout
                 style="@style/LinearLayoutStyle3">
 
                 <TextView
                     style="@style/LinearItem"
                     android:text="@string/auto_move_tote_stack"
-
                     />
 
                 <CheckBox android:id="@+id/auto_move_tote_stack"
@@ -402,7 +398,7 @@
                     android:text="@string/tele_place_totes_on_stack"
                     />
 
-                <EditText android:id="@+id/teleStackToteStack"
+                <EditText android:id="@+id/telePlaceToteStack"
                     style="@style/LinearItem"
                     android:inputType="number"
                     android:maxLength="1"
