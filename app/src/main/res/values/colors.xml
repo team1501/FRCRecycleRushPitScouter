@@ -18,5 +18,7 @@
     <color name="black">#000000</color>
 
     <color name="teamRed">#ed2224</color>
+    <color name="teamDarkBlue">#21205f</color>
+    <color name="teamLightBlue">#A3c1e5</color>
 
 </resources>

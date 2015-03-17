@@ -1,693 +1,382 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/TableLayout">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:orientation="vertical"
-        android:weightSum="1">
+    <TableRow
+        style="@style/TableRow">
 
-        <!--Team Info-->
-
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            style="@style/LinearLayoutStyle1">
-
-            <LinearLayout
-                style="@style/LinearLayoutStyle2">
-
-                <ImageView android:id="@+id/team_imageView"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:scaleType="centerInside"
-                    android:background="@android:color/darker_gray"
-                    android:cropToPadding="true"/>
-
-                <ImageButton android:id="@+id/team_imageButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:src="@android:drawable/ic_menu_camera"/>
-
-                <ImageButton android:id="@+id/team_imageButtonSave"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:src="@android:drawable/ic_menu_save"/>
-            </LinearLayout>
-
-
-            <LinearLayout
-               style="@style/LinearLayoutStyle2"  >
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/team_info"
-                    style="?android:listSeparatorTextViewStyle"/>
-
-                <EditText android:id="@+id/teamNum"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:maxLength="4"
-                    android:hint="@string/team_number_hint"/>
-                <EditText android:id="@+id/scoutName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    android:hint="@string/scout_name"/>
-            </LinearLayout>
-        </LinearLayout>
-
-
-        <!--Mechanisms-->
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/mech"
-            style="?android:listSeparatorTextViewStyle"/>
+            style= "@style/TextView"
+            android:text="@string/team_info"/>
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_weight="1">
+        <ImageView android:id="@+id/team_imageView"
+            style="@style/ImageView"
+            android:layout_weight="2" />
 
-            <!--litter-->
+    </TableRow>
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
+    <TableRow
+        style="@style/TableRow">
 
-                <TextView
-                    style="@style/LinearItem"
-                    android:text="@string/mech_litter"
-                    />
+        <EditText android:id="@+id/teamNum"
+            style="@style/EditText"
+            android:inputType="number"
+            android:maxLength="4"
+            android:hint="@string/team_number_hint"/>
 
-                <CheckBox android:id="@+id/mechLitterInserter"
-                    style="@style/LinearItem"
-                    android:text="@string/mech_inserter"
-                    />
+        <ImageButton android:id="@+id/team_imageButton"
+            style="@style/ImageButton"
+            android:src="@android:drawable/ic_menu_camera"/>
 
-                <CheckBox android:id="@+id/mechLitterPusher"
-                    style="@style/LinearItem"
-                    android:text="@string/mech_pusher"
-                    />
-            </LinearLayout>
-        </LinearLayout>
+    </TableRow>
 
-        <!--Tote-->
+    <TableRow
+        style="@style/TableRow">
 
-        <LinearLayout
-            style="@style/LinearLayoutStyle3">
+            <EditText android:id="@+id/comments"
+                style="@style/EditText"
+                android:layout_width="0dp"
+                android:singleLine="true"
+                android:hint="@string/comments"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="@string/mech_tote"
-                />
+        <ImageButton android:id="@+id/team_imageButtonSave"
+            style="@style/ImageButton"
+            android:src="@android:drawable/ic_menu_save"/>
 
-            <CheckBox android:id="@+id/mechToteFeeder"
-                style="@style/LinearItem"
-                android:text="@string/mech_feeder"
-                />
-        </LinearLayout>
+    </TableRow>
 
+    <TableRow
+        style="@style/TableRow">
 
-        <!--Tote-->
+        <RadioGroup android:id="@+id/layoutSelecter"
+            style="@style/RadioGroup"
+            android:checkedButton="@+id/mechLayout"
+            android:layout_span="2">
 
-        <LinearLayout
-            style="@style/LinearLayoutStyle3">
+            <RadioButton android:id="@+id/autoLayout"
+                style="@style/RadioButton"
+                android:checked="true"
+                android:text="Auto"/>
 
-            <TextView
-                style="@style/LinearItem"
-                android:layout_weight="2"
-                android:text="@string/mech_container"
-                />
+            <RadioButton android:id="@+id/coopLayout"
+                style="@style/RadioButton"
+                android:text="Coop"/>
 
-            <CheckBox android:id="@+id/mechContainerFlipper"
-                style="@style/LinearItem"
-                android:text="@string/mech_flipper"
-                />
+            <RadioButton android:id="@+id/mechLayout"
+                style="@style/RadioButton"
+                android:text="Mech"/>
 
-        </LinearLayout>
+            <RadioButton android:id="@+id/teleLayout"
+                style="@style/RadioButton"
+                android:text="Tele"/>
+
+        </RadioGroup>
 
 
-        <!--Auto-->
-        <TextView android:id="@+id/auto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/auto"
+    </TableRow>
 
-            style="?android:listSeparatorTextViewStyle"/>
 
-        <ImageView android:id="@+id/autoImageViewField"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="centerInside"
-            android:background="@android:color/darker_gray"
-            android:cropToPadding="true"
-            android:src="@drawable/field"/>
 
-        <LinearLayout
-            style="@style/LinearLayoutStyle2">
+    <!-- Auto -->
 
-            <!--num of programs-->
+    <ScrollView  android:id="@+id/autoScrollView" android:visibility="visible">
 
-            <LinearLayout
-                style="@style/LinearLayoutStyle3">
+        <TableLayout android:id="@+id/autoTable"
+            style="@style/TableLayout">
+
+            <TableRow
+                style="@style/TableRow">
+                <TextView android:id="@+id/auto"
+                    style="@style/TextView"
+                    android:text="@string/auto"
+                    android:layout_span="2" />
+            </TableRow>
+
+            <Space
+                style="@style/Space"/>
+
+
+
+            <TableRow
+                style="@style/TableRow">
 
                 <TextView
-                    style="@style/LinearItem"
+                    style="@style/TextView"
                     android:text="@string/auto_programs"
                     />
 
                 <EditText android:id="@+id/auto_programs"
-                    style="@style/LinearItem"
+                    style="@style/EditText"
                     android:inputType="number"
-                    android:maxLength="2"
-                    />
-            </LinearLayout>
+                    android:maxLength="2"/>
 
-            <!-- move-->
+            </TableRow>
 
-            <LinearLayout
-                style="@style/LinearLayoutStyle3">
+            <TableRow
+                style="@style/TableRow">
 
                 <TextView
-                    style="@style/LinearItem"
-                    android:text="@string/auto_move"
-
-                    />
+                    style="@style/TextView"
+                    android:text="@string/auto_move"/>
 
                 <CheckBox android:id="@+id/auto_move"
-                    style="@style/LinearItem"/>
-            </LinearLayout>
+                    style="@style/CheckBox"/>
 
+            </TableRow>
 
-
-            <!-- totes to az-->
-
-            <LinearLayout
-                style="@style/LinearLayoutStyle3">
+            <TableRow
+                style="@style/TableRow">
 
                 <TextView
-                    style="@style/LinearItem"
-                    android:text="@string/auto_totes"
-                    />
+                    style="@style/TextView"
+                    android:text="@string/auto_totes"/>
 
                 <EditText android:id="@+id/auto_totes"
-                    style="@style/LinearItem"
+                    style="@style/EditText"
                     android:inputType="number"
                     android:maxLength="1"
-                    android:hint="@string/between_0_and_3"
-                    />
+                    android:hint="@string/between_0_and_3"/>
 
-            </LinearLayout>
+            </TableRow>
 
-            <!-- Containers to az-->
-
-            <LinearLayout
-                style="@style/LinearLayoutStyle3">
+            <TableRow
+                style="@style/TableRow">
 
                 <TextView
-                    style="@style/LinearItem"
+                    style="@style/TextView"
                     android:text="@string/auto_containers"
                     />
 
                 <EditText android:id="@+id/auto_containers"
-                    style="@style/LinearItem"
+                    style="@style/EditText"
                     android:inputType="number"
                     android:maxLength="1"
-                    android:hint="@string/between_0_and_3"
-                    />
+                    android:hint="@string/between_0_and_3"/>
 
-            </LinearLayout>
+            </TableRow>
 
-            <LinearLayout
-                style="@style/LinearLayoutStyle3">
-
-                <TextView
-                    style="@style/LinearItem"
-                    android:text="@string/auto_move_tote_stack"
-                    />
-
-                <CheckBox android:id="@+id/auto_move_tote_stack"
-                    style="@style/LinearItem"/>
-            </LinearLayout>
-
-
-            <!-- prefered starting position-->
-
-            <LinearLayout
-                style="@style/LinearLayoutStyle3"
-                >
+            <TableRow
+                style="@style/TableRow">
 
                 <TextView
-                    style="@style/LinearItem"
+                    style="@style/TextView"
                     android:text="@string/auto_start_pos"
-                    />
+                    android:layout_span="2"/>
+
+            </TableRow>
+
+            <TableRow
+                style="@style/TableRow">
 
                 <RadioGroup android:id="@+id/startPosRadioGroup"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/text"
-                    android:orientation="horizontal"
-                    android:checkedButton="@+id/autoStartPos1" >
-
+                    style="@style/RadioGroup"
+                    android:checkedButton="@+id/autoStartPos1"
+                    android:layout_span="2">
 
                     <RadioButton android:id="@+id/autoStartPos1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
+                        style="@style/RadioButton"
                         android:checked="true"
                         android:text="1"/>
 
                     <RadioButton android:id="@+id/autoStartPos2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
+                        style="@style/RadioButton"
                         android:text="2"/>
 
                     <RadioButton android:id="@+id/autoStartPos3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
+                        style="@style/RadioButton"
                         android:text="3"/>
 
                     <RadioButton android:id="@+id/autoStartPosA"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
+                        style="@style/RadioButton"
                         android:text="A"/>
 
                 </RadioGroup>
-            </LinearLayout>
 
-        </LinearLayout>
+            </TableRow>
 
+            <TableRow
+                style="@style/TableRow"
+                android:visibility="visible">
 
-        <TextView android:id="@+id/tele"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/teleop"
-            style="?android:listSeparatorTextViewStyle"/>
+                <ImageView android:id="@+id/autoImageViewField"
+                    style="@style/ImageView"
+                    android:src="@drawable/field_stagingzone"
+                    android:layout_marginBottom="10dp"
+                    android:layout_span="2"/>
 
-        <ImageView android:id="@+id/teleImageViewField"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="centerInside"
-            android:background="@android:color/darker_gray"
-            android:cropToPadding="true"
-            android:src="@drawable/field"/>
-        <!--Teleop-->
+            </TableRow>
 
-        <LinearLayout
-            style="@style/LinearLayoutStyle4">
+        </TableLayout>
 
-            <!--Headers-->
+    </ScrollView>
 
-            <LinearLayout
-                style="@style/LinearLayoutStyle3">
+    <!--Coop-->
+
+    <ScrollView android:id="@+id/coopScrollView" android:visibility="gone">
+
+        <TableLayout
+            style="@style/TableLayout">
+
+            <TableRow
+                style="@style/TableRow">
 
                 <TextView
-                    style="@style/LinearItem"
+                    style="@style/TextView"
+                    android:text="@string/coopertition"
+                    android:layout_span="2"/>
+
+            </TableRow>
+            <TableRow
+                style="@style/TableRow">
+
+                <TextView
+                    style="@style/TextView"
+                    android:text="@string/tele_coop_set"/>
+
+                <EditText android:id="@+id/teleCoopSet"
+                    style="@style/EditText"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:hint="@string/between_0_and_3"/>
+
+            </TableRow>
+
+            <TableRow
+                style="@style/TableRow">
+
+                <TextView
+                    style="@style/TextView"
+                    android:text="@string/tele_coop_stack"
+                    android:layout_marginBottom="5dp"
+                    />
+
+                <CheckBox android:id="@+id/teleCoopStack"
+                    style="@style/CheckBox"
+                    />
+
+            </TableRow>
+
+        </TableLayout>
+
+    </ScrollView>
+
+    <!-- Mech -->
+
+    <ScrollView android:id="@+id/mechScrollView" android:visibility="gone">
+
+        <TableLayout android:id="@+id/mechTable"
+            style="@style/TableLayout">
+
+            <TableRow
+                style="@style/TableRow">
+                <TextView
+                    style="@style/TextView"
+                    android:text="@string/mech"
+                    android:layout_span="2"/>
+            </TableRow>
+
+            <TableRow
+                style="@style/TableRow">
+
+                <TextView
+                    style="@style/TextView"
+                    android:text="@string/mech_container"/>
+
+                <CheckBox android:id="@+id/stepRemover"
+                    style="@style/CheckBox"
+                    android:text="@string/mech_step_remover"/>
+
+            </TableRow>
+
+        </TableLayout>
+
+    </ScrollView>
+
+    <!--Tele-->
+
+    <ScrollView android:id="@+id/teleScrollView" android:visibility="gone">
+
+        <TableLayout
+            style="@style/TableLayout">
+
+            <TableRow style="@style/TableRow">
+
+                <TextView
+                    style="@style/TextView"
+                    android:text="@string/teleop"
+                    android:layout_span="2"/>
+
+            </TableRow>
+
+            <TableRow
+                style="@style/TableRow">
+
+                <TextView
+                    style="@style/TextView"
                     android:text="@string/tele_actions"
                     android:gravity="center_horizontal"
                     android:textStyle="bold" />
 
                 <TextView
-                    style="@style/LinearItem"
+                    style="@style/TextView"
                     android:text="@string/tele_max_height"
                     android:gravity="center_horizontal"
                     android:textStyle="bold" />
-            </LinearLayout>
 
-            <!-- stack totes-->
+            </TableRow>
 
-            <LinearLayout
-                style="@style/LinearLayoutStyle3">
+            <TableRow
+                style="@style/TableRow">
 
                 <TextView
-                    style="@style/LinearItem"
-                    android:text="@string/tele_stack_totes"
-                    />
+                    style="@style/TextView"
+                    android:text="@string/tele_stack_totes"/>
 
                 <EditText android:id="@+id/teleStackTotes"
-                    style="@style/LinearItem"
+                    style="@style/EditText"
                     android:inputType="number"
                     android:maxLength="1"
-                    android:hint="@string/between_0_and_6"
-                    />
+                    android:hint="@string/between_0_and_6"/>
 
-            </LinearLayout>
+            </TableRow>
 
-
-
-            <!-- Stack Containers-->
-
-            <LinearLayout
-                style="@style/LinearLayoutStyle3">
+            <TableRow
+                style="@style/TableRow">
 
                 <TextView
-                    style="@style/LinearItem"
-                    android:text="@string/tele_stack_container"
-                    />
+                    style="@style/TextView"
+                    android:text="@string/tele_stack_container"/>
 
                 <EditText android:id="@+id/teleStackContainer"
-                    style="@style/LinearItem"
+                    style="@style/EditText"
                     android:inputType="number"
                     android:maxLength="1"
-                    android:hint="@string/between_0_and_6"
-                    />
+                    android:hint="@string/between_0_and_6"/>
 
-            </LinearLayout>
+            </TableRow>
 
-            <!-- place litter-->
-
-            <LinearLayout
-                style="@style/LinearLayoutStyle3">
+            <TableRow
+                style="@style/TableRow">
 
                 <TextView
-                    style="@style/LinearItem"
-                    android:text="@string/tele_place_litter"
-                    />
-
-                <EditText android:id="@+id/telePlaceLitter"
-                    style="@style/LinearItem"
-                    android:inputType="number"
-                    android:maxLength="1"
-                    android:hint="@string/between_0_and_6"
-                    />
-
-            </LinearLayout>
-
-            <!-- place tote stack-->
-
-            <LinearLayout
-                style="@style/LinearLayoutStyle3">
-
-                <TextView
-                    style="@style/LinearItem"
-                    android:text="@string/tele_place_totes_on_stack"
-                    />
+                    style="@style/TextView"
+                    android:text="@string/tele_place_totes_on_stack"/>
 
                 <EditText android:id="@+id/telePlaceToteStack"
-                    style="@style/LinearItem"
+                    style="@style/EditText"
                     android:inputType="number"
                     android:maxLength="1"
-                    android:hint="@string/between_0_and_6"
-                    />
+                    android:hint="@string/between_0_and_6"/>
 
-            </LinearLayout>
+            </TableRow>
 
-            <!-- carry totes-->
+        </TableLayout>
 
-            <LinearLayout
-                style="@style/LinearLayoutStyle3">
+    </ScrollView>
 
-                <TextView
-                    style="@style/LinearItem"
-                    android:text="@string/tele_carry_totes"
-                    />
+    <ImageView android:id="@+id/team_imageViewSave"
+        android:layout_height="100dp"
+        android:layout_width="100dp"
+        android:visibility="gone"/>
 
-                <EditText android:id="@+id/teleCarryTotes"
-                    style="@style/LinearItem"
-                    android:inputType="number"
-                    android:maxLength="1"
-                    android:hint="@string/between_0_and_6"
-                    />
-
-            </LinearLayout>
-
-            <!--Coop set-->
-
-            <LinearLayout
-                style="@style/LinearLayoutStyle3">
-
-                <TextView
-                    style="@style/LinearItem"
-                    android:text="@string/tele_coop_set"
-                    />
-
-                <EditText android:id="@+id/teleCoopSet"
-                    style="@style/LinearItem"
-                    android:inputType="number"
-                    android:maxLength="1"
-                    android:hint="@string/between_0_and_3"
-                    />
-
-            </LinearLayout>
-
-
-
-            <!--blank-->
-            <LinearLayout
-                style="@style/LinearLayoutStyle3">
-
-                <TextView
-                    style="@style/LinearItem"
-                    android:text=""
-                    />
-
-                <TextView
-                    style="@style/LinearItem"
-                    android:text=""
-                    />
-
-            </LinearLayout>
-        </LinearLayout>
-
-        <!--Coop stack-->
-        <LinearLayout
-            style="@style/LinearLayoutStyle3">
-
-            <TextView
-                style="@style/LinearItem"
-                android:text="@string/tele_coop_stack"
-                android:layout_marginBottom="4dp"
-                />
-
-            <CheckBox android:id="@+id/teleCoopStack"
-                style="@style/LinearItem"
-                />
-
-        </LinearLayout>
-
-        <!--Stacking Direction-->
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <TextView
-                style="@style/LinearItem"
-                android:text="@string/tele_stack_direction"
-                android:layout_marginLeft="4dp"
-                />
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <RadioGroup android:id="@+id/stackingDirectionRadioGroup"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:checkedButton="@+id/teleDirectionL" >
-
-
-                    <RadioButton android:id="@+id/teleDirectionL"
-                        style="@style/LinearItem"
-                        android:checked="true"
-                        android:text="@string/tele_plat_long"/>
-
-                    <RadioButton android:id="@+id/teleDirectionS"
-                        style="@style/LinearItem"
-                        android:text="@string/tele_plat_short"/>
-
-                    <RadioButton android:id="@+id/teleDNS"
-                        style="@style/LinearItem"
-                        android:text="@string/tele_does_not_stack"/>
-
-                </RadioGroup>
-            </LinearLayout>
-        </LinearLayout>
-
-        <!-- prefered human station-->
-
-
-        <LinearLayout
-            style="@style/LinearLayoutStyle3">
-
-            <TextView
-                style="@style/LinearItem"
-                android:text="@string/tele_human_station"
-                />
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <RadioGroup android:id="@+id/humanStationRadioGroup"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:checkedButton="@+id/teleHumanStation1" >
-
-
-                    <RadioButton android:id="@+id/teleHumanStation1"
-                        style="@style/LinearItem"
-                        android:checked="true"
-                        android:text="1"/>
-
-                    <RadioButton android:id="@+id/teleHumanStation2"
-                        style="@style/LinearItem"
-                        android:text="2"/>
-
-                    <RadioButton android:id="@+id/teleHumanStationA"
-                        style="@style/LinearItem"
-                        android:text="A"/>
-
-                </RadioGroup>
-            </LinearLayout>
-        </LinearLayout>
-
-        <!-- prefered starting position-->
-
-        <LinearLayout
-            style="@style/LinearLayoutStyle3">
-
-            <TextView
-                style="@style/LinearItem"
-                android:text="@string/tele_platform"
-                />
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <RadioGroup android:id="@+id/platformRadioGroup"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:checkedButton="@+id/telePlat1" >
-
-
-                    <RadioButton android:id="@+id/telePlat1"
-                        style="@style/LinearItem"
-                        android:checked="true"
-                        android:text="1"/>
-
-                    <RadioButton android:id="@+id/telePlat2"
-                        style="@style/LinearItem"
-                        android:text="2"/>
-
-                    <RadioButton android:id="@+id/telePlatA"
-                        style="@style/LinearItem"
-                        android:text="A"/>
-
-                </RadioGroup>
-
-
-            </LinearLayout>
-        </LinearLayout>
-
-        <!--blank-->
-        <LinearLayout
-            style="@style/LinearLayoutStyle3">
-
-            <TextView
-                style="@style/LinearItem"
-                android:text=""
-                />
-
-            <TextView
-                style="@style/LinearItem"
-                android:text=""
-                />
-
-        </LinearLayout>
-
-        <!--flip totes-->
-        <LinearLayout
-            style="@style/LinearLayoutStyle3">
-
-            <TextView
-                style="@style/LinearItem"
-                android:text="@string/tele_can_flip_totes"/>
-
-            <CheckBox android:id="@+id/teleFlipTotes"
-                style="@style/LinearItem"/>
-        </LinearLayout>
-
-        <!--step remover-->
-        <LinearLayout
-            style="@style/LinearLayoutStyle3">
-
-            <TextView
-                style="@style/LinearItem"
-                android:text="@string/tele_can_remove_container"/>
-
-            <CheckBox android:id="@+id/teleRemoveContainer"
-                style="@style/LinearItem"/>
-        </LinearLayout>
-
-        <!--pick up litter-->
-        <LinearLayout
-            style="@style/LinearLayoutStyle3">
-
-            <TextView
-                style="@style/LinearItem"
-                android:text="@string/tele_pick_up_litter"/>
-
-            <CheckBox android:id="@+id/telePickUpLitter"
-                style="@style/LinearItem"/>
-        </LinearLayout>
-
-        <!--move litter-->
-        <LinearLayout
-            style="@style/LinearLayoutStyle3">
-
-            <TextView
-                style="@style/LinearItem"
-                android:text="@string/tele_move_litter"/>
-
-            <CheckBox android:id="@+id/teleMoveLitter"
-                style="@style/LinearItem"/>
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/comments"
-            style="?android:listSeparatorTextViewStyle"/>
-
-        <EditText android:id="@+id/comments"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:hint="@string/enter_comments"/>
-        <ImageView android:id="@+id/team_imageViewSave"
-            android:layout_width="500dp"
-            android:layout_height="500dp"
-            android:scaleType="centerInside"
-            android:background="@android:color/darker_gray"
-            android:cropToPadding="true"/>
-    </LinearLayout>
-
-</ScrollView>
+</TableLayout>

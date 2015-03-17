@@ -463,33 +463,48 @@ public class SendFragment extends Fragment {
                 report +="---"+ getResources().getString(R.string.txt_team_num) + SPACE + teamNum+"---";
                 report += DOUBLE_LINE_BREAK + getResources().getString(R.string.txt_scout_name) + SPACE + t.getScoutName();
 
+                //auto
+                report += DOUBLE_LINE_BREAK + getResources().getString(R.string.auto);
+
+                report += DOUBLE_LINE_BREAK + getResources().getString(R.string.txt_auto_progs) + SPACE + t.getAutoProgs();
+
+                if (t.isAutoMove()) {
+                    report += LINE_BREAK + getResources().getString(R.string.txt_auto_can_move_az);
+                } else {
+                    report += LINE_BREAK + getResources().getString(R.string.txt_auto_can_not_move_az);
+                }
+
+                report += LINE_BREAK + getResources().getString(R.string.txt_auto_totes) + SPACE + t.getAutoTotes();
+
+                report += LINE_BREAK + getResources().getString(R.string.txt_auto_conatiners) + SPACE + t.getAutoContainers();
+
+                if (t.getAutoPos() != 0) {
+                    report += LINE_BREAK + getResources().getString(R.string.txt_auto_pos) + SPACE + t.getAutoPos();
+                }else{
+                    report += LINE_BREAK + getResources().getString(R.string.txt_auto_pos) + SPACE + "Any";
+                }
+
+                //coop
+
+                report += DOUBLE_LINE_BREAK + getResources().getString(R.string.txt_coop);
+
+                report += DOUBLE_LINE_BREAK + getResources().getString(R.string.txt_tele_coop_set) + SPACE + t.getTeleCoopSet();
+
+                if (t.isTeleCoopStack()) {
+                    report += LINE_BREAK + getResources().getString(R.string.team_report_coop_stack);
+                } else {
+                    report += LINE_BREAK + getResources().getString(R.string.team_report_no_coop_stack);
+                }
                 //mech
                 report += DOUBLE_LINE_BREAK + getResources().getString(R.string.txt_has_mech);
 
                 ArrayList<String> mechHas = new ArrayList<String>();
                 ArrayList<String> mechDNH = new ArrayList<String>();
 
-                if (t.isMechLitterPusher()) {
-                    mechHas.add("" + getResources().getString(R.string.txt_litter_pusher));
+                if (t.isMechContainerStepRemover()) {
+                    mechHas.add("" + getResources().getString(R.string.team_report_step_remover));
                 } else {
-                    mechDNH.add("" + getResources().getString(R.string.txt_litter_pusher));
-                }
-                if (t.isMechLitterInserter()) {
-                    mechHas.add("" + getResources().getString(R.string.txt_litter_inserter));
-                } else {
-                    mechDNH.add("" + getResources().getString(R.string.txt_litter_inserter));
-                }
-
-                if (t.isMechToteFeeder()) {
-                    mechHas.add("" + getResources().getString(R.string.txt_tote_feeder));
-                } else {
-                    mechDNH.add("" + getResources().getString(R.string.txt_tote_feeder));
-                }
-
-                if (t.isMechContainerFlipper()) {
-                    mechHas.add("" + getResources().getString(R.string.txt_container_flipper));
-                } else {
-                    mechDNH.add("" + getResources().getString(R.string.txt_container_flipper));
+                    mechDNH.add("" + getResources().getString(R.string.team_report_no_step_remover));
                 }
 
                 for (int m = 0; m < mechHas.size(); m++) {
@@ -510,98 +525,12 @@ public class SendFragment extends Fragment {
                     }
                 }
 
-                //auto
-                report += DOUBLE_LINE_BREAK + getResources().getString(R.string.txt_auto);
-
-                report += DOUBLE_LINE_BREAK + getResources().getString(R.string.txt_auto_progs) + SPACE + t.getAutoProgs();
-
-                if (t.isAutoMove()) {
-                    report += LINE_BREAK + getResources().getString(R.string.txt_auto_can_move_az);
-                } else {
-                    report += LINE_BREAK + getResources().getString(R.string.txt_auto_can_not_move_az);
-                }
-
-                report += LINE_BREAK + getResources().getString(R.string.txt_auto_totes) + SPACE + t.getAutoTotes();
-
-                report += LINE_BREAK + getResources().getString(R.string.txt_auto_conatiners) + SPACE + t.getAutoContainers();
-
-                if (t.isAutoMoveTote()) {
-                    report += LINE_BREAK + getResources().getString(R.string.txt_auto_can_move_tote_stack);
-                } else {
-                    report += LINE_BREAK + getResources().getString(R.string.txt_auto_can_not_move_tote_stack);
-                }
-
-                if (t.getAutoPos() != 0) {
-                    report += LINE_BREAK + getResources().getString(R.string.txt_auto_pos) + SPACE + t.getAutoPos();
-                }else{
-                    report += LINE_BREAK + getResources().getString(R.string.txt_auto_pos) + SPACE + "Any";
-                }
-
-
                 //teleop
                 report += DOUBLE_LINE_BREAK + getResources().getString(R.string.txt_tele);
 
                 report += DOUBLE_LINE_BREAK + getResources().getString(R.string.txt_tele_totes) + SPACE + t.getTeleTotes();
                 report += LINE_BREAK + getResources().getString(R.string.txt_tele_conatiner) + SPACE + t.getTeleContainer();
-                report += LINE_BREAK + getResources().getString(R.string.txt_tele_litter) + SPACE + t.getTeleContainer();
                 report += LINE_BREAK + getResources().getString(R.string.txt_tele_tote_stack) + SPACE + t.getTelePlaceTotes();
-                report += LINE_BREAK + getResources().getString(R.string.txt_tele_carry_totes) + SPACE + t.getTeleCarryTotes();
-                report += LINE_BREAK + getResources().getString(R.string.txt_tele_coop_set) + SPACE + t.getTeleCoopSet();
-
-                if (t.isTeleCoopStack()) {
-                    report += LINE_BREAK + getResources().getString(R.string.txt_tele_can_place_bin);
-                } else {
-                    report += LINE_BREAK + getResources().getString(R.string.txt_tele_can_not_place_bin);
-                }
-
-                report += LINE_BREAK + getResources().getString(R.string.txt_tele_stacking_direction) + SPACE;
-                switch (t.getTeleStackingDirection()){
-                    case (0):
-                         report +=  getResources().getString(R.string.tele_does_not_stack);
-                        break;
-                    case (1):
-                         report +=  getResources().getString(R.string.tele_plat_long);
-                        break;
-                    case (2):
-                        report +=  getResources().getString(R.string.tele_plat_short);
-                        break;
-                }
-
-                if (t.getTeleHumanStation() != 0) {
-                    report += LINE_BREAK + getResources().getString(R.string.txt_tele_human_station) + SPACE + t.getTeleHumanStation();
-                }else{
-                    report += LINE_BREAK + getResources().getString(R.string.txt_tele_human_station) + SPACE + "Any";
-                }
-                if(t.getTelePlatform() != 0) {
-                    report += LINE_BREAK + getResources().getString(R.string.txt_tele_platfrom) + SPACE + t.getTelePlatform();
-                }else{
-                    report += LINE_BREAK + getResources().getString(R.string.txt_tele_platfrom) + SPACE + "Any";
-                }
-
-
-                if (t.isTeleFlipTote()) {
-                    report += LINE_BREAK + getResources().getString(R.string.txt_tele_can_flip_totes);
-                } else {
-                    report += LINE_BREAK + getResources().getString(R.string.txt_tele_can_not_flip_totes);
-                }
-
-                if (t.isTeleRemoveContainer()) {
-                    report += LINE_BREAK + getResources().getString(R.string.txt_tele_can_remove_container);
-                } else {
-                    report += LINE_BREAK + getResources().getString(R.string.txt_tele_can_not_remove_conatiner);
-                }
-
-                if (t.isTelePickUpLitter()) {
-                    report += LINE_BREAK + getResources().getString(R.string.txt_tele_can_pick_litter);
-                } else {
-                    report += LINE_BREAK + getResources().getString(R.string.txt_tele_can_not_pick_litter);
-                }
-
-                if (t.isTeleMoveLitter()) {
-                    report += LINE_BREAK + getResources().getString(R.string.txt_tele_can_move_litter);
-                } else {
-                    report += LINE_BREAK + getResources().getString(R.string.txt_tele_can_not_move_litter);
-                }
 
                 //comments
                 report += DOUBLE_LINE_BREAK +getResources().getString(R.string.txt_comments) + SPACE + t.getComments();
@@ -609,15 +538,13 @@ public class SendFragment extends Fragment {
             } catch (ArrayIndexOutOfBoundsException aiobe) {
 
             }
-        //}
-
 
         return report;
     }
 
     private void teamNotFound(int num){
         Vibrator vibrator = (Vibrator) getActivity().getApplicationContext().getSystemService(getActivity().getApplicationContext().VIBRATOR_SERVICE);
-        // Vibrate for 500 milliseconds
+        // Vibrate for 1 second
         vibrator.vibrate(1000);
         Toast.makeText(getActivity().getApplicationContext(), "Team " + num +" not found",Toast.LENGTH_SHORT).show();
     }

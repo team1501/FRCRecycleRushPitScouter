@@ -3,7 +3,7 @@
 
     <string name="app_name">FRC Recycle Rush Pit Scouter</string>
     <string name="team_number_hint">Enter a team number.</string>
-    <string name="auto">AUTO &lt;----Push me!</string>
+    <string name="auto">AUTO</string>
     <string name="teleop">TELEOP</string>
     <string name="coopertition">COOPERTITION</string>
     <string name="team_info">TEAM INFO</string>
@@ -83,8 +83,10 @@
     <string name="sample_hide_log">Hide Log</string>
     <string name="app_name_short">RR Pit Scouter</string>
     <string name="team_report_text">Send Team Report</string>
-    <string name="team_report_litter_inserter">Has litter inserter.</string>
-    <string name="team_report_no_litter_inserter">Does not have litter inserter.</string>
+    <string name="team_report_step_remover">Has step remover.</string>
+    <string name="team_report_no_step_remover">Does not have step remover.</string>
+    <string name="team_report_coop_stack">Can place bin on 3rd or 4th level of Coop set.</string>
+    <string name="team_report_no_coop_stack">Can NOT place bin on 3rd or 4th level of Coop set.</string>
     <string name="team_report_litter_pusher">Has litter pusher.</string>
     <string name="team_report_no_litter_pusher">Does not have litter pusher.</string>
     <string name="txt_match_num">Enter match number.</string>
@@ -99,12 +101,12 @@
     <string name="txt_auto_progs"># of Auto Programs:</string>
     <string name="txt_auto_can_move_az">Can move to auto zone.</string>
     <string name="txt_auto_can_not_move_az">Can NOT move to AZ.</string>
-    <string name="txt_auto">AUTO</string>
     <string name="txt_auto_totes"># of totes able to move to auto zone:</string>
     <string name="txt_auto_conatiners"># of containers able to move to auto zone:</string>
     <string name="txt_auto_can_move_tote_stack">Can move tote stack to auto zone.</string>
     <string name="txt_auto_can_not_move_tote_stack">Can NOT move tote stack to auto zone.</string>
     <string name="txt_auto_pos">Preferred Auto Position:</string>
+    <string name="txt_coop">COOP</string>
     <string name="txt_tele">TELEOP</string>
     <string name="txt_tele_totes">Tote stack height:</string>
     <string name="txt_tele_conatiner">Container stack height:</string>

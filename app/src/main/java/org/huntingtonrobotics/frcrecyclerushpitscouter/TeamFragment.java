@@ -2,6 +2,7 @@ package org.huntingtonrobotics.frcrecyclerushpitscouter;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
@@ -31,6 +32,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,6 +57,12 @@ public class TeamFragment extends Fragment {
     private ImageButton mPhotoSaveButton;
     private ImageView mPhotoView;
     private ImageView mPhotoSaveView;
+
+    private RadioGroup mLayout;
+    private ScrollView mAutoSV;
+    private ScrollView mCoopSV;
+    private ScrollView mMechSV;
+    private ScrollView mTeleSV;
 
     //mech
     private CheckBox mMechLitterInserter;
@@ -162,10 +170,7 @@ public class TeamFragment extends Fragment {
         });
 
 
-        //Scout name edit text
-        mScoutName = (EditText)v.findViewById(R.id.scoutName);
-        mScoutName.setText(""+mTeam.getScoutName());
-        mScoutName.setEnabled(false);
+
 
         //photo button
         mPhotoButton = (ImageButton)v.findViewById(R.id.team_imageButton);
@@ -221,89 +226,79 @@ public class TeamFragment extends Fragment {
             mPhotoButton.setEnabled(false);
         }
 
+        //change layout
+
+        mAutoSV = (ScrollView)v.findViewById(R.id.autoScrollView);
+        mCoopSV = (ScrollView)v.findViewById(R.id.coopScrollView);
+        mMechSV = (ScrollView)v.findViewById(R.id.mechScrollView);
+        mTeleSV = (ScrollView)v.findViewById(R.id.teleScrollView);
+
+        mLayout = (RadioGroup)v.findViewById(R.id.layoutSelecter);
+        mLayout.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // find which radio button is selected
+
+                switch (checkedId) {
+
+                    case R.id.autoLayout:
+                        mAutoSV.setVisibility(View.VISIBLE);
+                        mCoopSV.setVisibility(View.GONE);
+                        mMechSV.setVisibility(View.GONE);
+                        mTeleSV.setVisibility(View.GONE);
+                        break;
+                    case R.id.coopLayout:
+                        mAutoSV.setVisibility(View.GONE);
+                        mCoopSV.setVisibility(View.VISIBLE);
+                        mMechSV.setVisibility(View.GONE);
+                        mTeleSV.setVisibility(View.GONE);
+                        break;
+                    case R.id.mechLayout:
+                        mAutoSV.setVisibility(View.GONE);
+                        mCoopSV.setVisibility(View.GONE);
+                        mMechSV.setVisibility(View.VISIBLE);
+                        mTeleSV.setVisibility(View.GONE);
+                        break;
+                    case R.id.teleLayout:
+                        mAutoSV.setVisibility(View.GONE);
+                        mCoopSV.setVisibility(View.GONE);
+                        mMechSV.setVisibility(View.GONE);
+                        mTeleSV.setVisibility(View.VISIBLE);
+                        break;
+                }
+            }
+
+        });
+
+
         //MECH VIEW
 
-        mMechLitterInserter = (CheckBox)v.findViewById(R.id.mechLitterInserter);
-        mMechLitterInserter.setChecked(mTeam.isMechLitterInserter());
-        mMechLitterInserter.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        mMechContainerStepRemover = (CheckBox)v.findViewById(R.id.stepRemover);
+        mMechContainerStepRemover.setChecked(mTeam.isMechContainerStepRemover());
+        mMechContainerStepRemover.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    mTeam.setMechLitterInserter(true);
+                    mTeam.setMechContainerStepRemover(true);
                 } else if (!isChecked) {
-                    mTeam.setMechLitterInserter(false);
+                    mTeam.setMechContainerStepRemover(false);
                 } else {
 
                 }
             }
         });
-
-
-        mMechLitterPusher = (CheckBox)v.findViewById(R.id.mechLitterPusher);
-        mMechLitterPusher.setChecked(mTeam.isMechLitterPusher());
-        mMechLitterPusher.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    mTeam.setMechLitterPusher(true);
-                } else if (!isChecked) {
-                    mTeam.setMechLitterPusher(false);
-                } else {
-
-                }
-            }
-        });
-
-
-        mMechToteFeeder = (CheckBox)v.findViewById(R.id.mechToteFeeder);
-        mMechToteFeeder.setChecked(mTeam.isMechToteFeeder());
-        mMechToteFeeder.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    mTeam.setMechToteFeeder(true);
-                } else if (!isChecked) {
-                    mTeam.setMechToteFeeder(false);
-                } else {
-
-                }
-            }
-        });
-
-
-        mMechContainerFlipper = (CheckBox)v.findViewById(R.id.mechContainerFlipper);
-        mMechContainerFlipper.setChecked(mTeam.isMechContainerFlipper());
-        mMechContainerFlipper.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    mTeam.setMechContainerFlipper(true);
-                } else if (!isChecked) {
-                    mTeam.setMechContainerFlipper(false);
-                } else {
-
-                }
-            }
-        });
-
-
-
 
         //PUT AUTO VIEWS HERE
         mAuto = (TextView)v.findViewById(R.id.auto);
         mAuto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!(mAutoField.isShown())){
-                    mAutoField.setVisibility(View.VISIBLE);
-                }else{
-                    mAutoField.setVisibility(View.GONE);
-                }
+                Toast.makeText(getActivity().getApplicationContext(),"Ouch! That hurt!",Toast.LENGTH_SHORT).show();
             }
         });
 
         mAutoField = (ImageView)v.findViewById(R.id.autoImageViewField);
-        mAutoField.setVisibility(View.GONE);
 
 
         mAutoProgs = (EditText)v.findViewById(R.id.auto_programs);
@@ -418,22 +413,6 @@ public class TeamFragment extends Fragment {
         });
 
 
-        mAutoMoveTote = (CheckBox)v.findViewById(R.id.auto_move_tote_stack);
-        mAutoMoveTote.setChecked(mTeam.isAutoMoveTote());
-        mAutoMoveTote.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if(isChecked){
-                    mTeam.setAutoMoveTote(true);
-                }else if (!isChecked){
-                    mTeam.setAutoMoveTote(false);
-                }else{
-
-                }
-            }
-        });
-
-
         mAutoPos = (RadioGroup)v.findViewById(R.id.startPosRadioGroup);
         int ap = mTeam.getAutoPos();
         switch (ap) {
@@ -477,26 +456,6 @@ public class TeamFragment extends Fragment {
 
 
         //Tele
-        mTele = (TextView)v.findViewById(R.id.tele);
-        mTele.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!(mTeleField.isShown())){
-                    mTeleField.setVisibility(View.VISIBLE);
-                }else{
-                    mTeleField.setVisibility(View.GONE);
-                }
-            }
-        });
-
-
-        mTeleField = (ImageView)v.findViewById(R.id.teleImageViewField);
-        mTeleField.setVisibility(View.GONE);
-
-
-
-
-
         mTeleTotes = (EditText)v.findViewById(R.id.teleStackTotes);
         //set filter to only allow numbers 0-6
         mTeleTotes.setFilters(new InputFilter[]{ new InputFilterMinMax(0, 6,getActivity().getApplicationContext())});
@@ -562,40 +521,6 @@ public class TeamFragment extends Fragment {
             }
         });
 
-
-        mTelePlaceLitter = (EditText)v.findViewById(R.id.telePlaceLitter);
-        //set filter to only allow numbers 0-6
-        mTelePlaceLitter.setFilters(new InputFilter[]{ new InputFilterMinMax(0, 6,getActivity().getApplicationContext())});
-        mTelePlaceLitter.setText(""+mTeam.getTelePlaceLitter());
-        mTelePlaceLitter.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                //left blank
-            }
-
-            //user changes text of auto progs
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                //use try catch in case nothing is in text view
-                try {
-                    //saves text after converting CS to integer
-                    mTeam.setTelePlaceLitter(Integer.parseInt(s.toString()));
-                } catch (Exception e) {
-                    //exception is thrown so setAutoContainers to 0 so program can carry on
-                    Log.d(TAG, "ERROR: " + e);
-                    mTeam.setTelePlaceLitter(0);
-                }
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                //also left blank
-            }
-        });
-
-
         mTelePlaceTotes = (EditText)v.findViewById(R.id.telePlaceToteStack);
         //set filter to only allow numbers 0-6
         mTelePlaceTotes.setFilters(new InputFilter[]{ new InputFilterMinMax(0, 6,getActivity().getApplicationContext())});
@@ -618,39 +543,6 @@ public class TeamFragment extends Fragment {
                     //exception is thrown so setAutoContainers to 0 so program can carry on
                     Log.d(TAG, "ERROR: " + e);
                     mTeam.setTelePlaceTotes(0);
-                }
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                //also left blank
-            }
-        });
-
-
-        mTeleCarryTotes = (EditText)v.findViewById(R.id.teleCarryTotes);
-        //set filter to only allow numbers 0-6
-        mTeleCarryTotes.setFilters(new InputFilter[]{ new InputFilterMinMax(0, 6,getActivity().getApplicationContext())});
-        mTeleCarryTotes.setText(""+mTeam.getTeleCarryTotes());
-        mTeleCarryTotes.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                //left blank
-            }
-
-            //user changes text of auto progs
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                //use try catch in case nothing is in text view
-                try {
-                    //saves text after converting CS to integer
-                    mTeam.setTeleCarryTotes(Integer.parseInt(s.toString()));
-                } catch (Exception e) {
-                    //exception is thrown so setAutoContainers to 0 so program can carry on
-                    Log.d(TAG, "ERROR: " + e);
-                    mTeam.setTeleCarryTotes(0);
                 }
 
             }
@@ -704,172 +596,6 @@ public class TeamFragment extends Fragment {
                     mTeam.setTeleCoopStack(true);
                 }else if (!isChecked){
                     mTeam.setTeleCoopStack(false);
-                }else{
-
-                }
-            }
-        });
-
-
-        mTeleStackingDirection = (RadioGroup)v.findViewById(R.id.stackingDirectionRadioGroup);
-        switch (mTeam.getTeleStackingDirection()) {
-            case 1:
-                mTeleStackingDirection.check(R.id.teleDirectionL);
-                break;
-            case 2:
-                mTeleStackingDirection.check(R.id.teleDirectionS);
-                break;
-            case 0:
-                mTeleStackingDirection.check(R.id.teleDNS);
-                break;
-        }
-        mTeleStackingDirection.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                // find which radio button is selected
-
-                switch (checkedId) {
-                    case R.id.teleDirectionL:
-                        mTeam.setTeleStackingDirection(1);
-                        break;
-                    case R.id.teleDirectionS:
-                        mTeam.setTeleStackingDirection(2);
-                        break;
-                    case R.id.teleDNS:
-                        mTeam.setTeleStackingDirection(0);
-                        break;
-
-                }
-            }
-
-        });
-
-
-        mTelePlatform = (RadioGroup)v.findViewById(R.id.platformRadioGroup);
-        switch (mTeam.getTelePlatform()) {
-            case 1:
-                mTelePlatform.check(R.id.telePlat1);
-                break;
-            case 2:
-                mTelePlatform.check(R.id.telePlat2);
-                break;
-            case 0:
-                mTelePlatform.check(R.id.telePlatA);
-                break;
-        }
-        mTelePlatform.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                // find which radio button is selected
-
-                switch (checkedId) {
-                    case R.id.telePlat1:
-                        mTeam.setTelePlatform(1);
-                        break;
-                    case R.id.telePlat2:
-                        mTeam.setTelePlatform(2);
-                        break;
-                    case R.id.telePlatA:
-                        mTeam.setTelePlatform(0);
-                        break;
-
-                }
-            }
-
-        });
-
-
-        mTeleHumanStation = (RadioGroup)v.findViewById(R.id.humanStationRadioGroup);
-        switch (mTeam.getTeleHumanStation()) {
-            case 1:
-                mTeleHumanStation.check(R.id.teleHumanStation1);
-                break;
-            case 2:
-                mTeleHumanStation.check(R.id.teleHumanStation2);
-                break;
-            case 0:
-                mTeleHumanStation.check(R.id.teleHumanStationA);
-                break;
-        }
-        mTeleHumanStation.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                // find which radio button is selected
-
-                switch (checkedId) {
-                    case R.id.teleHumanStation1:
-                        mTeam.setTeleHumanStation(1);
-                        break;
-                    case R.id.teleHumanStation2:
-                        mTeam.setTeleHumanStation(2);
-                        break;
-                    case R.id.teleHumanStationA:
-                        mTeam.setTeleHumanStation(0);
-                        break;
-
-                }
-            }
-
-        });
-
-        mTeleFlipTote = (CheckBox)v.findViewById(R.id.teleFlipTotes);
-        mTeleFlipTote.setChecked(mTeam.isTeleFlipTote());
-        mTeleFlipTote.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if(isChecked){
-                    mTeam.setTeleFlipTote(true);
-                }else if (!isChecked){
-                    mTeam.setTeleFlipTote(false);
-                }else{
-
-                }
-            }
-        });
-
-        mTeleRemoveContainer = (CheckBox)v.findViewById(R.id.teleRemoveContainer);
-        mTeleRemoveContainer.setChecked(mTeam.isTeleRemoveContainer());
-        mTeleRemoveContainer.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if(isChecked){
-                    mTeam.setTeleRemoveContainer(true);
-                }else if (!isChecked){
-                    mTeam.setTeleRemoveContainer(false);
-                }else{
-
-                }
-            }
-        });
-
-        mTelePickUpLitter = (CheckBox)v.findViewById(R.id.telePickUpLitter);
-        mTelePickUpLitter.setChecked(mTeam.isTelePickUpLitter());
-        mTelePickUpLitter.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if(isChecked){
-                    mTeam.setTelePickUpLitter(true);
-                }else if (!isChecked){
-                    mTeam.setTelePickUpLitter(false);
-                }else{
-
-                }
-            }
-        });
-
-
-        mTeleMoveLitter = (CheckBox)v.findViewById(R.id.teleMoveLitter);
-        mTeleMoveLitter.setChecked(mTeam.isTeleMoveLitter());
-        mTeleMoveLitter.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if(isChecked){
-                    mTeam.setTeleMoveLitter(true);
-                }else if (!isChecked){
-                    mTeam.setTeleMoveLitter(false);
                 }else{
 
                 }
@@ -939,9 +665,6 @@ public class TeamFragment extends Fragment {
     @Override
     public void onStop(){
         super.onStop();
-        //if (mPhotoView!=null) {
-        //    PictureUtils.cleanImageView(mPhotoView);
-        //}
         TeamLab.get(getActivity()).saveTeams();
     }
     //---unload the image
