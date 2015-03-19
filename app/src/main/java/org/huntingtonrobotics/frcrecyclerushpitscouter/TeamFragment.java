@@ -17,6 +17,7 @@ import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NavUtils;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
@@ -104,6 +105,8 @@ public class TeamFragment extends Fragment {
     private CheckBox mTelePickUpLitter;
     private CheckBox mTeleMoveLitter;
 
+    private RadioGroup mTeleFeed;
+
     private EditText mComments;
     private Drawable drawable;
 
@@ -117,6 +120,8 @@ public class TeamFragment extends Fragment {
         mTeam = TeamLab.get(getActivity()).getTeam(teamId);
         this.getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         setHasOptionsMenu(true);
+
+
     }
     //---fragment is created
 
@@ -128,7 +133,6 @@ public class TeamFragment extends Fragment {
         final View v = inflater.inflate(R.layout.fragment_team, parent, false);
 
         //turn on Up button
-
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
             //no parent no carret
             if (NavUtils.getParentActivityName(getActivity())==null) {
@@ -140,7 +144,10 @@ public class TeamFragment extends Fragment {
 
         //Team Number Edit Text
         mTeamNum = (EditText)v.findViewById(R.id.teamNum);
-        mTeamNum.setText(""+mTeam.getTeamNum());
+        if(mTeam.getTeamNum() != 0) {
+            mTeamNum.setText("" + mTeam.getTeamNum());
+        }
+
         mTeamNum.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -300,9 +307,10 @@ public class TeamFragment extends Fragment {
 
         mAutoField = (ImageView)v.findViewById(R.id.autoImageViewField);
 
-
         mAutoProgs = (EditText)v.findViewById(R.id.auto_programs);
-        mAutoProgs.setText(""+mTeam.getAutoProgs());
+        if (mTeam.getAutoProgs() != 0) {
+            mAutoProgs.setText("" + mTeam.getAutoProgs());
+        }
         mAutoProgs.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -350,7 +358,9 @@ public class TeamFragment extends Fragment {
         mAutoTotes = (EditText)v.findViewById(R.id.auto_totes);
         //set filter to only allow numbers 0-3
         mAutoTotes.setFilters(new InputFilter[]{new InputFilterMinMax(0, 3, getActivity().getApplicationContext())});
-        mAutoTotes.setText(""+mTeam.getAutoTotes());
+        if (mTeam.getAutoTotes() != 0) {
+            mAutoTotes.setText("" + mTeam.getAutoTotes());
+        }
         mAutoTotes.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -383,7 +393,9 @@ public class TeamFragment extends Fragment {
         mAutoContainers = (EditText)v.findViewById(R.id.auto_containers);
         //set filter to only allow numbers 0-3
         mAutoContainers.setFilters(new InputFilter[]{ new InputFilterMinMax(0, 3,getActivity().getApplicationContext())});
-        mAutoContainers.setText(""+mTeam.getAutoContainers());
+        if (mTeam.getAutoContainers() != 0) {
+            mAutoContainers.setText("" + mTeam.getAutoContainers());
+        }
         mAutoContainers.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -459,7 +471,9 @@ public class TeamFragment extends Fragment {
         mTeleTotes = (EditText)v.findViewById(R.id.teleStackTotes);
         //set filter to only allow numbers 0-6
         mTeleTotes.setFilters(new InputFilter[]{ new InputFilterMinMax(0, 6,getActivity().getApplicationContext())});
-        mTeleTotes.setText(""+mTeam.getTeleTotes());
+        if (mTeam.getTeleTotes() != 0) {
+            mTeleTotes.setText("" + mTeam.getTeleTotes());
+        }
         mTeleTotes.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -492,7 +506,9 @@ public class TeamFragment extends Fragment {
         mTeleContainer = (EditText)v.findViewById(R.id.teleStackContainer);
         //set filter to only allow numbers 0-6
         mTeleContainer.setFilters(new InputFilter[]{ new InputFilterMinMax(0, 6,getActivity().getApplicationContext())});
-        mTeleContainer.setText(""+mTeam.getTeleContainer());
+        if (mTeam.getTeleContainer() != 0) {
+            mTeleContainer.setText("" + mTeam.getTeleContainer());
+        }
         mTeleContainer.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -524,7 +540,9 @@ public class TeamFragment extends Fragment {
         mTelePlaceTotes = (EditText)v.findViewById(R.id.telePlaceToteStack);
         //set filter to only allow numbers 0-6
         mTelePlaceTotes.setFilters(new InputFilter[]{ new InputFilterMinMax(0, 6,getActivity().getApplicationContext())});
-        mTelePlaceTotes.setText(""+mTeam.getTelePlaceTotes());
+        if (mTeam.getTelePlaceTotes() != 0) {
+            mTelePlaceTotes.setText("" + mTeam.getTelePlaceTotes());
+        }
         mTelePlaceTotes.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -557,7 +575,9 @@ public class TeamFragment extends Fragment {
         mTeleCoopSet = (EditText)v.findViewById(R.id.teleCoopSet);
         //set filter to only allow numbers 0-3
         mTeleCoopSet.setFilters(new InputFilter[]{ new InputFilterMinMax(0, 3,getActivity().getApplicationContext())});
-        mTeleCoopSet.setText(""+mTeam.getTeleCoopSet());
+        if (mTeam.getTeleCoopSet() != 0) {
+            mTeleCoopSet.setText("" + mTeam.getTeleCoopSet());
+        }
         mTeleCoopSet.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -602,11 +622,48 @@ public class TeamFragment extends Fragment {
             }
         });
 
-        
+        mTeleFeed = (RadioGroup)v.findViewById(R.id.feedRadioGroup);
+        int tf = mTeam.getTeleFeed();
+        switch (tf) {
+            case (1):
+                mTeleFeed.check(R.id.feedPos1);
+                break;
+            case (2):
+                mTeleFeed.check(R.id.feedPos2);
+                break;
+            case (0):
+                mTeleFeed.check(R.id.feedPosB);
+                break;
+        }
+
+        mTeleFeed.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // find which radio button is selected
+
+                switch (checkedId) {
+                    case R.id.feedPos1:
+                        mTeam.setTeleFeed(1);
+                        break;
+                    case R.id.feedPos2:
+                        mTeam.setTeleFeed(2);
+                        break;
+                    case R.id.feedPosB:
+                        mTeam.setTeleFeed(0);
+                        break;
+                }
+            }
+
+        });
+
         //comments
 
         mComments = (EditText)v.findViewById(R.id.comments);
-        mComments.setText(""+mTeam.getComments());
+        if (mTeam.getComments() != null) {
+            mComments.setText("" + mTeam.getComments());
+        }
+
+
         mComments.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

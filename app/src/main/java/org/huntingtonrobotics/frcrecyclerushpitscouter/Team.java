@@ -51,6 +51,7 @@ public class Team {
     private static final String JSON_TELE_REMOVE_CONTAINER= "rc";
     private static final String JSON_TELE_PICK_UP_LITTER = "tpul";
     private static final String JSON_TELE_MOVE_LITTER="tml";
+    private static final String JSON_TELE_FEED="tf";
 
     private static final String JSON_COMMENTS="c";
 
@@ -96,6 +97,7 @@ public class Team {
     private boolean mTeleRemoveContainer;
     private boolean mTelePickUpLitter;
     private boolean mTeleMoveLitter;
+    private int mTeleFeed;
 
     private String mComments;
     //Constructor for Team
@@ -215,6 +217,9 @@ public class Team {
         if (json.has(JSON_TELE_MOVE_LITTER)){
             mTeleMoveLitter = json.getBoolean(JSON_TELE_MOVE_LITTER);
         }
+        if (json.has(JSON_TELE_FEED)){
+            mTeleFeed = json.getInt(JSON_TELE_FEED);
+        }
 
         if (json.has(JSON_COMMENTS)){
             mComments = json.getString(JSON_COMMENTS);
@@ -267,6 +272,7 @@ public class Team {
         json.put(JSON_TELE_REMOVE_CONTAINER, mTeleRemoveContainer);
         json.put(JSON_TELE_PICK_UP_LITTER, mTelePickUpLitter);
         json.put(JSON_TELE_MOVE_LITTER, mTeleMoveLitter);
+        json.put(JSON_TELE_FEED, mTeleFeed);
 
         json.put(JSON_COMMENTS, mComments);
 
@@ -522,6 +528,14 @@ public class Team {
 
     public void setTeleMoveLitter(Boolean ml) {
         this.mTeleMoveLitter = ml;
+    }
+
+    public int getTeleFeed() {
+        return mTeleFeed;
+    }
+
+    public void setTeleFeed(int tf) {
+        this.mTeleFeed = tf;
     }
 
     public String getComments() {

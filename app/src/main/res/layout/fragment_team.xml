@@ -370,6 +370,41 @@
 
             </TableRow>
 
+            <TableRow
+                style="@style/TableRow">
+
+                <TextView
+                    style="@style/TextView"
+                    android:text="Can feed from:"
+                    android:layout_span="2"/>
+
+            </TableRow>
+
+            <TableRow
+                style="@style/TableRow">
+
+            <RadioGroup android:id="@+id/feedRadioGroup"
+                style="@style/RadioGroup"
+                android:layout_span="2"
+                android:layout_marginBottom="10dp">
+
+                <RadioButton android:id="@+id/feedPos1"
+                    style="@style/RadioButton"
+                    android:checked="true"
+                    android:text="Human Station"/>
+
+                <RadioButton android:id="@+id/feedPos2"
+                    style="@style/RadioButton"
+                    android:text="Landfill"/>
+
+                <RadioButton android:id="@+id/feedPosB"
+                    style="@style/RadioButton"
+                    android:text="Both"/>
+
+            </RadioGroup>
+
+        </TableRow>
+
         </TableLayout>
 
     </ScrollView>

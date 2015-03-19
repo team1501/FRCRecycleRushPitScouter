@@ -532,6 +532,14 @@ public class SendFragment extends Fragment {
                 report += LINE_BREAK + getResources().getString(R.string.txt_tele_conatiner) + SPACE + t.getTeleContainer();
                 report += LINE_BREAK + getResources().getString(R.string.txt_tele_tote_stack) + SPACE + t.getTelePlaceTotes();
 
+                if (t.getTeleFeed() == 1) {
+                    report += LINE_BREAK + "Feeds from human station.";
+                }else if (t.getTeleFeed()==2) {
+                    report += LINE_BREAK + "Feeds from landfill.";
+                }else{
+                    report += LINE_BREAK + "Feeds from both landfill and human station.";
+                }
+
                 //comments
                 report += DOUBLE_LINE_BREAK +getResources().getString(R.string.txt_comments) + SPACE + t.getComments();
 
