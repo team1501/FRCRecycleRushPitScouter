@@ -2,15 +2,16 @@
 <resources xmlns:xliff="http://schemas.android.com/apk/res-auto">
 
     <string name="app_name">FRC Recycle Rush Pit Scouter</string>
+    <string name="app_name_short">RR Pit Scouter</string>
+
+    <!-- Team Info-->
     <string name="team_number_hint">Enter a team number.</string>
+
     <string name="auto">AUTO</string>
     <string name="teleop">TELEOP</string>
     <string name="coopertition">COOPERTITION</string>
     <string name="team_info">TEAM INFO</string>
-    <string name="teams_title">Teams List</string>
-    <string name="new_team">New Team</string>
-    <string name="delete_team">Delete</string>
-    <string name="send_teams">Send Teams</string>
+
     <string name="take">Take!</string>
     <string name="auto_programs">Number of Programs:</string>
     <string name="auto_move">Can move to AZ:</string>
@@ -57,31 +58,8 @@
     <string name="tele_stack_direction">Preferred stacking direction:</string>
     <string name="tele_does_not_stack">Does not stack</string>
 
-    <!--  BluetoothChat -->
-    <string name="send">Send</string>
-    <string name="not_connected">You are not connected to a device</string>
-    <string name="bt_not_enabled_leaving">Bluetooth was not enabled. Leaving Bluetooth Chat.</string>
-    <string name="title_connecting">connecting...</string>
-    <string name="title_connected_to">connected to <xliff:g id="device_name">%1$s</xliff:g></string>
-    <string name="title_not_connected">not connected</string>
+    <!-- Report Builder-->
 
-    <!--  DeviceListActivity -->
-    <string name="scanning">scanning for devices...</string>
-    <string name="select_device">select a device to connect</string>
-    <string name="none_paired">No devices have been paired</string>
-    <string name="none_found">No devices found</string>
-    <string name="title_paired_devices">Paired Devices</string>
-    <string name="title_other_devices">Other Available Devices</string>
-    <string name="button_scan">Scan for devices</string>
-
-    <!-- Options Menu -->
-    <string name="secure_connect">Connect a device - Secure</string>
-    <string name="insecure_connect">Connect a device - Insecure</string>
-    <string name="discoverable">Make discoverable</string>
-
-    <string name="sample_show_log">Show Log</string>
-    <string name="sample_hide_log">Hide Log</string>
-    <string name="app_name_short">RR Pit Scouter</string>
     <string name="team_report_text">Send Team Report</string>
     <string name="team_report_step_remover">Has step remover.</string>
     <string name="team_report_no_step_remover">Does not have step remover.</string>
@@ -144,12 +122,49 @@
     <string name="txt_tele_coop_set">Coop set height:</string>
     <string name="txt_tele_stacking_direction">Preferred stacking direction:</string>
 
+    <!--Advanced-->
+
+    <!--  BluetoothChat -->
+    <string name="send">Send</string>
+    <string name="not_connected">You are not connected to a device</string>
+    <string name="bt_not_enabled_leaving">Bluetooth was not enabled. Leaving Bluetooth Chat.</string>
+    <string name="title_connecting">connecting...</string>
+    <string name="title_connected_to">connected to <xliff:g id="device_name">%1$s</xliff:g></string>
+    <string name="title_not_connected">not connected</string>
+
+    <!--  DeviceListActivity -->
+    <string name="scanning">scanning for devices...</string>
+    <string name="select_device">select a device to connect</string>
+    <string name="none_paired">No devices have been paired</string>
+    <string name="none_found">No devices found</string>
+    <string name="title_paired_devices">Paired Devices</string>
+    <string name="title_other_devices">Other Available Devices</string>
+    <string name="button_scan">Scan for devices</string>
+
+    <!--Action Bar-->
+
+    <string name="teams_title">Teams List</string>
+    <string name="new_team">New Team</string>
+    <string name="delete_team">Delete</string>
+    <string name="send_teams">Send Teams</string>
+    <string name="help">Click Me For Help!</string>
+
+    <!-- Bluetooth Options Menu -->
+
+    <string name="secure_connect">Connect a device - Secure</string>
+    <string name="insecure_connect">Connect a device - Insecure</string>
+    <string name="discoverable">Make discoverable</string>
+
+    <string name="sample_show_log">Show Log</string>
+    <string name="sample_hide_log">Hide Log</string>
+
+
+
     <string name="json">JSON</string>
     <string name="json_send">Send JSON String</string>
     <string name="json_comp">Enter Competition Name.</string>
     <string name="json_load">Load JSON String</string>
     <string name="json_string">Enter JSON string here.</string>
-    <string name="help">Click Me For Help!</string>
 
 
 </resources>

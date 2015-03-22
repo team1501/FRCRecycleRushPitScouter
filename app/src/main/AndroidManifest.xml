@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="org.huntingtonrobotics.frcrecyclerushpitscouter"
-    android:versionCode="3"
-    android:versionName="1.1"
+    android:versionCode="4"
+    android:versionName="1.1.1"
     >
 
     <uses-permission android:name="android.permission.BLUETOOTH"/>
@@ -33,43 +33,43 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name_short"
         android:theme="@style/AppTheme" >
-        <activity android:name=".TeamListActivity">
+        <activity android:name=".ADVANCED.activities.TeamListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".TeamPagerActivity"
+            android:name=".ADVANCED.activities.TeamPagerActivity"
             android:label="@string/app_name" >
             <meta-data android:name="android.support.PARENT_ACTIVITY"
-                android:value=".TeamListActivity"/>
+                android:value=".ADVANCED.activities.TeamListActivity"/>
         </activity>
-        <activity android:name=".RobotCameraActivity"
+        <activity android:name=".ADVANCED.robotPhoto.RobotCameraActivity"
             android:exported="true"
             android:screenOrientation="landscape"
             android:label="@string/app_name"
             ></activity>
         <activity
-            android:name=".SendActivity"
+            android:name=".ADVANCED.activities.SendActivity"
             android:label="@string/app_name"
             android:configChanges="orientation|keyboardHidden">
 
             <meta-data android:name="android.support.PARENT_ACTIVITY"
-                android:value=".TeamListActivity"/>
+                android:value=".ADVANCED.activities.TeamListActivity"/>
         </activity>
         <activity
-            android:name=".bluetoothchat.BluetoothMainActivity"
+            android:name=".ADVANCED.bluetoothChat.BluetoothMainActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/app_name">
         <meta-data android:name="android.support.PARENT_ACTIVITY"
-            android:value=".SendActivity"/>
+            android:value=".ADVANCED.activities.SendActivity"/>
 
         </activity>
 
         <activity
 
-            android:name=".bluetoothchat.DeviceListActivity"
+            android:name=".ADVANCED.bluetoothChat.DeviceListActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/select_device"
             android:theme="@android:style/Theme.Light"/>

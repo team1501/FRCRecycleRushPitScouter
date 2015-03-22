@@ -89,7 +89,7 @@ MERGED from com.android.support:support-v4:21.0.3:16:5
 		ADDED from AndroidManifest.xml:33:9
 	android:theme
 		ADDED from AndroidManifest.xml:35:9
-activity#org.huntingtonrobotics.frcrecyclerushpitscouter.TeamListActivity
+activity#ADVANCED.activities.TeamListActivity
 ADDED from AndroidManifest.xml:36:9
 	android:name
 		ADDED from AndroidManifest.xml:36:19
@@ -103,7 +103,7 @@ category#android.intent.category.LAUNCHER
 ADDED from AndroidManifest.xml:39:17
 	android:name
 		ADDED from AndroidManifest.xml:39:27
-activity#org.huntingtonrobotics.frcrecyclerushpitscouter.TeamPagerActivity
+activity#ADVANCED.activities.TeamPagerActivity
 ADDED from AndroidManifest.xml:42:9
 	android:label
 		ADDED from AndroidManifest.xml:44:13
@@ -115,7 +115,7 @@ ADDED from AndroidManifest.xml:45:13
 		ADDED from AndroidManifest.xml:46:17
 	android:name
 		ADDED from AndroidManifest.xml:45:24
-activity#org.huntingtonrobotics.frcrecyclerushpitscouter.RobotCameraActivity
+activity#ADVANCED.robotPhoto.RobotCameraActivity
 ADDED from AndroidManifest.xml:48:9
 	android:screenOrientation
 		ADDED from AndroidManifest.xml:50:13
@@ -125,7 +125,7 @@ ADDED from AndroidManifest.xml:48:9
 		ADDED from AndroidManifest.xml:49:13
 	android:name
 		ADDED from AndroidManifest.xml:48:19
-activity#org.huntingtonrobotics.frcrecyclerushpitscouter.SendActivity
+activity#ADVANCED.activities.SendActivity
 ADDED from AndroidManifest.xml:53:9
 	android:label
 		ADDED from AndroidManifest.xml:55:13

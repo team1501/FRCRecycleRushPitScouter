@@ -28,7 +28,7 @@
 
         <fragment
             android:id="@+id/log_fragment"
-            android:name="org.huntingtonrobotics.frcrecyclerushpitscouter.common.logger.LogFragment"
+            android:name="org.huntingtonrobotics.frcrecyclerushpitscouter.ADVANCED.bluetoothCommon.logger.LogFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
