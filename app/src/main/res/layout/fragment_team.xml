@@ -288,6 +288,20 @@
 
             </TableRow>
 
+            <TableRow
+                style="@style/TableRow">
+
+                <TextView
+                    style="@style/TextView"
+                    android:text="Robot Weight:"/>
+
+                <EditText android:id="@+id/weight"
+                    style="@style/EditText"
+                    android:inputType="numberDecimal"
+                    />
+
+            </TableRow>
+
         </TableLayout>
 
     </ScrollView>
@@ -404,6 +418,37 @@
             </RadioGroup>
 
         </TableRow>
+
+            <TableRow
+                style="@style/TableRow">
+
+                <TextView
+                    style="@style/TextView"
+                    android:text="Prefers to feed from:"
+                    android:layout_span="2"/>
+
+            </TableRow>
+
+            <TableRow
+                style="@style/TableRow">
+
+                <RadioGroup android:id="@+id/prefFeedRadioGroup"
+                    style="@style/RadioGroup"
+                    android:layout_span="2"
+                    android:layout_marginBottom="10dp">
+
+                    <RadioButton android:id="@+id/prefFeedPos1"
+                        style="@style/RadioButton"
+                        android:checked="true"
+                        android:text="Human Station"/>
+
+                    <RadioButton android:id="@+id/prefFeedPos2"
+                        style="@style/RadioButton"
+                        android:text="Landfill"/>
+
+                </RadioGroup>
+
+            </TableRow>
 
         </TableLayout>
 

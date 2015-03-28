@@ -75,11 +75,10 @@ public class TeamFragment extends Fragment {
     //mech
     private CheckBox mMechLitterInserter;
     private CheckBox mMechLitterPusher;
-
     private CheckBox mMechToteFeeder;
-
     private CheckBox mMechContainerFlipper;
     private CheckBox mMechContainerStepRemover;
+    private EditText mMechWeight;
 
     //auto
     private TextView mAuto;
@@ -113,6 +112,7 @@ public class TeamFragment extends Fragment {
     private CheckBox mTeleMoveLitter;
 
     private RadioGroup mTeleFeed;
+    private RadioGroup mTelePrefFeed;
 
     private EditText mComments;
     private Drawable drawable;
@@ -127,8 +127,6 @@ public class TeamFragment extends Fragment {
         mTeam = TeamLab.get(getActivity()).getTeam(teamId);
         this.getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         setHasOptionsMenu(true);
-
-
     }
     //---fragment is created
 
@@ -182,9 +180,6 @@ public class TeamFragment extends Fragment {
                 //also left blank
             }
         });
-
-
-
 
         //photo button
         mPhotoButton = (ImageButton)v.findViewById(R.id.team_imageButton);
@@ -300,6 +295,34 @@ public class TeamFragment extends Fragment {
                 } else {
 
                 }
+            }
+        });
+
+        mMechWeight = (EditText)v.findViewById(R.id.weight);
+        mMechWeight.setText(""+mTeam.getMechWeight());
+        mMechWeight.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //left blank
+            }
+
+            //user changes text of auto progs
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //use try catch in case nothing is in text view
+                try {
+                    //saves text after converting CS to integer
+                    mTeam.setMechWeight(Double.parseDouble(s.toString()));
+                } catch (Exception e) {
+                    //exception is thrown so setMechWeight to 0 so program can carry on
+                    Log.d(TAG, "ERROR: " + e);
+                    mTeam.setMechWeight(0);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                //also left blank
             }
         });
 
@@ -657,6 +680,35 @@ public class TeamFragment extends Fragment {
                         break;
                     case R.id.feedPosB:
                         mTeam.setTeleFeed(0);
+                        break;
+                }
+            }
+
+        });
+
+
+        mTelePrefFeed = (RadioGroup)v.findViewById(R.id.prefFeedRadioGroup);
+        int tpf = mTeam.getTelePrefFeed();
+        switch (tpf) {
+            case (1):
+                mTelePrefFeed.check(R.id.prefFeedPos1);
+                break;
+            case (2):
+                mTelePrefFeed.check(R.id.prefFeedPos2);
+                break;
+        }
+
+        mTelePrefFeed.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // find which radio button is selected
+
+                switch (checkedId) {
+                    case R.id.prefFeedPos1:
+                        mTeam.setTelePrefFeed(1);
+                        break;
+                    case R.id.prefFeedPos2:
+                        mTeam.setTelePrefFeed(2);
                         break;
                 }
             }

@@ -31,6 +31,7 @@ import java.util.ArrayList;
  * Created by 2015H_000 on 1/15/2015.
  */
 public class SendFragment extends Fragment {
+
     private static final String LINE_BREAK = "\n";
     private static final String DOUBLE_LINE_BREAK = "\n\n";
     private static final String SPACE = " ";
@@ -75,6 +76,8 @@ public class SendFragment extends Fragment {
         this.getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         //create Serializer
         mSerializer = new FRCRecycleRushPitScouterJSONSerializer(getActivity(), FILENAME);
+        mReportBuilder = new ReportBuilder();
+
     }
 
     /*

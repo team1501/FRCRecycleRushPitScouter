@@ -28,6 +28,7 @@ public class Team {
 
     private static final String JSON_MECH_CONTAINER_FLIPPER = "mcf";
     private static final String JSON_MECH_CONTAINER_STEP_REMOVER = "mcr";
+    private static final String JSON_MECH_WEIGHT = "mw";
 
     //auto
     private static final String JSON_AUTO_PROGS = "ap";
@@ -53,6 +54,7 @@ public class Team {
     private static final String JSON_TELE_PICK_UP_LITTER = "tpul";
     private static final String JSON_TELE_MOVE_LITTER="tml";
     private static final String JSON_TELE_FEED="tf";
+    private static final String JSON_TELE_PREF_FEED="tpf";
 
     private static final String JSON_COMMENTS="c";
 
@@ -71,6 +73,7 @@ public class Team {
 
     private boolean mMechContainerFlipper;
     private boolean mMechContainerStepRemover;
+    private double mMechWeight;
 
     //auto
     private int mAutoProgs;
@@ -99,6 +102,7 @@ public class Team {
     private boolean mTelePickUpLitter;
     private boolean mTeleMoveLitter;
     private int mTeleFeed;
+    private int mTelePrefFeed;
 
     private String mComments;
     //Constructor for Team
@@ -136,16 +140,17 @@ public class Team {
         if(json.has(JSON_MECH_LITTER_PUSHER)){
             mMechLitterPusher = json.getBoolean(JSON_MECH_LITTER_PUSHER);
         }
-
-        if(json.has(JSON_MECH_TOTE_FEEDER)){
+        if(json.has(JSON_MECH_TOTE_FEEDER)) {
             mMechToteFeeder = json.getBoolean(JSON_MECH_TOTE_FEEDER);
         }
-
         if(json.has(JSON_MECH_CONTAINER_FLIPPER)){
             mMechContainerFlipper = json.getBoolean(JSON_MECH_CONTAINER_FLIPPER);
         }
         if(json.has(JSON_MECH_CONTAINER_STEP_REMOVER)){
             mMechContainerStepRemover = json.getBoolean(JSON_MECH_CONTAINER_STEP_REMOVER);
+        }
+        if(json.has(JSON_MECH_WEIGHT)){
+            mMechWeight = json.getDouble(JSON_MECH_WEIGHT);
         }
 
         //auto
@@ -161,11 +166,7 @@ public class Team {
         if (json.has(JSON_AUTO_CONTAINERS)){
             mAutoContainers = json.getInt(JSON_AUTO_CONTAINERS);
         }
-        /*deleted from auto
-        if (json.has(JSON_AUTO_HEIGHT)){
-            mAutoHeight = json.getInt(JSON_AUTO_HEIGHT);
-        }
-        */
+
         if (json.has(JSON_AUTO_MOVE_TOTE)){
             mAutoMoveTote = json.getBoolean(JSON_AUTO_MOVE_TOTE);
         }
@@ -221,6 +222,9 @@ public class Team {
         if (json.has(JSON_TELE_FEED)){
             mTeleFeed = json.getInt(JSON_TELE_FEED);
         }
+        if (json.has(JSON_TELE_PREF_FEED)){
+            mTelePrefFeed = json.getInt(JSON_TELE_PREF_FEED);
+        }
 
         if (json.has(JSON_COMMENTS)){
             mComments = json.getString(JSON_COMMENTS);
@@ -241,18 +245,16 @@ public class Team {
         //mech
         json.put(JSON_MECH_LITTER_INSERTER, mMechLitterInserter);
         json.put(JSON_MECH_LITTER_PUSHER, mMechLitterPusher);
-
         json.put(JSON_MECH_TOTE_FEEDER, mMechToteFeeder);
-
         json.put(JSON_MECH_CONTAINER_FLIPPER, mMechContainerFlipper);
         json.put(JSON_MECH_CONTAINER_STEP_REMOVER, mMechContainerStepRemover);
+        json.put(JSON_MECH_WEIGHT, mMechWeight);
 
         //auto
         json.put(JSON_AUTO_PROGS, mAutoProgs);
         json.put(JSON_AUTO_MOVE, mAutoMove);
         json.put(JSON_AUTO_TOTES, mAutoTotes);
         json.put(JSON_AUTO_CONTAINERS, mAutoContainers);
-        //json.put(JSON_AUTO_HEIGHT, mAutoHeight);      //deleted from auto
         json.put(JSON_AUTO_MOVE_TOTE, mAutoMoveTote);
         json.put(JSON_AUTO_POS, mAutoPos);
 
@@ -274,6 +276,7 @@ public class Team {
         json.put(JSON_TELE_PICK_UP_LITTER, mTelePickUpLitter);
         json.put(JSON_TELE_MOVE_LITTER, mTeleMoveLitter);
         json.put(JSON_TELE_FEED, mTeleFeed);
+        json.put(JSON_TELE_PREF_FEED, mTelePrefFeed);
 
         json.put(JSON_COMMENTS, mComments);
 
@@ -359,6 +362,14 @@ public class Team {
 
     public void setMechContainerStepRemover(boolean sr) {
         this.mMechContainerStepRemover = sr;
+    }
+
+    public double getMechWeight() {
+        return mMechWeight;
+    }
+
+    public void setMechWeight(double mw) {
+        this.mMechWeight = mw;
     }
 
     //---Getter and Setters for Mech
@@ -537,6 +548,14 @@ public class Team {
 
     public void setTeleFeed(int tf) {
         this.mTeleFeed = tf;
+    }
+
+    public int getTelePrefFeed() {
+        return mTelePrefFeed;
+    }
+
+    public void setTelePrefFeed(int tpf) {
+        this.mTelePrefFeed = tpf;
     }
 
     public String getComments() {
